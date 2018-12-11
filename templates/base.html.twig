@@ -7,6 +7,7 @@
   {% block stylesheets %}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ asset('assets/css/navbar.css')}}" crossorigin="anonymous">
   {% endblock %}
 </head>
@@ -44,32 +45,32 @@
 
     <div class="container-fluid h-100">
       <div class="row sidebar-content">
-          <aside class="col-12 col-md-2 p-0 bg-dark">
-              <nav class="navbar navbar-expand navbar-dark bg-dark flex-md-column flex-row align-items-start py-2">
-                  <div class="collapse navbar-collapse">
-                      <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
-                          <li class="nav-item">
-                              <a class="nav-link pl-0 text-nowrap" href="#"><i class="fa fa-bullseye fa-fw"></i> <span class="font-weight-bold">Legend Of Dismodia</span></a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link pl-0" href="{{ path('index')}}"><i class="fa fa-heart-o fa-fw"></i> <span class="d-none d-md-inline">Accueil</span></a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link pl-0" href="{{ path('guide')}}"><i class="fa fa-book fa-fw"></i> <span class="d-none d-md-inline">Guide du jeu</span></a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link pl-0" href="{{path('classement')}}"><i class="fa fa-heart fa-fw"></i> <span class="d-none d-md-inline">Classement</span></a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link pl-0" href="{{path('login')}}"><i class="fa fa-star fa-fw"></i> <span class="d-none d-md-inline">Inscription / connection</span></a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link pl-0" href="#"><i class="fa fa-list fa-fw"></i> <span class="d-none d-md-inline">Profil</span></a>
-                          </li>
-                      </ul>
-                  </div>
-              </nav>
-          </aside>
+        <aside class="col-12 col-md-2 p-0 bg-dark">
+          <nav class="navbar navbar-expand navbar-dark bg-dark flex-md-column flex-row align-items-start py-2">
+            <div class="collapse navbar-collapse">
+              <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
+                <li class="nav-item">
+                  <a class="nav-link pl-0 text-nowrap" href="{{ path('index')}}"><i class="fa fa-bullseye fa-fw"></i> <span class="font-weight-bold">Legend Of Dismodia</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-0" href="{{ path('index')}}"><i class="fa fa-heart-o fa-fw"></i> <span class="d-none d-md-inline">Accueil</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-0" href="{{ path('guide')}}"><i class="fa fa-book fa-fw"></i> <span class="d-none d-md-inline">Guide du jeu</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-0" href="{{path('classement')}}"><i class="fa fa-heart fa-fw"></i> <span class="d-none d-md-inline">Classement</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-0" href="{{path('login')}}"><i class="fa fa-star fa-fw"></i> <span class="d-none d-md-inline">Inscription / connection</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link pl-0" href="#"><i class="fa fa-list fa-fw"></i> <span class="d-none d-md-inline">Profil</span></a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </aside>
   
   {% for message in app.flashes('notice') %}
     <div class="flash-notice alert alert-success alert-dismissible fade show" role="alert">
