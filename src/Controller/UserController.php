@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Users;
+use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -29,7 +29,7 @@ class UserController extends AbstractController
      */
     public function signin( Request $request, ObjectManager $em, UserPasswordEncoderInterface $passwordEncoder )
     {
-        $user = new Users();
+        $user = new User();
         $form = $this->createForm( UserType::class, $user );
 
         $form->handleRequest($request);
@@ -51,7 +51,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('login');
         }
         
-        return $this->render('main/signin.html.twig', [
+        return $this->render('user/register.html.twig', [
             'form' => $form->createView(),
         ]);
     }

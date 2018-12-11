@@ -16,7 +16,7 @@ class UserType extends AbstractType
         $builder
         ->add('username',null, array(
             'help' => 'Votre nom d\'utilisateur doit faire au minimum 3 caratères.'))
-        ->add('mail')
+        ->add('email')
         ->add('plainPassword', PasswordType::class, array(
             'label' => 'Mot de passe',
             'help' => 'Votre mot de passe doit faire au minimum 6 caratères et doit contenir au moins 1 chiffre.'))        
