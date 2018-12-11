@@ -5,11 +5,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity("username", message="Ce nom d'utilisateur existe déja")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -20,11 +24,25 @@ class User
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Assert\NotBlank(
+     *      message="Saississez votre nom d'utilisateur")
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 20,     
+     *      minMessage = "Minimum {{ minLimit }} caratères",
+     *      minMessage = "Maximum {{ maxLimit }} caratères", 
+     * )
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message="Saississez votre adresse mail")
+     * @Assert\Email(
+     *     message = "L'email '{{ value }}' n'est pas valide.",
+     *     checkMX = true
+     * )
      */
     private $email;
 
@@ -32,6 +50,16 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    /**
+     * @Assert\NotBlank(
+     *      message="Saississez votre mot de passe")
+     * @Assert\Regex(
+     *      pattern= "/^(?=.*\d).{6,}$/",     *      
+     *      message="Minimum 6 caratères et au moins 1 chiffre"
+     *)
+    */
+    private $plainPassword;
 
     /**
      * @ORM\Column(type="array")
@@ -130,5 +158,35 @@ class User
         }
 
         return $this;
+    }
+
+    /**
+     * Get the value of plainPassword
+     */ 
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * Set the value of plainPassword
+     *
+     * @return  self
+     */ 
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function eraseCredentials()
+    {
+        
+    }
+
+    public function getSalt(): ?string
+    {
+        return null;
     }
 }
