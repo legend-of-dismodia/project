@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}Inscription - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="mt-3">Création de compte</h1>
+    {{ form_start (form, {
+            'attr': {'novalidate': 'novalidate'}
+        }) }}
+    {{ form_widget (form) }}
+
+    <button class="btn btn-success" type="submit">Créer</button>
+    {{ form_end (form) }}
+
+</div>
+
+{% endblock %}
