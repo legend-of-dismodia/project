@@ -1,12 +1,12 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
-        App\Entity\Users: bcrypt
+        App\Entity\User: bcrypt
     providers:
         in_memory: { memory: ~ }
         db_provider:
             entity:
-                class: App\Entity\Users
+                class: App\Entity\User
                 property: username
     firewalls:
         dev:
@@ -19,7 +19,7 @@ security:
             form_login: 
                 login_path: login
                 check_path: login 
-                default_target_path: home              
+                default_target_path: index              
             logout:
                 path: /logout
                 target: /

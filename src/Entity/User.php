@@ -48,15 +48,17 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     */
+    private $password;
+
+    /**
      * @Assert\NotBlank(
      *      message="Saississez votre mot de passe")
      * @Assert\Regex(
      *      pattern= "/^(?=.*\d).{6,}$/",     *      
      *      message="Minimum 6 caratères et au moins 1 chiffre"
      *)
-     */
-    private $password;
-
+    */
     private $plainPassword;
 
     /**
