@@ -61,12 +61,15 @@
                 <li class="nav-item">
                   <a class="nav-link pl-0" href="{{path('classement')}}"><i class="fa fa-list fa-fw"></i> <span class="d-none d-md-inline">Classement des joueurs</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link pl-0" href="{{path('login')}}"><i class="fa fa-sign-in fa-fw"></i> <span class="d-none d-md-inline">Connexion</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link pl-0" href="#"><i class="fa fa-user-circle-o fa-fw"></i> <span class="d-none d-md-inline">Mon profil</span></a>
-                </li>
+                {% if app.user %}
+                  <li class="nav-item">
+                    <a class="nav-link pl-0" href="#"><i class="fa fa-user-circle-o fa-fw"></i> <span class="d-none d-md-inline">Mon profil</span></a>
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link pl-0" href="{{path('login')}}"><i class="fa fa-sign-in fa-fw"></i> <span class="d-none d-md-inline">Connexion</span></a>
+                  </li>
+                {% endif %}
               </ul>
             </div>
           </nav>
