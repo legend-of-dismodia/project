@@ -28,3 +28,8 @@ h1 {
         max-width: inherit;
     }
 }
+h2 {
+    font-family: 'Merienda', cursive;
+    text-align: center;
+    padding: 1.25rem;
+}
