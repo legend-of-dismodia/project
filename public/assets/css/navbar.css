@@ -33,6 +33,7 @@
 @media (max-width: 766px) {
     .sidebar-content aside {
         width: 100%;
+        height: 100%;
     }
 
     .navTitle {

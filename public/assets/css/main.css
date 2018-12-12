@@ -10,6 +10,9 @@ h1 {
     padding: 1.25rem;
 }
 
+.container {
+    max-width: calc(100vw - 240px - 30px); /* à revoir */
+}
 .container img {
     max-width: 100%;
 }
@@ -18,4 +21,10 @@ h1 {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+@media (max-width: 766px) {
+    .container {
+        max-width: inherit;
+    }
 }
