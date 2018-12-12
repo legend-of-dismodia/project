@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Merienda" rel="stylesheet"> 
+  <link rel="stylesheet" href="{{ asset('assets/css/main.css')}}" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ asset('assets/css/navbar.css')}}" crossorigin="anonymous">
   {% endblock %}
 </head>
@@ -45,12 +47,12 @@
 
     <div class="container-fluid h-100">
       <div class="row sidebar-content">
-        <aside class="col-12 col-md-2 p-0 bg-dark">
-          <nav class="navbar navbar-expand navbar-dark bg-dark flex-md-column flex-row align-items-start py-2">
+        <aside class="p-0">
+          <nav class="navbar navbar-expand navbar-dark flex-md-column flex-row align-items-start py-2">
             <div class="collapse navbar-collapse">
               <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
                 <li class="nav-item">
-                  <a class="nav-link pl-0 text-nowrap" href="{{ path('index')}}"><span class="font-weight-bold">Legend Of Dismodia</span></a>
+                  <a class="nav-link pl-0 navTitle" href="{{ path('index')}}">Legend Of Dismodia</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link pl-0" href="{{ path('index')}}"><i class="fa fa-home fa-fw"></i> <span class="d-none d-md-inline">Accueil</span></a>
@@ -96,8 +98,7 @@
   {% endblock %}
   {% block javascripts %}<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"

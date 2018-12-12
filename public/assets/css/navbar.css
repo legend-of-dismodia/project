@@ -1,3 +1,38 @@
-.sidebar-content {
-    min-height: 100vh;
+/* CSS en mobile first */
+
+/* titre du site */
+.navTitle {
+    font-weight: bold;
+    font-family: 'Merienda', cursive;
+    color: white!important;
+}
+
+/* icônes de la sidebar*/
+.sidebar-content i {
+    color: #76b4bd ;
+}
+
+.sidebar-content aside {
+    background: #1e4363;
+}
+
+/* sur mobile */
+.sidebar-content aside {
+    width: 100%;
+}
+
+/* sur un écran pc */
+@media (min-width: 780px) {
+    /* dimensions de la sidebar */
+    .sidebar-content {
+        min-height: 100vh;
+    }
+    .sidebar-content aside {
+        width: 240px !important;
+    }
+
+    /* titre */
+    .navTitle {
+        font-size: 1.5rem;
+    }
 }
