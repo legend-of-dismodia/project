@@ -1,38 +1,42 @@
-/* CSS en mobile first */
-
-/* titre du site */
+/* titre */
 .navTitle {
-    font-weight: bold;
     font-family: 'Merienda', cursive;
-    color: white!important;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: white !important;
 }
 
-/* icônes de la sidebar*/
+/* icônes */
 .sidebar-content i {
-    color: #76b4bd ;
+    color: #76b4bd;
 }
 
 .sidebar-content aside {
     background: #1e4363;
 }
 
-/* sur mobile */
-.sidebar-content aside {
-    width: 100%;
+/* comportement général de la navbar */
+.navbar {
+    box-shadow: none; /* annule le comportement de MD Bootstrap */
 }
 
-/* sur un écran pc */
-@media (min-width: 780px) {
-    /* dimensions de la sidebar */
-    .sidebar-content {
-        min-height: 100vh;
-    }
+.sidebar-content {
+    min-height: 100vh;
+}
+
+.sidebar-content aside {
+    width: 240px;
+}
+
+/* mobile */
+@media (max-width: 766px) {
     .sidebar-content aside {
-        width: 240px !important;
+        width: 100%;
+        height: 100%;
     }
 
-    /* titre */
     .navTitle {
-        font-size: 1.5rem;
+        text-align: inherit;
     }
 }

@@ -1,7 +1,30 @@
 body {
     background: #E7DAC4;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 h1 {
     font-family: 'Merienda', cursive;
+    text-align: center;
+    padding: 1.25rem;
+}
+
+.container {
+    max-width: calc(100vw - 240px - 30px); /* à revoir */
+}
+.container img {
+    max-width: 100%;
+}
+
+.img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 766px) {
+    .container {
+        max-width: inherit;
+    }
 }

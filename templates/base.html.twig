@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Merienda" rel="stylesheet"> 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.16/css/mdb.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merienda" rel="stylesheet">  
   <link rel="stylesheet" href="{{ asset('assets/css/main.css')}}" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ asset('assets/css/navbar.css')}}" crossorigin="anonymous">
   {% endblock %}
@@ -47,7 +48,7 @@
 
     <div class="container-fluid h-100">
       <div class="row sidebar-content">
-        <aside class="p-0">
+        <aside>
           <nav class="navbar navbar-expand navbar-dark flex-md-column flex-row align-items-start py-2">
             <div class="collapse navbar-collapse">
               <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
@@ -65,7 +66,10 @@
                 </li>
                 {% if app.user %}
                   <li class="nav-item">
-                    <a class="nav-link pl-0" href="#"><i class="fa fa-user-circle-o fa-fw"></i> <span class="d-none d-md-inline">Mon profil</span></a>
+                    <a class="nav-link pl-0" href="#"><i class="fa fa-user-circle-o fa-fw"></i> <span class="d-none d-md-inline">Profil de {{app.user.username}} </span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link pl-0" href="#"><i class="fa fa-cog fa-fw"></i> <span class="d-none d-md-inline">Mon compte</span></a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link pl-0" href="{{path('logout')}}"><i class="fa fa-sign-out fa-fw"></i> <span class="d-none d-md-inline">Déconnexion</span></a>
@@ -89,9 +93,9 @@
     </div>
   {% endfor %}
 
-
+<div class="container">
   {% block body %}
-
+</div>
 
 
 
