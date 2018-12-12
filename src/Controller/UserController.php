@@ -25,9 +25,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/signin", name="signin")
+     * @Route("/register", name="register")
      */
-    public function signin( Request $request, ObjectManager $em, UserPasswordEncoderInterface $passwordEncoder )
+    public function register( Request $request, ObjectManager $em, UserPasswordEncoderInterface $passwordEncoder )
     {
         $user = new User();
         $form = $this->createForm( UserType::class, $user );
