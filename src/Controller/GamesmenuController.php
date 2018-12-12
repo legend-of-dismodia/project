@@ -34,4 +34,12 @@ class GamesmenuController extends AbstractController
             'controller_name' => 'GamesmenuController',
         ]);
     }
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contact()
+    {
+        return $this->render('contact.html.twig', [
+        ]);
+    }
 }
