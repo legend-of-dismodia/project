@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+
+use App\Form\ContactType;
 
 class GamesmenuController extends AbstractController
 {
@@ -37,9 +40,65 @@ class GamesmenuController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function contact()
+    public function contact(Request $request, \Swift_Mailer $mailer)
     {
+        $form = $this->createForm(ContactType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // $sent = $form->getData();
+
+            if (isset($form)) {
+                $name = $form['name']->getData();
+            } else {
+                $name = 'undefined';
+            }
+            if (isset($form)) {
+                $email = $form['email']->getData();
+            } else {
+                $email = 'undefined';
+            }
+            if (isset($form)) {
+                $message = $form['message']->getData();
+            } else {
+                $message = 'undefined';
+            }
+            
+            
+            
+
+            $message = (new \Swift_Message('Nouveau message sur le formulaire de contact !'))
+                ->setFrom('send@example.com')
+                ->setTo('legendofdismodia@gmail.com')
+                ->setBody(
+                    $this->renderView(
+                // templates/emails/registration.html.twig
+                        'emails/registration.html.twig',
+                        array(
+                            'name' => $name,
+                            'email' => $email,
+                            'message' => $message
+                            )
+                    ),
+                    'text/html'
+                )
+        /*
+             * If you also want to include a plaintext version of the message
+        ->addPart(
+            $this->renderView(
+                'emails/registration.txt.twig',
+                array('name' => $name)
+            ),
+            'text/plain'
+        )
+             */;
+
+            $mailer->send($message);
+        }
+
         return $this->render('contact.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }

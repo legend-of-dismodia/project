@@ -2,8 +2,39 @@
 {% block body %}
     <h1>Contact</h1>
 
+    {# <p>
+        Bienvenue sur notre page de contact !
+    <p> #}
     <p>
-        Bonjour !
+        Si vous voulez être recontacté à propos de quelque chose ou si vous avez juste un message à nous faire passer, vous pouvez le faire ici !
     </p>
+
+    {{ form_start (form, {
+            'attr': {'novalidate': 'novalidate'}
+        })}}
+
+    {# nom #}
+    {{ form_row (form.name, {
+        'attr': {'placeholder': 'Votre nom'}
+    })}}
+
+    {# email #}
+    {{ form_row (form.email, {
+        'attr': {'placeholder': 'Votre email'}
+    })}}
+
+    {# message #}
+    {{ form_row (form.message, {
+        'attr': {'placeholder': 'Votre message'}
+    })}}
+
+    {{ form_widget (form)}}
+
+    <span>* champs obligatoires</span><br>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+
+    {{ form_end (form)}}
+
+    
 
 {% endblock %}
