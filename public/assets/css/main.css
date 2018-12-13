@@ -17,14 +17,19 @@ i {
 button i {
     color: white;
 }
+
+.text-muted {
+    color: #90a4ae !important;
+}
+
 /* .container { */
      /* à revoir */
     /* max-width: calc(100vw - 240px - 30px); */
 /* } */
+
 .container img {
     max-width: 100%;
 }
-
 .img-center {
     display: block;
     margin-left: auto;
