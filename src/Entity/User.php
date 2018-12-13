@@ -25,12 +25,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=20)
      * @Assert\NotBlank(
-     *      message="Saississez votre nom d'utilisateur")
+     *      message="Saisissez votre nom d'utilisateur")
      * @Assert\Length(
      *      min = 3,
      *      max = 20,     
-     *      minMessage = "Minimum {{ minLimit }} caratères",
-     *      minMessage = "Maximum {{ maxLimit }} caratères", 
+     *      minMessage = "Minimum {{ minLimit }} caractères",
+     *      minMessage = "Maximum {{ maxLimit }} caractères", 
      * )
      */
     private $username;
@@ -38,7 +38,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *      message="Saississez votre adresse mail")
+     *      message="Saisissez votre adresse mail")
      * @Assert\Email(
      *     message = "L'email '{{ value }}' n'est pas valide.",
      *     checkMX = true
@@ -53,10 +53,10 @@ class User implements UserInterface
 
     /**
      * @Assert\NotBlank(
-     *      message="Saississez votre mot de passe")
+     *      message="Saisissez votre mot de passe")
      * @Assert\Regex(
      *      pattern= "/^(?=.*\d).{6,}$/",     *      
-     *      message="Minimum 6 caratères et au moins 1 chiffre"
+     *      message="Minimum 6 caractères et au moins 1 chiffre"
      *)
     */
     private $plainPassword;
