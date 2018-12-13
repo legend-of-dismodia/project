@@ -60,14 +60,16 @@
                     <input class="form-control" type="password" placeholder="Mot de passe" name="_password">                
                 </div>
                 <div class="text-center mt-2">                
-                    <button type="submit" class="btn btn-info">Connexion <i class="fa fa-sign-in ml-1"></i></button>
+                    <button type="submit" class="btn btn-info">Connexion <i class="fa fa-sign-in ml-1"></i></button>                    
                 </div>
             </form>
+            <a href="{{path('connect_facebook_start')}}" class="btn btn-info">Facebook</a></p>
         </div>
         <!--Footer-->
         <div class="modal-footer">
             <div class="options text-center text-md-right mt-1">
             <p>Pas encore inscrit? <a href="{{path('register')}}" class="blue-text">Inscription</a></p>
+
             {# <p>Mot de passe  <a href="#" class="blue-text">oublié?</a></p> #}
             </div>            
         </div>
