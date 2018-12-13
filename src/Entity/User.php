@@ -71,6 +71,11 @@ class User implements UserInterface
      */
     private $saves;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $facebookId;
+
     public function __construct()
     {
         $this->saves = new ArrayCollection();
@@ -188,5 +193,17 @@ class User implements UserInterface
     public function getSalt(): ?string
     {
         return null;
+    }
+
+    public function getFacebookId(): ?int
+    {
+        return $this->facebookId;
+    }
+
+    public function setFacebookId(string $facebookId): self
+    {
+        $this->facebookId = $facebookId;
+
+        return $this;
     }
 }
