@@ -42,4 +42,12 @@ class GamesmenuController extends AbstractController
         return $this->render('contact.html.twig', [
         ]);
     }
+    /**
+     * @Route("/game", name="game")
+     */
+    public function game()
+    {
+        return $this->render('game.html.twig', [
+        ]);
+    }
 }
