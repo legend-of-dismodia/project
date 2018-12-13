@@ -54,15 +54,19 @@ class MyFacebookAuthenticator extends SocialAuthenticator
         $user = $this->em->getRepository(User::class)
                     ->findOneBy(['email' => $email]);
 
-        // 3) Maybe you just want to "register" them by creating
-        // a User object
+        // 3) Maybe you just want to "register"         
         $user->setFacebookId($facebookUser->getId());
         $user->setRoles(['ROLE_USER']);
 
         $this->em->persist($user);
         $this->em->flush();
 
-        return $user;
+        $this->addFlash(
+            'notice',
+            'Vous êtes bien connecté avec votre compte'. $user->getUsername()
+        );
+
+        return $userProvider->loadUserByUsername($this->getClient()->fetchUserFromToken($credentials)->getId());
     }
 
     /**
