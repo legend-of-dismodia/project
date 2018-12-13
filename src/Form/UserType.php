@@ -15,6 +15,7 @@ class UserType extends AbstractType
     {
         $builder
         ->add('username',null, array(
+            'label' => 'Nom d\'utilisateur',
             'help' => 'Votre nom d\'utilisateur doit faire au minimum 3 caratères.'))
         ->add('email')
         ->add('plainPassword', PasswordType::class, array(
