@@ -70,15 +70,10 @@ class FacebookController extends AbstractController
                 $user->setUsername($facebookUser->getName()); 
     
                 $password = $passwordEncoder->encodePassword($user, $fbId);
-                $user->setPassword($password);
-    
-                var_dump($fbId);
-                var_dump($user->setFacebookId($fbId));
-
+                $user->setPassword($password);               
                 $user->setFacebookId($fbId);
                 $user->setRoles(['ROLE_USER']);
                 $user->setEmail($email);
-    
                 $em->persist($user);
                 $em->flush();
     
