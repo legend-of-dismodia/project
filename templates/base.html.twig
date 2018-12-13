@@ -55,13 +55,13 @@
                 <li class="nav-item">
                   <a class="nav-link pl-0 navTitle" href="{{ path('index')}}">Legend Of Dismodia</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{app.request.pathInfo == path('index') ? 'navActive' : ''}}">
                   <a class="nav-link pl-0" href="{{ path('index')}}"><i class="fa fa-home fa-fw"></i> <span class="d-none d-md-inline">Accueil</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{app.request.pathInfo == path('guide') ? 'navActive' : ''}}">
                   <a class="nav-link pl-0" href="{{ path('guide')}}"><i class="fa fa-question-circle fa-fw"></i> <span class="d-none d-md-inline">Guide de jeu</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{app.request.pathInfo == path('classement') ? 'navActive' : ''}}">
                   <a class="nav-link pl-0" href="{{path('classement')}}"><i class="fa fa-list fa-fw"></i> <span class="d-none d-md-inline">Classement des joueurs</span></a>
                 </li>
                 {% if app.user %}
@@ -75,11 +75,11 @@
                     <a class="nav-link pl-0" href="{{path('logout')}}"><i class="fa fa-sign-out fa-fw"></i> <span class="d-none d-md-inline">Déconnexion</span></a>
                   </li>
                 {% else %}
-                  <li class="nav-item">
+                  <li class="nav-item {{app.request.pathInfo == path('login') ? 'navActive' : ''}}">
                     <a class="nav-link pl-0" href="{{path('login')}}"><i class="fa fa-sign-in fa-fw"></i> <span class="d-none d-md-inline">Connexion</span></a>
                   </li>
                 {% endif %}
-                <li class="nav-item">
+                <li class="nav-item {{app.request.pathInfo == path('contact') ? 'navActive' : ''}}">
                     <a class="nav-link pl-0" href="{{path('contact')}}"><i class="fa fa-envelope  fa-fw"></i> <span class="d-none d-md-inline">Contact</span></a>
                   </li>
               </ul>
