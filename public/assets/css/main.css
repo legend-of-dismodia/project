@@ -14,9 +14,16 @@ h1 {
 /* icônes FontAwesome */
 i {
     color: #1e4363;
+    width: 20px;
+    height: 20px;
+    text-align: center;
 }
 .btn i {
     color: white;
+}
+nav .fa, nav .fas {
+    padding-right: 3px;
+    padding-left: 3px;
 }
 
 /* boutons */
