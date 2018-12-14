@@ -1,0 +1,14 @@
+{ "columns":16,
+ "image":"..\/Project1\/www\/img\/tilesets\/Dungeon_A2.png",
+ "imageheight":576,
+ "imagewidth":768,
+ "margin":0,
+ "name":"Dungeon_A2",
+ "spacing":0,
+ "tilecount":192,
+ "tiledversion":"1.2.1",
+ "tileheight":48,
+ "tilewidth":48,
+ "type":"tileset",
+ "version":1.2
+}
