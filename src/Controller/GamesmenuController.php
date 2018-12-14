@@ -76,6 +76,15 @@ class GamesmenuController extends AbstractController
     }
 
     /**
+     * @Route("/profil", name="profil")
+     */
+    public function profil()
+    {
+        return $this->render('user/profile.html.twig', [
+        
+        ]);
+    }
+    /**
      * @Route("/contact", name="contact")
      */
     public function contact(Request $request, \Swift_Mailer $mailer)
