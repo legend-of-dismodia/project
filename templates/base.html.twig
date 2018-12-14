@@ -65,7 +65,7 @@
                   <a class="nav-link pl-0" href="{{path('classement')}}"><i class="fa fa-list fa-fw"></i> <span class="navbarText">Classement des joueurs</span></a>
                 </li>
                 {% if app.user %}
-                <li class="nav-item">
+                <li class="nav-item  {{app.request.pathInfo == path('game') ? 'navActive' : ''}}">
                     <a class="nav-link pl-0" href="{{path('game')}}"><i class="fas fa-gamepad"></i> <span class="navbarText">Jouer</span></a>
                   </li>
                   <li class="nav-item">
