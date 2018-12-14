@@ -16,7 +16,7 @@ var BattleScene = new Phaser.Class({
     create: function ()
     {
         // change the background to green
-         this.add.image(400, 300, 'fond');
+        this.add.image(400, 300, 'fond');
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
@@ -24,6 +24,7 @@ var BattleScene = new Phaser.Class({
 
     startBattle: function() {
         // player character - warrior
+        
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
         this.add.existing(warrior);
 
@@ -99,7 +100,7 @@ var BattleScene = new Phaser.Class({
         }
         if(action == "magie"){
         this.units[this.index].magieAttaque(this.enemies[target]);
-         }
+        }
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     },
 
@@ -119,21 +120,21 @@ var BattleScene = new Phaser.Class({
         this.scene.switch('World');
     }
 });
-
+let i = 0;
 // base class for heroes and enemies
 var Unit = new Phaser.Class({
     Extends: Phaser.GameObjects.Sprite,
 
     initialize:
-
     function Unit(scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp, mana) {
         Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
         this.type = type;
-        this.maxHp = this.hp = hp;
+        this.maxHp = this.hp = hp;        
         this.damage = damage; // default damage
         this.magie = magie;
         this.living = true;
-        this.menuItem = null;
+        this.menuItem = null;        
+
     },
     // we will use this to notify the menu item when the unit is dead
     setMenuItem: function(item) {
@@ -146,28 +147,45 @@ var Unit = new Phaser.Class({
             target.takeDamage(this.damage);
             this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
 
-
+            
+            
         }
 
     },
 
     magieAttaque: function(target) {
-          if(target.living) {
-              target.takeMagic(this.magie);
-              this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
-          }
+            if(target.living) {
+                target.takeMagic(this.magie);
+                this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
+            }
         },
 
-    takeDamage: function(damage) {
-        this.hp -= damage;
-        if(this.hp <= 0) {
+
+    takeDamage: function(damage) {  
+
+        if(i == 0){
+            i = 1;
+            this.hp -= damage;
+            console.log("enemyLife: "+ this.hp);
+            
+            
+        }else{
+            this.hp -= damage;
+            console.log("playerLife: "+ this.hp);
+
+            tbl.life = this.hp;
+            
+            i = 0;            
+        }
+        
+        
+        if(this.hp <= 0 ) {
             this.hp = 0;
             this.menuItem.unitKilled();
             this.living = false;
             this.visible = false;
             this.menuItem = null;
-        }
-
+        }   
 
     },
 
@@ -181,7 +199,12 @@ var Unit = new Phaser.Class({
             this.visible = false;
             this.menuItem = null;
         }
+    },
+
+    data: function(){
+        console.log('helo: '+tbl);
     }
+    
 });
 
 var Enemy = new Phaser.Class({
@@ -190,6 +213,11 @@ var Enemy = new Phaser.Class({
     initialize:
     function Enemy(scene, x, y, texture, frame, type, hp, damage) {
         Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
+        
+        console.log('hpenemey: '+hp);
+        console.log('damagenemy: '+damage);
+
+
     }
 });
 
@@ -203,6 +231,9 @@ var PlayerCharacter = new Phaser.Class({
         this.flipX = true;
 
         this.setScale(2);
+        console.log('hpPLayer: '+hp);
+        console.log('damage: '+damage);
+
     }
 });
 

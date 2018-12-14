@@ -7,6 +7,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 use App\Form\ContactType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
 class GamesmenuController extends AbstractController
 {
@@ -47,6 +50,31 @@ class GamesmenuController extends AbstractController
         
         ]);
     }
+
+    /**
+     * @Route("/game/save", name="gameGetSave")
+     */
+    public function gameGetSave(EntityManagerInterface $em, Request $request)
+    {
+        $user = $this->getUser()->getId();
+        
+        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
+
+        $arrayUser = [
+            'id' => $userSave->getId(),
+            'createdAt'=> $userSave->getCreatedAt(),
+            'level'=> $userSave->getLevel(),
+            'life'=> $userSave->getLife(),
+            'mana'=> $userSave->getMana(),
+            'xp'=> $userSave->getXp(),
+            'playtime'=> $userSave->getPlaytime(),
+        ];
+        
+        return new JsonResponse($arrayUser);        
+        // var_dump($ok);
+        // die();
+    }
+
     /**
      * @Route("/contact", name="contact")
      */
