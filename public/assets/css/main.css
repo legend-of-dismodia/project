@@ -113,9 +113,17 @@ i {
         padding:  0 15px;
     }
 }
+<<<<<<< HEAD
 
 @media only screen and (min-width: 1600px) {
     .container {
         max-width: 1400px !important;
     }
 }
+=======
+h2 {
+    font-family: 'Merienda', cursive;
+    text-align: center;
+    padding: 1.25rem;
+}
+>>>>>>> vincent
