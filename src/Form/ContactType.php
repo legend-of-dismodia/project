@@ -17,7 +17,7 @@ class ContactType extends AbstractType
             ->add('name', null, array(
                 'label' => 'Nom *'))
             ->add('email', EmailType::class, array(
-                'help' => 'Votre adresse ne sera pas utilisé à des fins commerciales.',
+                'help' => 'Votre adresse ne sera pas utilisée à des fins commerciales.',
                 'required' => false
             ))
             ->add('message', null, array(
