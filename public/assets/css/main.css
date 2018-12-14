@@ -81,6 +81,9 @@ i {
     border-color: transparent;
     background: rgba(0,0,0,0.1)
 }
+.modal-content .nav-link:focus {
+    border-color: transparent;
+}
 /** footer **/
 .modal-footer {
     border-top: 1px solid #ced4da;
