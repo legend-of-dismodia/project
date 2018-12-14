@@ -25,7 +25,7 @@ security:
                 check_path: login 
                 default_target_path: index              
             logout:
-                path: /logout
+                path: /logout,
                 target: /
         # facebook:
         #     anonymous: true
@@ -41,5 +41,6 @@ security:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }        
+        - { path: ^/admin, roles: ROLE_ADMIN }  
+        - { path: ^/game, roles: ROLE_USER }     
 
