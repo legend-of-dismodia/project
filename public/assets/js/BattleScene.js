@@ -10,7 +10,7 @@ var BattleScene = new Phaser.Class({
     {
         // load resources
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
-    this.load.spritesheet("souris", "../assets/spritesheet/Monster.png", { frameWidth: 48, frameHeight: 48});
+    this.load.spritesheet("souris", "../assets/spritesheet/troll.png", { frameWidth: 150, frameHeight: 200});
     this.load.image("fond", "../assets/spritesheet/battle.png");
     },
     create: function ()

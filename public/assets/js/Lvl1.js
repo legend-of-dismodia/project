@@ -22,7 +22,7 @@ var Boot = new Phaser.Class({
       this.load.tilemapTiledJSON("map", "../assets/map/nivo1.json");
       this.load.spritesheet("escalier", "../assets/tilesets/Inside_B.png", { frameWidth: 48, frameHeight: 48});
       this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
-      this.load.spritesheet('souris', '../assets/spritesheet/Monster.png', { frameWidth: 48, frameHeight: 48});
+      this.load.spritesheet('souris', '../assets/spritesheet/troll.png', { frameWidth: 80, frameHeight: 100});
 
     },
 
