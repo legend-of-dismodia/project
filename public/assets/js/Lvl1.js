@@ -29,6 +29,7 @@ var Boot = new Phaser.Class({
       create: function (){
 
       this.scene.start('World');
+      
 
       },
 
