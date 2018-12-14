@@ -1,10 +1,11 @@
+"use strict"
+
 // au chargement de la page
-germain();
+startup();
 
 // changement de taille au clic
 $('.toggle').on('click', function () {
     checkCookie()
-
 
     // masque les légendes
     $('.navbarText').toggle();
@@ -60,7 +61,7 @@ function checkCookie() {
     }
 }
 
-function germain() {
+function startup() {
     console.log('Début de la fonction qui se lance au début');
     if (checkCookie() == 'true') {
         $('.navbarText').hide();
