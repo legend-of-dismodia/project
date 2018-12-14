@@ -78,7 +78,7 @@ class GamesmenuController extends AbstractController
 
 
 
-            $message = (new \Swift_Message('Nouveau message sur le formulaire de contact !'))
+            $message = (new \Swift_Message('Nouveau message sur Legend of Dismodia !'))
                 ->setFrom('send@example.com')
                 ->setTo('legendofdismodia@gmail.com')
                 ->setBody(
