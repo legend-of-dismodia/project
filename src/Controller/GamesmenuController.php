@@ -110,16 +110,4 @@ class GamesmenuController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-<<<<<<< HEAD
 }
-=======
-    /**
-     * @Route("/game", name="game")
-     */
-    public function game()
-    {
-        return $this->render('game.html.twig', [
-        ]);
-    }
-}
->>>>>>> vincent
