@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Legend Of Dismodia{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Entrez dans la legend!</h1>
+    </header>
+
+<div id="content" style="display: block; width: 100%; text-align: center"></div>
+
+{% endblock %}
+{% block javascripts %}
+<script src={{ asset("../assets/js/phaser.min.js")}}></script>
+
+<script src={{ asset("../assets/save/save.js")}}></script>
+<script src={{ asset("../assets/js/Lvl1.js")}}></script>
+<script src={{asset("../assets/js/lvl2.js")}}></script>
+<script src={{asset("../assets/js/Lvl3.js")}}></script>
+<script src={{asset("../assets/js/Lvl4.js")}}></script>
+<script src={{asset("../assets/js/BossBattle.js")}}></script>
+<script src={{asset("../assets/js/BattleScene.js")}}></script>
+<script src={{asset("../assets/js/game.js")}}></script>
+<script src={{asset("../assets/js/start.js")}}></script>
+
+
+{% endblock %}

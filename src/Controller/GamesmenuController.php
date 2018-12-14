@@ -37,6 +37,16 @@ class GamesmenuController extends AbstractController
             'controller_name' => 'GamesmenuController',
         ]);
     }
+
+    /**
+     * @Route("/game", name="game")
+     */
+    public function game()
+    {
+        return $this->render('gamesmenu/game.html.twig', [
+        
+        ]);
+    }
     /**
      * @Route("/contact", name="contact")
      */
@@ -64,9 +74,9 @@ class GamesmenuController extends AbstractController
             } else {
                 $message = 'undefined';
             }
-            
-            
-            
+
+
+
 
             $message = (new \Swift_Message('Nouveau message sur le formulaire de contact !'))
                 ->setFrom('send@example.com')
