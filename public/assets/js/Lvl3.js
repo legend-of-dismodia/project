@@ -22,6 +22,7 @@ var Boot3 = new Phaser.Class({
 
 
       this.load.spritesheet("escalier3", "../assets/tilesets/Inside_B.png", { frameWidth: 48, frameHeight: 48});
+      this.load.spritesheet('loupgarou', '../assets/spritesheet/Package1.png', { frameWidth: 48, frameHeight: 48});
       this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
 
 
@@ -165,6 +166,8 @@ var Boot3 = new Phaser.Class({
        // this.physics.add.overlap(player, escalier3, collisionStairs, null, this);
        escalier3 = this.physics.add.sprite(850, 158, "escalier3", 20);
        this.physics.add.overlap(player, escalier3, collisionStairs3, null, this);
+       loupgarou = this.physics.add.sprite(950, 158, "loupgarou", 11);
+       this.physics.add.overlap(player, loupgarou, collisionloup, null, this);
       },
 
 
@@ -218,4 +221,10 @@ var Boot3 = new Phaser.Class({
              this.scene.switch('BootScene');
 
 
+         }
+         function collisionloup(player, loupgarou)
+                     {
+            console.log( this.scene );     
+             this.scene.switch('LoupScene');
+            // loup.disableBody(true, true);
          }
