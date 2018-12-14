@@ -25,6 +25,9 @@ nav .fa, nav .fas {
     padding-right: 3px;
     padding-left: 3px;
 }
+.toggle i {
+    color: gray;
+}
 
 /* boutons */
 .btn-primary {
