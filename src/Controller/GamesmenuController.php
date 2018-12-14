@@ -73,8 +73,7 @@ class GamesmenuController extends AbstractController
                 ->setTo('legendofdismodia@gmail.com')
                 ->setBody(
                     $this->renderView(
-                // templates/emails/registration.html.twig
-                        'emails/registration.html.twig',
+                        'emails/contact.html.twig',
                         array(
                             'name' => $name,
                             'email' => $email,
