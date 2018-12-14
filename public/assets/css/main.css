@@ -11,25 +11,37 @@ h1 {
     padding: 1.25rem;
 }
 
+/* icônes FontAwesome */
 i {
     color: #1e4363;
 }
-button i {
+.btn i {
     color: white;
 }
 
-.text-muted {
-    color: #90a4ae !important;
-}
+/* boutons */
 .btn-primary {
     background-color: #795548 !important;
 }
+.btn-facebook {
+    background-color: #4267b2;
+}
+.btn:hover {
+    color: white!important;
+}
 
-/* .container { */
-     /* à revoir */
-    /* max-width: calc(100vw - 240px - 30px); */
-/* } */
+/* aide du formulaire */
+.text-muted {
+    color: #90a4ae !important;
+}
 
+/* conteneur principal */
+.container {
+    padding: 15px 80px;
+    max-width: calc(100vw - 260px);
+}
+
+/* images */
 .container img {
     max-width: 100%;
 }
@@ -39,8 +51,71 @@ button i {
     margin-right: auto;
 }
 
+/* modal de login */
+.modal-content {
+    background-color: #e7e7e7;
+}
+.modal-content p {
+    color: #414141;
+}
+/** tabs **/
+/*** tab 1 ***/
+.modal-content .nav-link.active i {
+    color: inherit;
+}
+.modal-content .nav-link.active {
+    background: #e7e7e7;
+    border-color: transparent;
+}
+.modal-content .nav-link.active:hover {
+    background: #e7e7e7;
+}
+/*** tab 2 ***/
+.modal-content .nav-tabs {
+    background: #795548;
+}
+.modal-content .nav-link, .modal-content .nav-link i {
+    color: white;
+}
+.modal-content .nav-link:hover {
+    border-color: transparent;
+    background: rgba(0,0,0,0.1)
+}
+/** footer **/
+.modal-footer {
+    border-top: 1px solid #ced4da;
+}
+
+
+/* responsive */
+
+/* @media (max-width: 1200px) {
+    .container {
+        max-width: calc(1140px - 240px) !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: calc(960px - 240px) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: calc(720px - 240px) !important;
+    }
+} */
+
 @media (max-width: 766px) {
     .container {
         max-width: inherit;
+        padding:  0 15px;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .container {
+        max-width: 1400px !important;
     }
 }
