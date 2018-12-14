@@ -1,16 +1,16 @@
-var LoupScene = new Phaser.Class({
+var EctoScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
-    initialize: function LoupScene ()
+    initialize: function EctoScene ()
     {
-        Phaser.Scene.call(this, { key: "LoupScene" });
+        Phaser.Scene.call(this, { key: "EctoScene" });
     },
     preload: function ()
     {
         // load resources
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
-    this.load.spritesheet("loup", "../assets/spritesheet/Package1.png", { frameWidth: 48, frameHeight: 48});
+    this.load.spritesheet("madeleine", "../assets/spritesheet/ecto1.png", { frameWidth: 150, frameHeight: 160});
     this.load.image("fond", "../assets/spritesheet/battle.png");
     },
     create: function ()
@@ -28,21 +28,21 @@ var LoupScene = new Phaser.Class({
         this.add.existing(warrior);
 
 
-        var loup = new Enemy(this, 500, 400, "loup", 11, "loup", 50, 15);
-        this.add.existing(loup);
+        var madeleine = new Enemy(this, 500, 400, "madeleine", 1, "madeleine", 50, 20);
+        this.add.existing(madeleine);
 
 
 
         // array with heroes
         this.heroes = [ warrior];
         // array with enemies
-        this.enemies = [loup];
+        this.enemies = [madeleine];
         // array with both parties, who will attack
         this.units = this.heroes.concat(this.enemies);
 
         this.index = -1; // currently active unit
 
-        this.scene.run("UIScene3");
+        this.scene.run("UIScene4");
     },
     nextTurn: function() {
         // if we have victory or game over
@@ -114,9 +114,9 @@ var LoupScene = new Phaser.Class({
         }
         this.units.length = 0;
         // sleep the UI
-        this.scene.sleep('UIScene3');
-        // return to WorldScene and sleep current LoupScene
-        this.scene.switch('World3');
+        this.scene.sleep('UIScene4');
+        // return to WorldScene and sleep current EctoScene
+        this.scene.switch('World2');
     }
 });
 
@@ -355,15 +355,15 @@ var EnemiesMenu = new Phaser.Class({
 });
 
 // User Interface scene
-var UIScene3 = new Phaser.Class({
+var UIScene4 = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
     initialize:
 
-    function UIScene3 ()
+    function UIScene4 ()
     {
-        Phaser.Scene.call(this, { key: "UIScene3" });
+        Phaser.Scene.call(this, { key: "UIScene4" });
     },
 
     create: function ()
@@ -394,13 +394,13 @@ var UIScene3 = new Phaser.Class({
         this.menus.add(this.actionsMenu);
         this.menus.add(this.enemiesMenu);
 
-        this.loupScene = this.scene.get("LoupScene");
+        this.ectoScene = this.scene.get("EctoScene");
 
         // listen for keyboard events
         this.input.keyboard.on("keydown", this.onKeyInput, this);
 
         // when its player cunit turn to move
-        this.loupScene.events.on("PlayerSelect", this.onPlayerSelect, this);
+        this.ectoScene.events.on("PlayerSelect", this.onPlayerSelect, this);
 
         // when the action on the menu is selected
         // for now we have only one action so we dont send and action id
@@ -413,7 +413,7 @@ var UIScene3 = new Phaser.Class({
         this.sys.events.on('wake', this.createMenu, this);
 
         // the message describing the current action
-        this.message = new Message(this, this.loupScene.events);
+        this.message = new Message(this, this.ectoScene.events);
         this.add.existing(this.message);
 
         this.createMenu();
@@ -424,7 +424,7 @@ var UIScene3 = new Phaser.Class({
         // map enemies menu items to enemies
         this.remapEnemies();
         // first move
-        this.loupScene.nextTurn();
+        this.ectoScene.nextTurn();
     },
     onEnemy: function(index) {
         // when the enemy is selected, we deselect all menus and send event with the enemy id
@@ -432,8 +432,8 @@ var UIScene3 = new Phaser.Class({
         this.actionsMenu.deselect();
         this.enemiesMenu.deselect();
         this.currentMenu = null;
-        this.loupScene.receivePlayerSelection("attack", index);
-        // this.loupScene.receivePlayerSelection2("magie", index);
+        this.ectoScene.receivePlayerSelection("attack", index);
+        // this.ectoScene.receivePlayerSelection2("magie", index);
     },
     onPlayerSelect: function(id) {
         // when its player turn, we select the active hero item and the first action
@@ -449,11 +449,11 @@ var UIScene3 = new Phaser.Class({
         this.enemiesMenu.select(0);
     },
     remapHeroes: function() {
-        var heroes = this.loupScene.heroes;
+        var heroes = this.ectoScene.heroes;
         this.heroesMenu.remap(heroes);
     },
     remapEnemies: function() {
-        var enemies = this.loupScene.enemies;
+        var enemies = this.ectoScene.enemies;
         this.enemiesMenu.remap(enemies);
     },
     onKeyInput: function(event) {

@@ -19,8 +19,11 @@ var config = {
     BossBattle,
       UIScene,
       LoupScene,
+      EctoScene,
       UIScene2,
       UIScene3,
+      UIScene4,
+
       Boot2,
       World2,
       // //
