@@ -224,7 +224,7 @@ var Boot3 = new Phaser.Class({
          }
          function collisionloup(player, loupgarou)
                      {
-             console.log( this.scene );
+            console.log( this.scene );     
              this.scene.switch('LoupScene');
-             loup.disableBody(true, true);
+            // loup.disableBody(true, true);
          }
