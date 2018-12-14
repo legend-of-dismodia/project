@@ -37,6 +37,7 @@ aside .navActive {
 
 .navbarText {
     display: inline;
+    padding-left: 3px;
 }
 
 
