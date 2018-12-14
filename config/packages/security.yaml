@@ -25,7 +25,7 @@ security:
                 check_path: login 
                 default_target_path: index              
             logout:
-                path: /logout,
+                path: /logout
                 target: /
         # facebook:
         #     anonymous: true
