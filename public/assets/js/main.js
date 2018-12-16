@@ -63,7 +63,8 @@ function checkCookie() {
 function startup() {
     console.log('Début de la fonction qui se lance au début');
     // si on est bien en mode desktop
-    if ( window.innerWidth > '766px' ) {
+    console.log(window.innerWidth);
+    if ( window.innerWidth > 765 ) {
         if (checkCookie() == 'true') {
             $('.navbarText').hide();
             $('.sidebar-content aside').css('width', '56px');
