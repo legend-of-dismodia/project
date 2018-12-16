@@ -48,7 +48,6 @@ function getCookie(key) {
     return keyValue ? keyValue[2] : null;
 }
 
-
 function checkCookie() {
     if (getCookie('minimizedNavbar') == 'false') {
         console.log('checkCookie() : La barre de navigation est déballée');
@@ -63,25 +62,29 @@ function checkCookie() {
 
 function startup() {
     console.log('Début de la fonction qui se lance au début');
-    if (checkCookie() == 'true') {
-        $('.navbarText').hide();
-        $('.sidebar-content aside').css('width', '56px');
-        $('.navTitle').html('LOD');
-        $('.navTitle').css({
-            'font-size': '1.2rem',
-            'margin': '0 -8px',
-        });
-        $('.navActive').css('width', '56px')
-        $('.toggle').html('<a><i class="fas fa-caret-right"></i></a>');
-    } else if (checkCookie() == 'false') {
-        $('.sidebar-content aside').css('width', '240px');
-        $('.navTitle').html('Legend Of Dismodia');
-        $('.navTitle').css({
-            'font-size': '1.5rem'
-        })
-        $('.navActive').css('width', 'initial')
-        $('.toggle').html('<a><i class="fas fa-caret-left"></i></a>');
-    } else {
-        console.log('ça marche po');
+    // si on est bien en mode desktop
+    if ( window.innerWidth > '766px' ) {
+        if (checkCookie() == 'true') {
+            $('.navbarText').hide();
+            $('.sidebar-content aside').css('width', '56px');
+            $('.navTitle').html('LOD');
+            $('.navTitle').css({
+                'font-size': '1.2rem',
+                'margin': '0 -8px',
+            });
+            $('.navActive').css('width', '56px')
+            $('.toggle').html('<a><i class="fas fa-caret-right"></i></a>');
+        } else if (checkCookie() == 'false') {
+            $('.sidebar-content aside').css('width', '240px');
+            $('.navTitle').html('Legend Of Dismodia');
+            $('.navTitle').css({
+                'font-size': '1.5rem'
+            })
+            $('.navActive').css('width', 'initial')
+            $('.toggle').html('<a><i class="fas fa-caret-left"></i></a>');
+        } else {
+            console.log('ça marche po');
+        }
     }
+    
 }
