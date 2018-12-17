@@ -214,12 +214,12 @@ var PlayerCharacter = new Phaser.Class({
     }
 });
 
-var MenuItem = new Phaser.Class({
+var MenuItem3 = new Phaser.Class({
     Extends: Phaser.GameObjects.Text,
 
     initialize:
 
-    function MenuItem(x, y, text, scene) {
+    function MenuItem3(x, y, text, scene) {
         Phaser.GameObjects.Text.call(this, scene, x, y, text, { color: "#ffffff", align: "left", fontSize: 15});
     },
 
@@ -239,12 +239,12 @@ var MenuItem = new Phaser.Class({
 });
 
 // base menu class, container for menu items
-var Menu = new Phaser.Class({
+var Menu3 = new Phaser.Class({
     Extends: Phaser.GameObjects.Container,
 
     initialize:
 
-    function Menu(x, y, scene, heroes) {
+    function Menu3(x, y, scene, heroes) {
         Phaser.GameObjects.Container.call(this, scene, x, y);
         this.menuItems = [];
         this.menuItemIndex = 0;
@@ -252,7 +252,7 @@ var Menu = new Phaser.Class({
         this.y = y;
         this.selected = false;
     },
-    addMenuItem: function(unit) {
+    addMenuItem3: function(unit) {
         var menuItem = new MenuItem(0, this.menuItems.length * 20, unit, this.scene);
         this.menuItems.push(menuItem);
         this.add(menuItem);
@@ -315,31 +315,31 @@ var Menu = new Phaser.Class({
         this.clear();
         for(var i = 0; i < units.length; i++) {
             var unit = units[i];
-            unit.setMenuItem(this.addMenuItem(unit.type));
+            unit.setMenuItem(this.addMenuItem3(unit.type));
         }
         this.menuItemIndex = 0;
     }
 });
 
 var HeroesMenu = new Phaser.Class({
-    Extends: Menu,
+    Extends: Menu3,
 
     initialize:
 
     function HeroesMenu(x, y, scene) {
-        Menu.call(this, x, y, scene);
+        Menu3.call(this, x, y, scene);
     }
 });
 
-var ActionsMenu = new Phaser.Class({
-    Extends: Menu,
+var ActionsMenu3 = new Phaser.Class({
+    Extends: Menu3,
 
     initialize:
 
-    function ActionsMenu(x, y, scene) {
-        Menu.call(this, x, y, scene);
-        this.addMenuItem("Attack");
-        this.addMenuItem("magie");
+    function ActionsMenu3(x, y, scene) {
+        Menu3.call(this, x, y, scene);
+        this.addMenuItem3("Attack");
+
     },
     confirm: function() {
         // we select an action and go to the next menu and choose from the enemies to apply the action
@@ -349,12 +349,12 @@ var ActionsMenu = new Phaser.Class({
 });
 
 var EnemiesMenu = new Phaser.Class({
-    Extends: Menu,
+    Extends: Menu3,
 
     initialize:
 
     function EnemiesMenu(x, y, scene) {
-        Menu.call(this, x, y, scene);
+        Menu3.call(this, x, y, scene);
     },
     confirm: function() {
         // the player has selected the enemy and we send its id with the event
@@ -391,7 +391,7 @@ var UIScene4 = new Phaser.Class({
         this.menus = this.add.container();
 
         this.heroesMenu = new HeroesMenu(810, 650, this);
-        this.actionsMenu = new ActionsMenu(550, 650, this);
+        this.actionsMenu = new ActionsMenu3(550, 650, this);
         this.enemiesMenu = new EnemiesMenu(50, 650, this);
 
         // the currently selected menu
