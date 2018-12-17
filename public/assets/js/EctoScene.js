@@ -23,6 +23,7 @@ var EctoScene = new Phaser.Class({
     },
 
     startBattle: function() {
+        hp = tbl.life;
         // player character - warrior
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
         this.add.existing(warrior);
@@ -104,7 +105,8 @@ var EctoScene = new Phaser.Class({
     },
 
 
-    endBattle: function() {
+    endBattle: function() {        
+
         // clear state, remove sprites
         this.heroes.length = 0;
         this.enemies.length = 0;
@@ -143,7 +145,8 @@ var Unit = new Phaser.Class({
     attack: function(target) {
         if(target.living) {
 
-            target.takeDamage(this.damage);
+            target.takeDamage(this.damage);            
+
             this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
 
 
@@ -152,14 +155,26 @@ var Unit = new Phaser.Class({
     },
 
     magieAttaque: function(target) {
-          if(target.living) {
-              target.takeMagic(this.magie);
-              this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
-          }
+            if(target.living) {
+                target.takeMagic(this.magie);
+                this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
+            }
         },
 
     takeDamage: function(damage) {
-        this.hp -= damage;
+        if(i == 0){
+            i = 1;
+            this.hp -= damage;
+            console.log("enemyLife: "+ this.hp);
+
+
+        }else{
+            this.hp -= damage;
+            console.log("playerLife: "+ this.hp);            
+            i = 0;
+            getPhaserData(this.hp);
+        }
+        
         if(this.hp <= 0) {
             this.hp = 0;
             this.menuItem.unitKilled();
