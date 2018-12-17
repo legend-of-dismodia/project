@@ -1,144 +1,80 @@
 {% extends 'base.html.twig' %}
 {% block title %}Connexion - {{ parent() }}{% endblock %}
 
-{% block body %}   
-    <div class="d-flex justify-content-center">
-        <div class="col-sm-6"> 
-            <h1 class="mt-3">Connexion</h1>   
-            {# <form action="{{ path('login') }}" method="post">
-                <div class="form-group"> 
-                    <input class="form-control" type="text" placeholder="Adresse mail" name="_username" value="{{ lastUsername }}">
+{% block body %}
+
+<div class="d-flex justify-content-center">
+    <div class="col-sm-6"> 
+        <h1 class="mt-3">Connexion</h1>   
+
+        <div class="modal-content">
+            <!--Modal cascading tabs-->
+            <div class="modal-c-tabs">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs md-tabs tabs-2" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab">
+                            <i class="fa fa-user mr-1"></i> Connexion
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  href="{{path('register')}}" >
+                            <i class="fa fa-user-plus mr-1"></i> Inscription
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Tab panels -->
+                <div class="tab-content">
+                    <!--Panel 7-->
+                    <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+                    <!--Body-->
+                        <div class="modal-body mb-1">
+                            <form action="{{ path('login') }}" method="post"> 
+                                <div class="md-form form-sm mb-5">
+                                    <i class="fa fa-envelope prefix"></i>
+                                    <input class="form-control" type="text" placeholder="Adresse mail" name="_username" value="{{ lastUsername }}">
+                                </div>
+                                <div class="md-form form-sm mb-4">
+                                    <i class="fa fa-lock prefix"></i>
+                                    <input class="form-control" type="password" placeholder="Mot de passe" name="_password">                
+                                </div>
+
+                                {% if error %}
+                                    <div class="text-danger">
+                                        <span class="badge badge-danger">Error</span> 
+                                        Combinaison d'email et de mot de passe invalide.
+                                    </div>
+                                {% endif %}
+
+                                <div class="row mt-2">
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-primary float-right">
+                                            <i class="fas fa-sign-in-alt"></i> Connexion
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <a href="{{path('connect_facebook_start')}}" class="btn btn-facebook">
+                                            <i class="fab fa-facebook-square"></i> Facebook
+                                        </a>
+                                    </div>                 
+                                </div>
+                            </form>  
+                        </div>
+                        <!--Footer-->
+                        <div class="modal-footer">
+                            <div class="options text-center text-md-right mt-1">
+                                <p>Pas encore inscrit? <a href="{{path('register')}}">Inscription</a></p>
+                                {# <p>Mot de passe  <a href="#" class="blue-text">oublié?</a></p> #}
+                            </div>            
+                        </div>
+                    </div>        
                 </div>
-                <div class="form-group"> 
-                    <input class="form-control" type="password" placeholder="Mot de passe" name="_password">
-                </div>  #}
-
-
-                {#
-                    If you want to control the URL the user
-                    is redirected to on success (more details below)
-                    <input type="hidden" name="_target_path" value="/account" />
-                
-
-                <button type="submit" class="btn btn-success col-12 m-0">Connexion</button>
-                
-            </form> #}
-            
-<!--Content-->
-<div class="modal-content">
-    <!--Modal cascading tabs-->
-    <div class="modal-c-tabs">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs md-tabs tabs-2" role="tablist">
-        <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user mr-1"></i>
-            Connexion</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link"  href="{{path('register')}}" ><i class="fa fa-user-plus mr-1"></i>
-            Inscription</a>
-        </li>
-    </ul>
-
-    <!-- Tab panels -->
-    <div class="tab-content">
-        <!--Panel 7-->
-        <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
-        <!--Body-->
-        <div class="modal-body mb-1">
-            <form action="{{ path('login') }}" method="post"> 
-                <div class="md-form form-sm mb-5">
-                    <i class="fa fa-envelope prefix"></i>
-                    <input class="form-control" type="text" placeholder="Adresse mail" name="_username" value="{{ lastUsername }}">                    
-                </div>
-                <div class="md-form form-sm mb-4">
-                    <i class="fa fa-lock prefix"></i>
-                    <input class="form-control" type="password" placeholder="Mot de passe" name="_password">                
-                </div>
-
-                {% if error %}
-                    <div class="text-danger"><span class="badge badge-danger">Error</span> Combinaison d'email et de mot de passe invalide.</div>
-                {% endif %}
-
-                <div class="row mt-2">
-                    <div class="col-6">
-                        <button type="submit" class="btn btn-primary float-right"><i class="fas fa-sign-in-alt"></i> Connexion</button>
-                    </div>
-                    <div class="col-6">
-                        <a href="{{path('connect_facebook_start')}}" class="btn btn-facebook"><i class="fab fa-facebook-square"></i> Facebook</a></p>
-                    </div>                 
-                                        
-                </div>
-            </form>
-            
-        </div>
-        <!--Footer-->
-        <div class="modal-footer">
-            <div class="options text-center text-md-right mt-1">
-            <p>Pas encore inscrit? <a href="{{path('register')}}">Inscription</a></p>
-
-            {# <p>Mot de passe  <a href="#" class="blue-text">oublié?</a></p> #}
-            </div>            
-        </div>
-
-        </div>
-        <!--/.Panel 7-->
-
-        <!--Panel 8-->
-        <div class="tab-pane fade" id="panel8" role="tabpanel">
-
-        <!--Body-->
-        <div class="modal-body">
-            {# <div class="md-form form-sm mb-5">
-            <i class="fa fa-envelope prefix"></i>
-            <input type="email" id="modalLRInput12" class="form-control form-control-sm validate">
-            <label data-error="wrong" data-success="right" for="modalLRInput12">Your email</label>
             </div>
-
-            <div class="md-form form-sm mb-5">
-            <i class="fa fa-lock prefix"></i>
-            <input type="password" id="modalLRInput13" class="form-control form-control-sm validate">
-            <label data-error="wrong" data-success="right" for="modalLRInput13">Your password</label>
-            </div>
-
-            <div class="md-form form-sm mb-4">
-            <i class="fa fa-lock prefix"></i>
-            <input type="password" id="modalLRInput14" class="form-control form-control-sm validate">
-            <label data-error="wrong" data-success="right" for="modalLRInput14">Repeat password</label>
-            </div>
-
-            <div class="text-center form-sm mt-2">
-            <button class="btn btn-info">Sign up <i class="fa fa-sign-in ml-1"></i></button>
-            </div> #}
-
-                {# {% include 'user/register.html.twig' %} #}
-            
-            {# {{ form_start (form, {
-            'attr': {'novalidate': 'novalidate', 'action': "/register"}
-            }) }}
-            {{ form_widget (form) }}
-
-            <button class="btn btn-success" type="submit">Créer</button>
-            {{ form_end (form) }}  #}
         </div>
-        <!--Footer-->
-        <div class="modal-footer">
-            <div class="options text-right">
-            <p class="pt-1">Already have an account? <a href="#" class="blue-text">Log In</a></p>
-            </div>
-            
-        </div>
-        </div>
-        <!--/.Panel 8-->
     </div>
+</div>    
 
-    </div>
-<!--/.Content-->
-</div>
-
-
-        </div>    
-    </div>
 
 
 {% endblock %}
