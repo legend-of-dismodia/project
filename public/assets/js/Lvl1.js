@@ -240,5 +240,5 @@ function collisionChest(player, chest)
 
                 chest.disableBody(true, true);
                 chest = this.physics.add.sprite(850, 20, "chest", 13);
-
+                objet[0]['quantité'] = 1;
 }
