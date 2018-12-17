@@ -47,7 +47,7 @@ class UserController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'L\'utilisateur "'. $user->getUsername() .'" a bien été ajouté'
+                'L\'utilisateur "'. $user->getUsername() .'" a bien été ajouté.'
             );
 
             return $this->redirectToRoute('login');
