@@ -5,6 +5,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ContactType;
 use App\Entity\User;
+use App\Entity\Save;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -109,8 +110,12 @@ class GamesmenuController extends AbstractController
    {
        $userid = $this->getUser()->getId();
        $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
+       
+       $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $userid]);
+       
        return $this->render('user/profile.html.twig', [
-        "user" => $user
+        "user" => $user,
+        "save" => $userSave
        ]);
    }
     /**
