@@ -54,10 +54,13 @@ class GamesmenuController extends AbstractController
      */
     public function gameGetSave(EntityManagerInterface $em, Request $request)
     {
-        $user = $this->getUser()->getId();        
+        $user = $this->getUser()->getId();
 
         $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
+        // $userInventory = $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave->getId()]);
+
         $arrayUser = [
+
             'id' => $userSave->getId(),
             'createdAt'=> $userSave->getCreatedAt(),
             'level'=> $userSave->getLevel(),
@@ -65,10 +68,11 @@ class GamesmenuController extends AbstractController
             'mana'=> $userSave->getMana(),
             'xp'=> $userSave->getXp(),
             'playtime'=> $userSave->getPlaytime(),
+            'inventory' => $userSave->getInventories()->getItem(),
         ];
 
         return new JsonResponse($arrayUser);
-        // var_dump($ok);
+        // var_dump($userInventory->());
         // die();
     }
 
@@ -91,12 +95,12 @@ class GamesmenuController extends AbstractController
 
         $user = $this->getUser()->getId();
         $saveUser = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
-    
+
         if (!$saveUser) {
             throw $this->createNotFoundException(
                 'No user found for id '.$id
             );
-        }    
+        }
         if ($tbl['life'] <= 0) {
             $saveUser->setLife(0);
         }else{
@@ -104,7 +108,7 @@ class GamesmenuController extends AbstractController
         }
         $em->flush();
 
-        return new Response('ok');        
+        return new Response('ok');
     }
 
     /**

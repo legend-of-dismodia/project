@@ -60,25 +60,25 @@ var config = {
       World,
 
       BattleScene,
-      // BossBattle,
-      // UIScene,
-      // LoupScene,
-      // EctoScene,
+      BossBattle,
+      UIScene,
+      LoupScene,
+      EctoScene,
       UIScene5,
-      // UIScene2,
-      // UIScene3,
-      // UIScene4,
+      UIScene2,
+      UIScene3,
+      UIScene4,
 
 
 
-      // Boot2,
-      // World2,
-      //
-      // Boot3,
-      // World3,
-      //
-      // BootScene,
-      // WorldScene,
+      Boot2,
+      World2,
+
+      Boot3,
+      World3,
+
+      BootScene,
+      WorldScene,
       Sac,
 
     ]

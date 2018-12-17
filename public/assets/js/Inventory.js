@@ -26,19 +26,9 @@
     startInventory:function(){
 
       this.index = -1; // currently active unit
-      var warrior = new PlayerCharacter(this, 750, 300, "player", 0, "Warrior", hp, attack, 50,);
-      this.add.existing(warrior);
 
-      var potion = new Objet (this, 80, 250, "objet", 179, "potion", objet[0]['effet'], objet[0]['quantité'], objet[0]['rareté']);
-      this.add.existing(potion);
 
-      var arme = new Objet (this, 200, 250, "objet", 97, "arme", objet[1]['effet'], objet[1]['quantité'], objet[1]['rareté']);
-      this.add.existing(arme);
-
-      this.heroes = [ warrior];
-      this.objet = [potion, arme];
-
-      this.scene.run('UIScene5');
+      this.scene.start('UIScene5');
     },
 
 
@@ -59,6 +49,14 @@
           {
             hp = tbl.life;
 
+            var warrior = new PlayerCharacter(this, 750, 300, "player", 0, "Warrior", hp, attack, 50,);
+            this.add.existing(warrior);
+
+            var potion = new Objet (this, 80, 250, "objet", 179, "potion", objet[0]['effet'], objet[0]['quantité'], objet[0]['rareté']);
+            this.add.existing(potion);
+
+            var arme = new Objet (this, 200, 250, "objet", 97, "arme", objet[1]['effet'], objet[1]['quantité'], objet[1]['rareté']);
+            this.add.existing(arme);
 
             warrior.setDepth(10);
             potion.setDepth(10);
@@ -74,7 +72,8 @@
             this.graphics.strokeRect(600, 200, 300, 500);
             this.graphics.fillRect(600, 200, 300, 500);
 
-
+           this.heroes = [ warrior];
+           this.objet = [potion, arme];
 
 //-----------------------------stat personnage------------------------------//
 
