@@ -94,7 +94,11 @@ class GamesmenuController extends AbstractController
                 'No user found for id '.$id
             );
         }    
-        $saveUser->setLife($tbl['life']);
+        if ($tbl['life'] <= 0) {
+            $saveUser->setLife(0);
+        }else{
+            $saveUser->setLife($tbl['life']);
+        }
         $em->flush();
 
         return new Response('ok');        
