@@ -44,6 +44,8 @@
 
           create: function ()
           {
+            hp = tbl.life;
+
             var warrior = new PlayerCharacter(this, 750, 300, "player", 0, "Warrior", hp, attack, 50,);
             this.add.existing(warrior);
 
@@ -101,39 +103,24 @@
             armeText.setText(' quantité : ' +  arme['quantité']);
 
             this.menus = this.add.container();
-
-            this.heroesMenu2 = new HeroesMenu2(195, 153, this);
+            //
+            // this.heroesMenu2 = new HeroesMenu2(195, 153, this);
             this.actionsMenu = new ActionsMenu(400, 250, this);
-            this.objetMenu = new ObjetMenu(8, 153, this);
+            // this.objetMenu = new ObjetMenu(8, 153, this);
 
             // the currently selected menu
-            this.currentMenu = this.actionsMenu;
+            // this.currentMenu = this.actionsMenu;
 
-            // add menus to the container
-            this.menus.add(this.heroesMenu2);
+
+            // this.menus.add(this.heroesMenu2);
             this.menus.add(this.actionsMenu);
-            this.menus.add(this.objetMenu);
+            // this.menus.add(this.objetMenu);
 
          },
 
 
       });
 
-      var Unit = new Phaser.Class({
-          Extends: Phaser.GameObjects.Sprite,
-
-          initialize:
-
-          function Unit(scene, x, y, texture, frame, type,hp, damage, magie, lvl, xp, mana) {
-              Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
-              this.type = type;
-              this.maxHp = this.hp = hp;
-              this.quantité = quantité; // default damage
-              this.rareté = rareté;
-              this.living = true;
-              this.menuItem = null;
-          },
-        });
 
         var Unit3 = new Phaser.Class({
             Extends: Phaser.GameObjects.Sprite,
@@ -220,7 +207,7 @@
             initialize:
 
             function HeroesMenu2(x, y, scene) {
-                Menu.call(this, x, y, scene);
+                Menu2.call(this, x, y, scene);
             }
         });
 
@@ -231,23 +218,24 @@
 
             function ActionsMenu(x, y, scene) {
                 Menu2.call(this, x, y, scene);
-                this.addMenuItem('equiper');
+                this.addMenuItem("equiper");
             },
             confirm: function() {
                 // do something when the player selects an action
-            }
-
-        });
-
-        var ObjetMenu = new Phaser.Class({
-            Extends: Menu2,
-
-            initialize:
-
-            function ObjetMenu(x, y, scene) {
-                Menu2.call(this, x, y, scene);
             },
-            confirm: function() {
-                // do something when the player selects an enemy
-            }
+
         });
+
+
+        // var ObjetMenu = new Phaser.Class({
+        //     Extends: Menu2,
+        //
+        //     initialize:
+        //
+        //     function ObjetMenu(x, y, scene) {
+        //         Menu2.call(this, x, y, scene);
+        //     },
+        //     confirm: function() {
+        //         // do something when the player selects an enemy
+        //     }
+        // });
