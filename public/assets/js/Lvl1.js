@@ -173,7 +173,7 @@ var Boot = new Phaser.Class({
        //-----------------------ouvrir l'inventaire-------------------------//
 
        this.input.keyboard.once("keydown_D", event =>{
-  this.scene.switch('Sac');
+       this.scene.switch('Sac');
        });
       },
 
@@ -240,5 +240,5 @@ function collisionChest(player, chest)
 
                 chest.disableBody(true, true);
                 chest = this.physics.add.sprite(850, 20, "chest", 13);
-            
+
 }
