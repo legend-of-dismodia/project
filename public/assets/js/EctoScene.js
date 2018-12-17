@@ -16,7 +16,7 @@ var EctoScene = new Phaser.Class({
     create: function ()
     {
         // change the background to green
-         this.add.image(400, 300, 'fond');
+        this.add.image(400, 300, 'fond');
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
@@ -100,7 +100,7 @@ var EctoScene = new Phaser.Class({
         }
         if(action == "magie"){
         this.units[this.index].magieAttaque(this.enemies[target]);
-         }
+        }
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     },
 
@@ -144,12 +144,8 @@ var Unit = new Phaser.Class({
     // attack the target unit
     attack: function(target) {
         if(target.living) {
-
             target.takeDamage(this.damage);            
-
             this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
-
-
         }
 
     },
@@ -165,12 +161,9 @@ var Unit = new Phaser.Class({
         if(i == 0){
             i = 1;
             this.hp -= damage;
-            console.log("enemyLife: "+ this.hp);
-
 
         }else{
-            this.hp -= damage;
-            console.log("playerLife: "+ this.hp);            
+            this.hp -= damage;         
             i = 0;
             getPhaserData(this.hp);
         }

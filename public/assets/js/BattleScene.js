@@ -146,8 +146,7 @@ var Unit = new Phaser.Class({
     attack: function(target) {
         if(target.living) {
 
-            target.takeDamage(this.damage);
-            console.log("hp: "+hp );
+            target.takeDamage(this.damage);            
             this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
         }
 
@@ -166,15 +165,9 @@ var Unit = new Phaser.Class({
         if(i == 0){
             i = 1;
             this.hp -= damage;
-            console.log("enemyLife: "+ this.hp);
-
 
         }else{
-            this.hp -= damage;
-            console.log("playerLife: "+ this.hp);
-
-           
-
+            this.hp -= damage;            
             i = 0;
         }
 
@@ -211,11 +204,6 @@ var Enemy = new Phaser.Class({
     initialize:
     function Enemy(scene, x, y, texture, frame, type, hp, damage) {
         Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
-
-        console.log('hpenemey: '+hp);
-        console.log('damagenemy: '+damage);
-
-
     }
 });
 
@@ -229,8 +217,6 @@ var PlayerCharacter = new Phaser.Class({
         this.flipX = true;
 
         this.setScale(2);
-        console.log('hpPLayer: '+hp);
-        console.log('damage: '+damage);
 
     }
 });
