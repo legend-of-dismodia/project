@@ -104,8 +104,8 @@ class GamesmenuController extends AbstractController
     /**
     * @Route("/profil", name="profil")
     */
-<<<<<<< HEAD
-   public function profil(EntityManagerInterface $em)
+    
+    public function profil(EntityManagerInterface $em)
    {
        $userid = $this->getUser()->getId();
        $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
@@ -113,14 +113,6 @@ class GamesmenuController extends AbstractController
         "user" => $user
        ]);
    }
-=======
-    public function profil()
-    {
-        return $this->render('user/profile.html.twig', [
-
-        ]);
-    }
->>>>>>> master
     /**
      * @Route("/contact", name="contact")
      */
