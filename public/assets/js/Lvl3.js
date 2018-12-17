@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var Boot3 = new Phaser.Class({
 
   Extends: Phaser.Scene,
@@ -229,7 +228,6 @@ var Boot3 = new Phaser.Class({
              this.scene.switch('LoupScene');
              loupgarou.disableBody(true, true);
          }
-=======
 var Boot3 = new Phaser.Class({
 
   Extends: Phaser.Scene,
@@ -460,4 +458,3 @@ var Boot3 = new Phaser.Class({
              this.scene.switch('LoupScene');
              loupgarou.disableBody(true, true);
          }
->>>>>>> master
