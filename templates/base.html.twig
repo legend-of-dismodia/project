@@ -9,102 +9,74 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.16/css/mdb.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Merienda" rel="stylesheet">  
+  <link href="https://fonts.googleapis.com/css?family=Merienda" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('assets/css/main.css')}}" crossorigin="anonymous">
   <link rel="stylesheet" href="{{ asset('assets/css/navbar.css')}}" crossorigin="anonymous">
   {% endblock %}
 </head>
+
 <body>
-   {# <header>
-    <nav class="navbar navbar-fixed-left navbar-expand-lg navbar-dark bg-dark">
-      
-      <div class="navbar-brand">Legend Of Dismodia</div>
-      <div class="navbar-fixed-content">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+<div class="container-fluid h-100">
+  <div class="row sidebar-content">
+    <aside>
+      <nav class="navbar navbar-expand navbar-dark flex-md-column flex-row align-items-start py-2">
+        <div class="collapse navbar-collapse">
+          <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
             <li class="nav-item">
-              <a class="nav-link" href="#">Accueil</a>
+              <a class="nav-link pl-0 navTitle" href="{{ path('index')}}">Legend Of Dismodia</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Guide du jeu</a>
+            <li class="nav-item {{app.request.pathInfo == path('index') ? 'navActive' : ''}}">
+              <a class="nav-link pl-0" href="{{ path('index')}}"><i class="fa fa-home fa-fw"></i> <span class="navbarText">Accueil</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Classement</a>
+            <li class="nav-item {{app.request.pathInfo == path('guide') ? 'navActive' : ''}}">
+              <a class="nav-link pl-0" href="{{ path('guide')}}"><i class="fa fa-question-circle fa-fw"></i> <span class="navbarText">Guide de jeu</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Inscription / connection</a>
+            <li class="nav-item {{app.request.pathInfo == path('classement') ? 'navActive' : ''}}">
+              <a class="nav-link pl-0" href="{{path('classement')}}"><i class="fa fa-list fa-fw"></i> <span class="navbarText">Classement des joueurs</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Profil</a>
-            </li>
+            {% if app.user %}
+            <li class="nav-item  {{app.request.pathInfo == path('game') ? 'navActive' : ''}}">
+                <a class="nav-link pl-0" href="{{path('game')}}"><i class="fas fa-gamepad"></i> <span class="navbarText">Jouer</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link pl-0" href="#"><i class="fas fa-user"></i> <span class="navbarText">Profil de {{app.user.username}} </span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link pl-0" href="#"><i class="fa fa-cog fa-fw"></i> <span class="navbarText">Mon compte</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link pl-0" href="{{path('logout')}}"><i class="fas fa-sign-out-alt"></i> <span class="navbarText">Déconnexion</span></a>
+              </li>
+            {% else %}
+              <li class="nav-item {{app.request.pathInfo == path('login') ? 'navActive' : ''}}">
+                <a class="nav-link pl-0" href="{{path('login')}}"><i class="fas fa-sign-in-alt"></i> <span class="navbarText">Connexion</span></a>
+              </li>
+            {% endif %}
+            <li class="nav-item {{app.request.pathInfo == path('contact') ? 'navActive' : ''}}">
+                <a class="nav-link pl-0" href="{{path('contact')}}"><i class="fa fa-envelope  fa-fw"></i> <span class="navbarText">Contact</span></a>
+              </li>
           </ul>
         </div>
-      </div>
-    </nav>
-  </header> #}
+      </nav>
+    </aside>
 
-    <div class="container-fluid h-100">
-      <div class="row sidebar-content">
-        <aside>
-          <nav class="navbar navbar-expand navbar-dark flex-md-column flex-row align-items-start py-2">
-            <div class="collapse navbar-collapse">
-              <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
-                <li class="nav-item">
-                  <a class="nav-link pl-0 navTitle" href="{{ path('index')}}">Legend Of Dismodia</a>
-                </li>
-                <li class="nav-item {{app.request.pathInfo == path('index') ? 'navActive' : ''}}">
-                  <a class="nav-link pl-0" href="{{ path('index')}}"><i class="fa fa-home fa-fw"></i> <span class="navbarText">Accueil</span></a>
-                </li>
-                <li class="nav-item {{app.request.pathInfo == path('guide') ? 'navActive' : ''}}">
-                  <a class="nav-link pl-0" href="{{ path('guide')}}"><i class="fa fa-question-circle fa-fw"></i> <span class="navbarText">Guide de jeu</span></a>
-                </li>
-                <li class="nav-item {{app.request.pathInfo == path('classement') ? 'navActive' : ''}}">
-                  <a class="nav-link pl-0" href="{{path('classement')}}"><i class="fa fa-list fa-fw"></i> <span class="navbarText">Classement des joueurs</span></a>
-                </li>
-                {% if app.user %}
-                <li class="nav-item  {{app.request.pathInfo == path('game') ? 'navActive' : ''}}">
-                    <a class="nav-link pl-0" href="{{path('game')}}"><i class="fas fa-gamepad"></i> <span class="navbarText">Jouer</span></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link pl-0" href="#"><i class="fas fa-user"></i> <span class="navbarText">Profil de {{app.user.username}} </span></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link pl-0" href="#"><i class="fa fa-cog fa-fw"></i> <span class="navbarText">Mon compte</span></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link pl-0" href="{{path('logout')}}"><i class="fas fa-sign-out-alt"></i> <span class="navbarText">Déconnexion</span></a>
-                  </li>
-                {% else %}
-                  <li class="nav-item {{app.request.pathInfo == path('login') ? 'navActive' : ''}}">
-                    <a class="nav-link pl-0" href="{{path('login')}}"><i class="fas fa-sign-in-alt"></i> <span class="navbarText">Connexion</span></a>
-                  </li>
-                {% endif %}
-                <li class="nav-item {{app.request.pathInfo == path('contact') ? 'navActive' : ''}}">
-                    <a class="nav-link pl-0" href="{{path('contact')}}"><i class="fa fa-envelope  fa-fw"></i> <span class="navbarText">Contact</span></a>
-                  </li>
-              </ul>
-            </div>
-          </nav>
-        </aside>
-  
-  {% for message in app.flashes('notice') %}
-    <div class="flash-notice alert alert-success alert-dismissible fade show" role="alert">
-      {{ message }} 
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+    <div class="toggle">
+      <a><i class="fas fa-caret-left"></i></a>
     </div>
-  {% endfor %}
 
-<div class="toggle">
-  <a><i class="fas fa-caret-left"></i></a>
-</div>
-<div class="container">
+    <div class="container">
+      {% for message in app.flashes('notice') %}
+        <div class="flash-notice alert alert-success alert-dismissible fade show" role="alert">
+          {{ message }} 
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endfor %}
 
-  {% block body %}
+      {% block body %}
+    </div>
+  </div>
 </div>
 
 

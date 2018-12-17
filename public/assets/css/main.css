@@ -120,6 +120,17 @@ nav .fa, nav .fas {
     }
 } */
 
+tr{
+    border: 1px solid white;
+}
+
+th{
+    border: 1px solid white;
+}
+td{
+  border: 1px solid white;
+}
+
 @media (max-width: 766px) {
     .container {
         max-width: inherit;
