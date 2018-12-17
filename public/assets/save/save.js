@@ -1,6 +1,7 @@
+
 getSave();
 
-var hp;
+var hp = 100;
 var attack = 40;
 var tbl = [];
 
@@ -12,7 +13,7 @@ function getSave(){
         method: 'POST',
         dataType: 'json',
         success : successSave,
-        error: function(e) {        
+        error: function(e) {
             console.log(e+" - Désolé, aucun résultat trouvé.");
         }
     });
@@ -22,8 +23,8 @@ function successSave(data){
     var saveUser = data;
 
 
-    hp = saveUser.life;    
-    createdAt = saveUser.createdAt;    
+    hp = saveUser.life;
+    createdAt = saveUser.createdAt;
     level= saveUser.level;
     life= saveUser.life;
     mana= saveUser.mana;

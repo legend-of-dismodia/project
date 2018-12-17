@@ -116,7 +116,7 @@ var LoupScene = new Phaser.Class({
         // sleep the UI
         this.scene.sleep('UIScene3');
         // return to WorldScene and sleep current LoupScene
-        this.scene.switch('World');
+        this.scene.switch('World3');
     }
 });
 

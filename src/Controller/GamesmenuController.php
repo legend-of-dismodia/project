@@ -1,16 +1,12 @@
 <?php
-
 namespace App\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-
 use App\Form\ContactType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-
 class GamesmenuController extends AbstractController
 {
     /**
@@ -40,26 +36,23 @@ class GamesmenuController extends AbstractController
             'controller_name' => 'GamesmenuController',
         ]);
     }
-
     /**
      * @Route("/game", name="game")
      */
     public function game()
     {
         return $this->render('gamesmenu/game.html.twig', [
-        
+
         ]);
     }
-
     /**
      * @Route("/game/save", name="gameGetSave")
      */
     public function gameGetSave(EntityManagerInterface $em, Request $request)
     {
         $user = $this->getUser()->getId();
-        
-        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
 
+        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
         $arrayUser = [
             'id' => $userSave->getId(),
             'createdAt'=> $userSave->getCreatedAt(),
@@ -69,33 +62,30 @@ class GamesmenuController extends AbstractController
             'xp'=> $userSave->getXp(),
             'playtime'=> $userSave->getPlaytime(),
         ];
-        
-        return new JsonResponse($arrayUser);        
+
+        return new JsonResponse($arrayUser);
         // var_dump($ok);
         // die();
     }
 
     /**
-     * @Route("/profil", name="profil")
-     */
-    public function profil()
-    {
-        return $this->render('user/profile.html.twig', [
-        
-        ]);
-    }
+    * @Route("/profil", name="profil")
+    */
+   public function profil()
+   {
+       return $this->render('user/profile.html.twig', [
+
+       ]);
+   }
     /**
      * @Route("/contact", name="contact")
      */
     public function contact(Request $request, \Swift_Mailer $mailer)
     {
         $form = $this->createForm(ContactType::class);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             // $sent = $form->getData();
-
             if (isset($form)) {
                 $name = $form['name']->getData();
             } else {
@@ -111,10 +101,6 @@ class GamesmenuController extends AbstractController
             } else {
                 $message = 'undefined';
             }
-
-
-
-
             $message = (new \Swift_Message('Nouveau message sur Legend of Dismodia !'))
                 ->setFrom('send@example.com')
                 ->setTo('legendofdismodia@gmail.com')
@@ -139,10 +125,8 @@ class GamesmenuController extends AbstractController
             'text/plain'
         )
              */;
-
             $mailer->send($message);
         }
-
         return $this->render('contact.html.twig', [
             'form' => $form->createView()
         ]);

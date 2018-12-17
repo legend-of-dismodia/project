@@ -1,22 +1,22 @@
-var BattleScene = new Phaser.Class({
+var EctoScene = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
-    initialize: function BattleScene ()
+    initialize: function EctoScene ()
     {
-        Phaser.Scene.call(this, { key: "BattleScene" });
+        Phaser.Scene.call(this, { key: "EctoScene" });
     },
     preload: function ()
     {
         // load resources
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
-    this.load.spritesheet("souris", "../assets/spritesheet/Monster.png", { frameWidth: 48, frameHeight: 48});
+    this.load.spritesheet("madeleine", "../assets/spritesheet/ecto1.png", { frameWidth: 150, frameHeight: 160});
     this.load.image("fond", "../assets/spritesheet/battle.png");
     },
     create: function ()
     {
         // change the background to green
-        this.add.image(400, 300, 'fond');
+         this.add.image(400, 300, 'fond');
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
@@ -24,26 +24,25 @@ var BattleScene = new Phaser.Class({
 
     startBattle: function() {
         // player character - warrior
-
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
         this.add.existing(warrior);
 
 
-        var souris = new Enemy(this, 500, 400, "souris", null, "souris", 50, 10);
-        this.add.existing(souris);
+        var madeleine = new Enemy(this, 500, 400, "madeleine", 1, "madeleine", 50, 20);
+        this.add.existing(madeleine);
 
 
 
         // array with heroes
         this.heroes = [ warrior];
         // array with enemies
-        this.enemies = [souris];
+        this.enemies = [madeleine];
         // array with both parties, who will attack
         this.units = this.heroes.concat(this.enemies);
 
         this.index = -1; // currently active unit
 
-        this.scene.run("UIScene");
+        this.scene.run("UIScene4");
     },
     nextTurn: function() {
         // if we have victory or game over
@@ -100,7 +99,7 @@ var BattleScene = new Phaser.Class({
         }
         if(action == "magie"){
         this.units[this.index].magieAttaque(this.enemies[target]);
-        }
+         }
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     },
 
@@ -115,17 +114,18 @@ var BattleScene = new Phaser.Class({
         }
         this.units.length = 0;
         // sleep the UI
-        this.scene.sleep('UIScene');
-        // return to WorldScene and sleep current BattleScene
-        this.scene.switch('World');
+        this.scene.sleep('UIScene4');
+        // return to WorldScene and sleep current EctoScene
+        this.scene.switch('World2');
     }
 });
-let i = 0;
+
 // base class for heroes and enemies
 var Unit = new Phaser.Class({
     Extends: Phaser.GameObjects.Sprite,
 
     initialize:
+
     function Unit(scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp, mana) {
         Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
         this.type = type;
@@ -134,7 +134,6 @@ var Unit = new Phaser.Class({
         this.magie = magie;
         this.living = true;
         this.menuItem = null;
-
     },
     // we will use this to notify the menu item when the unit is dead
     setMenuItem: function(item) {
@@ -148,44 +147,27 @@ var Unit = new Phaser.Class({
             this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
 
 
-
         }
 
     },
 
     magieAttaque: function(target) {
-            if(target.living) {
-                target.takeMagic(this.magie);
-                this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
-            }
+          if(target.living) {
+              target.takeMagic(this.magie);
+              this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
+          }
         },
 
-
     takeDamage: function(damage) {
-
-        if(i == 0){
-            i = 1;
-            this.hp -= damage;
-            console.log("enemyLife: "+ this.hp);
-
-
-        }else{
-            this.hp -= damage;
-            console.log("playerLife: "+ this.hp);
-
-            tbl.life = this.hp;
-
-            i = 0;
-        }
-
-
-        if(this.hp <= 0 ) {
+        this.hp -= damage;
+        if(this.hp <= 0) {
             this.hp = 0;
             this.menuItem.unitKilled();
             this.living = false;
             this.visible = false;
             this.menuItem = null;
         }
+
 
     },
 
@@ -199,12 +181,7 @@ var Unit = new Phaser.Class({
             this.visible = false;
             this.menuItem = null;
         }
-    },
-
-    data: function(){
-        console.log('helo: '+tbl);
     }
-
 });
 
 var Enemy = new Phaser.Class({
@@ -213,11 +190,6 @@ var Enemy = new Phaser.Class({
     initialize:
     function Enemy(scene, x, y, texture, frame, type, hp, damage) {
         Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
-
-        console.log('hpenemey: '+hp);
-        console.log('damagenemy: '+damage);
-
-
     }
 });
 
@@ -231,9 +203,6 @@ var PlayerCharacter = new Phaser.Class({
         this.flipX = true;
 
         this.setScale(2);
-        console.log('hpPLayer: '+hp);
-        console.log('damage: '+damage);
-
     }
 });
 
@@ -361,8 +330,8 @@ var ActionsMenu = new Phaser.Class({
 
     function ActionsMenu(x, y, scene) {
         Menu.call(this, x, y, scene);
-        this.addMenuItem("Attack","magie");
-
+        this.addMenuItem("Attack");
+        this.addMenuItem("magie");
     },
     confirm: function() {
         // we select an action and go to the next menu and choose from the enemies to apply the action
@@ -386,15 +355,15 @@ var EnemiesMenu = new Phaser.Class({
 });
 
 // User Interface scene
-var UIScene = new Phaser.Class({
+var UIScene4 = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
     initialize:
 
-    function UIScene ()
+    function UIScene4 ()
     {
-        Phaser.Scene.call(this, { key: "UIScene" });
+        Phaser.Scene.call(this, { key: "UIScene4" });
     },
 
     create: function ()
@@ -425,13 +394,13 @@ var UIScene = new Phaser.Class({
         this.menus.add(this.actionsMenu);
         this.menus.add(this.enemiesMenu);
 
-        this.battleScene = this.scene.get("BattleScene");
+        this.ectoScene = this.scene.get("EctoScene");
 
         // listen for keyboard events
         this.input.keyboard.on("keydown", this.onKeyInput, this);
 
         // when its player cunit turn to move
-        this.battleScene.events.on("PlayerSelect", this.onPlayerSelect, this);
+        this.ectoScene.events.on("PlayerSelect", this.onPlayerSelect, this);
 
         // when the action on the menu is selected
         // for now we have only one action so we dont send and action id
@@ -444,7 +413,7 @@ var UIScene = new Phaser.Class({
         this.sys.events.on('wake', this.createMenu, this);
 
         // the message describing the current action
-        this.message = new Message(this, this.battleScene.events);
+        this.message = new Message(this, this.ectoScene.events);
         this.add.existing(this.message);
 
         this.createMenu();
@@ -455,7 +424,7 @@ var UIScene = new Phaser.Class({
         // map enemies menu items to enemies
         this.remapEnemies();
         // first move
-        this.battleScene.nextTurn();
+        this.ectoScene.nextTurn();
     },
     onEnemy: function(index) {
         // when the enemy is selected, we deselect all menus and send event with the enemy id
@@ -463,8 +432,8 @@ var UIScene = new Phaser.Class({
         this.actionsMenu.deselect();
         this.enemiesMenu.deselect();
         this.currentMenu = null;
-        this.battleScene.receivePlayerSelection("attack", index);
-        // this.battleScene.receivePlayerSelection2("magie", index);
+        this.ectoScene.receivePlayerSelection("attack", index);
+        // this.ectoScene.receivePlayerSelection2("magie", index);
     },
     onPlayerSelect: function(id) {
         // when its player turn, we select the active hero item and the first action
@@ -480,11 +449,11 @@ var UIScene = new Phaser.Class({
         this.enemiesMenu.select(0);
     },
     remapHeroes: function() {
-        var heroes = this.battleScene.heroes;
+        var heroes = this.ectoScene.heroes;
         this.heroesMenu.remap(heroes);
     },
     remapEnemies: function() {
-        var enemies = this.battleScene.enemies;
+        var enemies = this.ectoScene.enemies;
         this.enemiesMenu.remap(enemies);
     },
     onKeyInput: function(event) {

@@ -22,8 +22,8 @@ var Boot = new Phaser.Class({
       this.load.tilemapTiledJSON("map", "../assets/map/nivo1.json");
       this.load.spritesheet("escalier", "../assets/tilesets/Inside_B.png", { frameWidth: 48, frameHeight: 48});
       this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
-      this.load.spritesheet('souris', '../assets/spritesheet/Monster.png', { frameWidth: 48, frameHeight: 48});
-
+      this.load.spritesheet('souris', '../assets/spritesheet/troll.png', { frameWidth: 80, frameHeight: 80});
+    this.load.spritesheet("chest", "../assets/tilesets/chest.png", { frameWidth: 48, frameHeight: 48});
     },
 
       create: function (){
@@ -166,6 +166,15 @@ var Boot = new Phaser.Class({
 
        souris1 = this.physics.add.sprite(900, 350, "souris", 2);
        this.physics.add.overlap(player, souris1, collisionSouris1, null, this);
+
+       chest = this.physics.add.sprite(850, 20, "chest", 2);
+       this.physics.add.overlap(player, chest, collisionChest, null, this);
+
+       //-----------------------ouvrir l'inventaire-------------------------//
+
+       this.input.keyboard.once("keydown_D", event =>{
+  this.scene.switch('Sac');
+       });
       },
 
 
@@ -224,4 +233,12 @@ function collisionSouris1(player, souris1)
 
               this.scene.switch('BattleScene');
                 souris1.disableBody(true, true);
+}
+
+function collisionChest(player, chest)
+            {
+
+                chest.disableBody(true, true);
+                chest = this.physics.add.sprite(850, 20, "chest", 13);
+            
 }

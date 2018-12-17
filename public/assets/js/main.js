@@ -10,7 +10,7 @@ $('.toggle').on('click', function () {
     // masque les légendes
     $('.navbarText').toggle();
 
-    // petite barre    
+    // petite barre
     if ($('.sidebar-content aside').css('width') !== '56px') {
         setCookie('minimizedNavbar', 'true')
         $('.sidebar-content aside').css('width', '56px');
