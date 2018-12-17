@@ -124,6 +124,21 @@ class GamesmenuController extends AbstractController
         
        ]);
    }
+   /**
+    * @Route("/compte", name="compte")
+    */
+    
+    public function compte(EntityManagerInterface $em)
+   {
+       $userid = $this->getUser()->getId();
+       $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
+       
+       
+       return $this->render('user/compte.html.twig', [
+        "user" => $user,
+        
+       ]);
+   }
     /**
      * @Route("/contact", name="contact")
      */
