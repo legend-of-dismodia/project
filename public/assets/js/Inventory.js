@@ -47,10 +47,10 @@
             var warrior = new PlayerCharacter(this, 750, 300, "player", 0, "Warrior", hp, attack, 50,);
             this.add.existing(warrior);
 
-            var potion = new Objet (this, 80, 250, "objet", 179, "potion", 50, 0, 1);
+            var potion = new Objet (this, 80, 250, "objet", 179, "potion", objet[0]['effet'], objet[0]['quantité'], objet[0]['rareté']);
             this.add.existing(potion);
 
-            var arme = new Objet (this, 200, 250, "objet", 97, "arme", 0, 0, 3);
+            var arme = new Objet (this, 200, 250, "objet", 97, "arme", objet[1]['effet'], objet[1]['quantité'], objet[1]['rareté']);
             this.add.existing(arme);
 
             warrior.setDepth(10);
@@ -87,6 +87,7 @@
            potionText.setText(' rareté : ' +  potion['rareté']);
 
            potionText = this.add.text(60,350, 'rare: 0', { fontSize: '14px', fill: 'white' });
+
            potionText.setText(' quantité : ' +  potion['quantité']);
 //-----------------------------------stat arme--------------------------------//
 
@@ -143,7 +144,7 @@
                 Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
                 this.type = type;
                 this.effet= effet;
-                this.quantité = quantité; 
+                this.quantité = quantité;
                 this.rareté = rareté;
                 this.living = true;
                 this.menuItem = null;
@@ -229,7 +230,7 @@
             initialize:
 
             function ActionsMenu(x, y, scene) {
-                Menu.call(this, x, y, scene);
+                Menu2.call(this, x, y, scene);
                 this.addMenuItem('equiper');
             },
             confirm: function() {
