@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\ContactType;
 use App\Entity\User;
 use App\Entity\Save;
+use App\Entity\Inventory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -115,7 +116,8 @@ class GamesmenuController extends AbstractController
        
        return $this->render('user/profile.html.twig', [
         "user" => $user,
-        "save" => $userSave
+        "save" => $userSave,
+        
        ]);
    }
     /**
