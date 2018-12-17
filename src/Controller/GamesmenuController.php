@@ -8,6 +8,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\HttpFoundation\Response;
 class GamesmenuController extends AbstractController
 {
     /**
@@ -51,7 +52,7 @@ class GamesmenuController extends AbstractController
      */
     public function gameGetSave(EntityManagerInterface $em, Request $request)
     {
-        $user = $this->getUser()->getId();
+        $user = $this->getUser()->getId();        
 
         $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
         $arrayUser = [
@@ -70,8 +71,40 @@ class GamesmenuController extends AbstractController
     }
 
     /**
+     * @Route("/game/setSave", name="gameSetSave")
+     */
+    public function gameSetSave(EntityManagerInterface $em, Request $request)
+    {
+        $tbl = $_POST['tbl'];
+        // $tbl = '{
+        //     "life":90,
+        //     "createdAt":{"date":"2018-12-14 14:27:07.000000","timezone_type":3,"timezone":"Europe/Berlin"},
+        //     "level":0,
+        //     "mana":200,
+        //     "xp":0,
+        //     "playtime":{"date":"1970-01-01 00:00:00.000000","timezone_type":3,"timezone":"Europe/Berlin"}
+        // }';
+
+        $tbl = json_decode($tbl, true);
+
+        $user = $this->getUser()->getId();
+        $saveUser = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
+    
+        if (!$saveUser) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$id
+            );
+        }    
+        $saveUser->setLife($tbl['life']);
+        $em->flush();
+
+        return new Response('ok');        
+    }
+
+    /**
     * @Route("/profil", name="profil")
     */
+<<<<<<< HEAD
    public function profil(EntityManagerInterface $em)
    {
        $userid = $this->getUser()->getId();
@@ -80,6 +113,14 @@ class GamesmenuController extends AbstractController
         "user" => $user
        ]);
    }
+=======
+    public function profil()
+    {
+        return $this->render('user/profile.html.twig', [
+
+        ]);
+    }
+>>>>>>> master
     /**
      * @Route("/contact", name="contact")
      */

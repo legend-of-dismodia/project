@@ -1,12 +1,11 @@
 "use strict"
 
+var winSize = window.innerWidth;
 // au chargement de la page
-startup();
+checkSize();
 
-// changement de taille au clic
+// clic sur le bouton toggle
 $('.toggle').on('click', function () {
-    checkCookie()
-
     // masque les légendes
     $('.navbarText').toggle();
 
@@ -35,6 +34,10 @@ $('.toggle').on('click', function () {
     }
 })
 
+// au redimensionnement de la fenêtre
+$(window).on('resize', function () {
+    checkSize();
+});
 
 // https://stackoverflow.com/questions/1458724/how-do-i-set-unset-a-cookie-with-jquery
 function setCookie(key, value) {
@@ -42,30 +45,16 @@ function setCookie(key, value) {
     expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
     document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
 }
-
 function getCookie(key) {
     var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
     return keyValue ? keyValue[2] : null;
 }
 
-function checkCookie() {
-    if (getCookie('minimizedNavbar') == 'false') {
-        console.log('checkCookie() : La barre de navigation est déballée');
-        return 'false';
-    } else if (getCookie('minimizedNavbar') == 'true') {
-        console.log('checkCookie() : La barre de navigation est minimisée');
-        return 'true';
-    } else {
-        console.log('getCookie a une valeur de ' + getCookie('minimizedNavbar'))
-    }
-}
-
-function startup() {
-    console.log('Début de la fonction qui se lance au début');
-    // si on est bien en mode desktop
-    console.log(window.innerWidth);
-    if ( window.innerWidth > 765 ) {
-        if (checkCookie() == 'true') {
+function checkSize() {
+    // pc
+    if (window.innerWidth > 765) {
+            // petite navbar
+        if (getCookie('minimizedNavbar') == 'true') {
             $('.navbarText').hide();
             $('.sidebar-content aside').css('width', '56px');
             $('.navTitle').html('LOD');
@@ -75,7 +64,9 @@ function startup() {
             });
             $('.navActive').css('width', '56px')
             $('.toggle').html('<a><i class="fas fa-caret-right"></i></a>');
-        } else if (checkCookie() == 'false') {
+
+            // grosse navbar
+        } else if (getCookie('minimizedNavbar') == 'false') {
             $('.sidebar-content aside').css('width', '240px');
             $('.navTitle').html('Legend Of Dismodia');
             $('.navTitle').css({
@@ -83,9 +74,17 @@ function startup() {
             })
             $('.navActive').css('width', 'initial')
             $('.toggle').html('<a><i class="fas fa-caret-left"></i></a>');
+            
+            // pas de cookie de taille de navbar
         } else {
-            console.log('ça marche po');
+            $('.sidebar-content aside').css('width', '240px');
+            $('.navTitle').html('Legend Of Dismodia');
         }
+
     }
-    
+    // mobile
+    else {
+        $('.sidebar-content aside').css('width', '100%');
+        $('.navTitle').html('LOD');
+    }
 }
