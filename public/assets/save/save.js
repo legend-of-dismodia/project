@@ -28,17 +28,19 @@ function successSave(data){
     tbl.mana = saveUser.mana;
     tbl.xp = saveUser.xp;
     tbl.playtime = saveUser.playtime;
+tbl.inventories = saveUser.inventories;
+    console.log(saveUser);
 
 }
 
 function getPhaserData(life) {
     tbl.life = life;
 
-    var lala  = JSON.stringify(tbl);   
+    var lala  = JSON.stringify(tbl);
 
     $.ajax({
         url: '/game/setSave',
-        method: 'POST',        
+        method: 'POST',
         data: 'tbl='+lala,
         success : function(r){
             console.log('ok'+  r);
