@@ -1,10 +1,9 @@
 
 getSave();
 
-var hp = 100;
 var attack = 40;
-var tbl = [];
 
+var tbl = {};
 console.log(tbl);
 
 function getSave(){
@@ -22,15 +21,32 @@ function getSave(){
 function successSave(data){
     var saveUser = data;
 
+    tbl.life = saveUser.life;
+    tbl.createdAt = saveUser.createdAt;
+    tbl.level = saveUser.level;
+    tbl.life = saveUser.life;
+    tbl.mana = saveUser.mana;
+    tbl.xp = saveUser.xp;
+    tbl.playtime = saveUser.playtime;
 
-    hp = saveUser.life;
-    createdAt = saveUser.createdAt;
-    level= saveUser.level;
-    life= saveUser.life;
-    mana= saveUser.mana;
-    xp= saveUser.xp;
-    playtime= saveUser.playtime;
+}
 
-    console.log(hp);
+function getPhaserData(life) {
+    tbl.life = life;
 
+    console.log(tbl);
+    var lala  = JSON.stringify(tbl);
+    console.log(lala);
+
+    $.ajax({
+        url: '/game/setSave',
+        method: 'POST',        
+        data: 'tbl='+lala,
+        success : function(r){
+            console.log('ok'+  r);
+        },
+        error: function(e) {
+            console.log(e+" - Désolé, aucun résultat trouvé.");
+        }
+    });
 }
