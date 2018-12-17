@@ -5,7 +5,7 @@ var BattleScene = new Phaser.Class({
     initialize: function BattleScene ()
     {
         Phaser.Scene.call(this, { key: "BattleScene" });
-        
+
     },
     preload: function ()
     {
@@ -13,7 +13,7 @@ var BattleScene = new Phaser.Class({
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
     this.load.spritesheet('souris', '../assets/spritesheet/troll.png', { frameWidth: 80, frameHeight: 80});
     this.load.image("fond", "../assets/spritesheet/battle.png");
-    
+
 
     },
     create: function ()
@@ -78,7 +78,7 @@ var BattleScene = new Phaser.Class({
         }
     },
     // check for game over or victory
-    checkEndBattle: function() {        
+    checkEndBattle: function() {
         var victory = true;
         // if all enemies are dead we have victory
         for(var i = 0; i < this.enemies.length; i++) {
@@ -106,9 +106,9 @@ var BattleScene = new Phaser.Class({
     },
 
 
-    endBattle: function() {        
+    endBattle: function() {
         // clear state, remove sprites
-        
+
         this.heroes.length = 0;
         this.enemies.length = 0;
         for(var i = 0; i < this.units.length; i++) {
@@ -146,8 +146,7 @@ var Unit = new Phaser.Class({
     attack: function(target) {
         if(target.living) {
 
-            target.takeDamage(this.damage);
-            console.log("hp: "+hp );
+            target.takeDamage(this.damage);            
             this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
         }
 
@@ -162,19 +161,13 @@ var Unit = new Phaser.Class({
 
 
     takeDamage: function(damage) {
-        
+
         if(i == 0){
             i = 1;
             this.hp -= damage;
-            console.log("enemyLife: "+ this.hp);
-
 
         }else{
-            this.hp -= damage;
-            console.log("playerLife: "+ this.hp);
-
-           
-
+            this.hp -= damage;            
             i = 0;
         }
 
@@ -201,7 +194,7 @@ var Unit = new Phaser.Class({
         }
     },
 
-    
+
 
 });
 
@@ -211,11 +204,6 @@ var Enemy = new Phaser.Class({
     initialize:
     function Enemy(scene, x, y, texture, frame, type, hp, damage) {
         Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
-
-        console.log('hpenemey: '+hp);
-        console.log('damagenemy: '+damage);
-
-
     }
 });
 
@@ -229,8 +217,6 @@ var PlayerCharacter = new Phaser.Class({
         this.flipX = true;
 
         this.setScale(2);
-        console.log('hpPLayer: '+hp);
-        console.log('damage: '+damage);
 
     }
 });
@@ -359,7 +345,7 @@ var ActionsMenu = new Phaser.Class({
 
     function ActionsMenu(x, y, scene) {
         Menu.call(this, x, y, scene);
-        this.addMenuItem("Attack","magie");
+        this.addMenuItem("Attack");
 
     },
     confirm: function() {

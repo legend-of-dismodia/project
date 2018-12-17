@@ -11,6 +11,7 @@ use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Save;
 
 class UserController extends AbstractController
 {
@@ -32,18 +33,33 @@ class UserController extends AbstractController
     public function register( Request $request, ObjectManager $em, UserPasswordEncoderInterface $passwordEncoder )
     {
         $user = new User();
+        $save = new Save();
         $form = $this->createForm( UserType::class, $user );
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {            
             
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);            
+            $user->setPassword($password);           
 
             $user->setRoles(['ROLE_USER']);
 
             $em->persist( $user );
-            $em->flush();            
+            $em->flush(); 
+            
+            //Ajout de la première sauvegarde
+            $save->setLife(100);
+            $save->setCreatedAt(new \DateTime());
+            $save->setLevel(1);
+            $save->setMana(100);
+            $save->setXp(0);
+            $save->setUser($user);
+            $playtime = new \DateTime();
+            $playtime->setTime(00,00,00);
+            $save->setPlaytime($playtime);
+
+            $em->persist( $save );
+            $em->flush();
 
             $this->addFlash(
                 'notice',
