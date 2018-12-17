@@ -4,6 +4,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ContactType;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -71,10 +72,12 @@ class GamesmenuController extends AbstractController
     /**
     * @Route("/profil", name="profil")
     */
-   public function profil()
+   public function profil(EntityManagerInterface $em)
    {
+       $userid = $this->getUser()->getId();
+       $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
        return $this->render('user/profile.html.twig', [
-
+        "user" => $user
        ]);
    }
     /**
