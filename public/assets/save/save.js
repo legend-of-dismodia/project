@@ -34,9 +34,7 @@ function successSave(data){
 function getPhaserData(life) {
     tbl.life = life;
 
-    console.log(tbl);
-    var lala  = JSON.stringify(tbl);
-    console.log(lala);
+    var lala  = JSON.stringify(tbl);   
 
     $.ajax({
         url: '/game/setSave',
