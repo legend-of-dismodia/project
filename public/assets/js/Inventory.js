@@ -44,6 +44,8 @@
 
           create: function ()
           {
+            hp = tbl.life;
+
             var warrior = new PlayerCharacter(this, 750, 300, "player", 0, "Warrior", hp, attack, 50,);
             this.add.existing(warrior);
 
