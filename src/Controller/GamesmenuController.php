@@ -61,11 +61,7 @@ class GamesmenuController extends AbstractController
 
         foreach ($userInventory as $key => $value) {
             $userInventory[$key]['property']  =  unserialize($value['property']);
-        }
-
-        $userInventory = $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave->getId()]);
-
-        $invent =  $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave]);
+        }        
 
         $arrayUser = [
 
