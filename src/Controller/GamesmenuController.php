@@ -126,11 +126,13 @@ class GamesmenuController extends AbstractController
        $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
 
        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $userid]);
-
+      
+       
        return $this->render('user/profile.html.twig', [
         "user" => $user,
         "save" => $userSave,
 
+        
        ]);
    }
    /**

@@ -196,6 +196,7 @@ var Boot = new Phaser.Class({
        });
 
       },
+      
 
 
       //---------------------------quand le perso bouge---------------------------//
