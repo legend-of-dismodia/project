@@ -31,11 +31,13 @@ class GamesmenuController extends AbstractController
             'controller_name' => 'GamesmenuController',
         ]);
     }
+    
     /**
      * @Route("/classement", name="classement")
      */
     public function classement()
     {
+    
         return $this->render('scores.html.twig', [
             'controller_name' => 'GamesmenuController',
         ]);
@@ -123,10 +125,13 @@ class GamesmenuController extends AbstractController
        $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
        
        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $userid]);
+       $inventory = $this->getUser()->getId();
+       $invent = $em->getRepository('App:Inventory')->findOneBy(['inventory' => $invent]);
        
        return $this->render('user/profile.html.twig', [
         "user" => $user,
         "save" => $userSave,
+        "inventory"=>$inventory,
         
        ]);
    }

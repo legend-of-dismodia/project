@@ -94,6 +94,10 @@ nav .fa, nav .fas {
 .modal-content .nav-link:focus {
     border-color: transparent;
 }
+
+.video video {
+    max-width: 100%;
+}
 /** footer **/
 .modal-footer {
     border-top: 1px solid #ced4da;
@@ -130,6 +134,7 @@ th{
 td{
   border: 1px solid white;
 }
+
 
 @media (max-width: 766px) {
     .container {
