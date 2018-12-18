@@ -16,13 +16,13 @@ var LoupScene = new Phaser.Class({
     create: function ()
     {
         // change the background to green
-        this.add.image(400, 300, 'fond');
+         this.add.image(400, 300, 'fond');
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
     },
 
-    startBattle: function() {
+    startBattle: function() {        
         hp = tbl.life;
         // player character - warrior
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
@@ -121,6 +121,7 @@ var LoupScene = new Phaser.Class({
     }
 });
 
+
 // base class for heroes and enemies
 var Unit = new Phaser.Class({
     Extends: Phaser.GameObjects.Sprite,
@@ -153,10 +154,10 @@ var Unit = new Phaser.Class({
     },
 
     magieAttaque: function(target) {
-            if(target.living) {
-                target.takeMagic(this.magie);
-                this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
-            }
+          if(target.living) {
+              target.takeMagic(this.magie);
+              this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
+          }
         },
 
     takeDamage: function(damage) {

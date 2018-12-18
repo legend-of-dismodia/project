@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<h1>Profil de  </h1></br>
-<h2>Pseudos :</h2>
-<h2>Niveau :</h2>
+
+    
+<h1>Profil de {{user.username}}</h1></br>
+<h2>Niveau :{{save.level}}</h2>
+<h2>Point de vie: {{save.life}}</h2>
+<h2>Mana: {{save.mana}}</h2>
+<h2>XP: {{save.xp}}</h2>
+<h2>XP: {{inventory.quantity}}</h2>
+
 <h2>Inventaire :</h2> </br>
 <table>
 

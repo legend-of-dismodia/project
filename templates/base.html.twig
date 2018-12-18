@@ -39,10 +39,10 @@
                 <a class="nav-link pl-0" href="{{path('game')}}"><i class="fas fa-gamepad"></i> <span class="navbarText">Jouer</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link pl-0" href="#"><i class="fas fa-user"></i> <span class="navbarText">Profil de {{app.user.username}} </span></a>
+                <a class="nav-link pl-0" href="{{path('profil')}}"><i class="fas fa-user"></i> <span class="navbarText">Profil de {{app.user.username}} </span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link pl-0" href="#"><i class="fa fa-cog fa-fw"></i> <span class="navbarText">Mon compte</span></a>
+                <a class="nav-link pl-0" href="{{path('compte')}}"><i class="fa fa-cog fa-fw"></i> <span class="navbarText">Mon compte</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link pl-0" href="{{path('logout')}}"><i class="fas fa-sign-out-alt"></i> <span class="navbarText">Déconnexion</span></a>
@@ -82,8 +82,6 @@
 
 
   {% endblock %}
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
