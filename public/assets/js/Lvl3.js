@@ -72,7 +72,7 @@ var Boot3 = new Phaser.Class({
         const sol = map.createDynamicLayer("sol", tiles20);
         const mur = map.createDynamicLayer("mur", tiles21);
         const decoration1 = map.createDynamicLayer("decoration1", tiles22);
-    const decoration2 = map.createDynamicLayer("decoration2", tiles23);
+        const decoration2 = map.createDynamicLayer("decoration2", tiles23);
 
 
       //----------------------créer l'animation du personnage-----------------------//

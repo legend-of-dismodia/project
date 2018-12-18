@@ -169,7 +169,6 @@ var Unit = new Phaser.Class({
         }else{
             this.hp -= damage;            
             i = 0;
-            getPhaserData(this.hp);
         }
 
 
