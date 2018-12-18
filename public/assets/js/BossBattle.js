@@ -23,6 +23,7 @@ var BossBattle = new Phaser.Class({
     },
 
     startBattle: function() {
+        hp = tbl.life;
         // player character - warrior
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50);
         this.add.existing(warrior);
@@ -152,13 +153,21 @@ var Unit = new Phaser.Class({
     },
 
     magieAttaque: function(target) {
-          if(target.living) {
-              target.takeMagic(this.magie);
-              this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
-          }
+            if(target.living) {
+                target.takeMagic(this.magie);
+                this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
+            }
         },
 
     takeDamage: function(damage) {
+        if(i == 0){
+            i = 1;
+            this.hp -= damage;
+        }else{
+            this.hp -= damage;
+            i = 0;
+            getPhaserData(this.hp);
+        }
         this.hp -= damage;
         if(this.hp <= 0) {
             this.hp = 0;
