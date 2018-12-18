@@ -35,10 +35,12 @@ class GamesmenuController extends AbstractController
     /**
      * @Route("/classement", name="classement")
      */
-    public function classement()
+    public function classement(EntityManagerInterface $em)
     {
+       
+       $user= $em->getRepository('App:User')->findAll();
     
-        return $this->render('scores.html.twig', [
+        return $this->render('scores.html.twig', ["users" => $user,
             'controller_name' => 'GamesmenuController',
         ]);
     }
