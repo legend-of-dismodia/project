@@ -56,8 +56,12 @@ class GamesmenuController extends AbstractController
     {
         $user = $this->getUser()->getId();
 
-        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user ]);
+        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
+        $userInventory = $em->getRepository('App:Inventory')->getPlayerInventory($userSave->getId());
 
+        foreach ($userInventory as $key => $value) {
+            $userInventory[$key]['property']  =  unserialize($value['property']);
+        }
 
         $userInventory = $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave->getId()]);
 
@@ -72,12 +76,11 @@ class GamesmenuController extends AbstractController
             'mana'=> $userSave->getMana(),
             'xp'=> $userSave->getXp(),
             'playtime'=> $userSave->getPlaytime(),
-            // 'inventory' => $userSave->getInventories(),
+            'inventory' => $userInventory,
         ];
 
         return new JsonResponse($arrayUser);
-
-        // var_dump($userSave->getInventories());
+        // var_dump($arrayUser);
         // die();
     }
 
