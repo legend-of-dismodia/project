@@ -156,19 +156,14 @@ class GamesmenuController extends AbstractController
             // $sent = $form->getData();
             if (isset($form)) {
                 $name = $form['name']->getData();
-            } else {
-                $name = 'undefined';
-            }
-            if (isset($form)) {
                 $email = $form['email']->getData();
-            } else {
-                $email = 'undefined';
-            }
-            if (isset($form)) {
                 $message = $form['message']->getData();
             } else {
+                $name = 'undefined';
+                $email = 'undefined';
                 $message = 'undefined';
             }
+
             $message = (new \Swift_Message('Nouveau message sur Legend of Dismodia !'))
                 ->setFrom('send@example.com')
                 ->setTo('legendofdismodia@gmail.com')

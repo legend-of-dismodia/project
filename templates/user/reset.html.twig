@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}Réinitialiser votre mot de passe - {{ parent() }}{% endblock %}
+
+{% block body %}
+<h1>Réinitialisation de mot de passe</h1>
+
+
+ {# {% for email in emails %}
+    {{ email.email }}
+    {% endfor %} #}
+
+    {{ form_start (form, {
+        'attr': {'novalidate': 'novalidate'}
+    }) }}
+    {{ form_end (form) }}
+    
+
+{# {% if queryEmail in emails %}
+    {{ form_start (form, {
+        'attr': {'novalidate': 'novalidate'}
+    }) }}
+    {{ form_end (form) }}
+{% else %}
+<p>Malheureusement, cette addresse n'est pas dans notre base de données.</p>
+{% endif %} #}
+
+
+{% endblock %}
