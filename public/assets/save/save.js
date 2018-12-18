@@ -32,10 +32,11 @@ function successSave(data){
     tbl.inventories = saveUser.inventory;
 }
 
-function getPhaserData(life, xp, lvl) {
+function getPhaserData(life, xp, level) {
 tbl.life = life;
 tbl.xp = xp;
 tbl.level = level;
+
 
     var jsonData  = JSON.stringify(tbl);
 

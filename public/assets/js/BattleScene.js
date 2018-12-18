@@ -176,10 +176,13 @@ var Unit = new Phaser.Class({
             console.log("hp: "+this.hp+"dmg : "+ damage);
             this.hp -= damage;
             this.xp = xp + 50;
+
+
             if (this.xp >= 50){
             this.level = level + 1;
             xp = 0;
-            this.hp = hp + 50;
+            this.hp += 50;
+
             }
             getPhaserData(this.hp, this.xp, this.level);
         }
