@@ -97,6 +97,7 @@ nav .fa, nav .fas {
 /** footer **/
 .modal-footer {
     border-top: 1px solid #ced4da;
+    display: inherit;
 }
 
 
