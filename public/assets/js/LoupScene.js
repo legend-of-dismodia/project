@@ -22,8 +22,10 @@ var LoupScene = new Phaser.Class({
         // this.sys.events.on('wake', this.startBattle, this);
     },
 
-    startBattle: function() {        
+    startBattle: function() {
+         xp = tbl.xp;
         hp = tbl.life;
+       level=tbl.level;
         // player character - warrior
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
         this.add.existing(warrior);
@@ -128,12 +130,13 @@ var Unit = new Phaser.Class({
 
     initialize:
 
-    function Unit(scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp, mana) {
+    function Unit(scene, x, y, texture, frame, type, hp, damage, xp, level) {
         Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
         this.type = type;
         this.maxHp = this.hp = hp;
         this.damage = damage; // default damage
-        this.magie = magie;
+        this.maxXp = this.xp = xp;
+        this.maxLevel = this.level = level;
         this.living = true;
         this.menuItem = null;
     },
@@ -167,8 +170,25 @@ var Unit = new Phaser.Class({
         }else{
             this.hp -= damage;
             i = 0;
-            getPhaserData(this.hp);
-        }
+            console.log("hp: "+this.hp+"dmg : "+ damage);
+            this.hp -= damage;
+            this.xp = xp + 50;
+            this.level = level + 1
+            }
+        //
+        //     if (this.xp > 50){
+        //     this.level = level + 1;
+        //     xp = 0;
+        //     this.hp = hp + 50;
+        //
+        // }
+        //
+        // else{
+        //
+        //   }
+
+  getPhaserData(this.hp, this.xp, this.level);
+
         if(this.hp <= 0) {
             this.hp = 0;
             this.menuItem.unitKilled();
@@ -206,8 +226,8 @@ var PlayerCharacter = new Phaser.Class({
     Extends: Unit,
 
     initialize:
-    function PlayerCharacter(scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp, mana) {
-        Unit.call(this, scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp);
+    function PlayerCharacter(scene, x, y, texture, frame, type, hp, damage, level, xp) {
+        Unit.call(this, scene, x, y, texture, frame, type, hp, damage, level, xp);
         // flip the image so I don"t have to edit it manually
         this.flipX = true;
 
@@ -340,7 +360,7 @@ var ActionsMenu = new Phaser.Class({
     function ActionsMenu(x, y, scene) {
         Menu.call(this, x, y, scene);
         this.addMenuItem("Attack");
-    
+
     },
     confirm: function() {
         // we select an action and go to the next menu and choose from the enemies to apply the action

@@ -32,8 +32,10 @@ function successSave(data){
     tbl.inventories = saveUser.inventory;
 }
 
-function getPhaserData(life) {
-    tbl.life = life;
+function getPhaserData(life, xp, lvl) {
+tbl.life = life;
+tbl.xp = xp;
+tbl.level = level;
 
     var jsonData  = JSON.stringify(tbl);
 
@@ -48,4 +50,4 @@ function getPhaserData(life) {
             console.log(e+" - Désolé, aucun résultat trouvé.");
         }
     });
-}
+  }

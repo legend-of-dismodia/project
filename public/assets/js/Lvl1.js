@@ -190,11 +190,10 @@ var Boot = new Phaser.Class({
        //-----------------------ouvrir l'inventaire-------------------------//
 
        this.input.keyboard.once("keydown_D", event =>{
-       this.scene.switch('Sac');
+       this.scene.run('Sac');
+
        });
-       this.input.keyboard.once("keydown_F", event =>{
-        this.scene.switch('World');
-        });
+
       },
       
 
