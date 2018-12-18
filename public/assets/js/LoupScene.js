@@ -16,7 +16,7 @@ var LoupScene = new Phaser.Class({
     create: function ()
     {
         // change the background to green
-        this.add.image(400, 300, 'fond');
+         this.add.image(400, 300, 'fond');
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
@@ -154,10 +154,10 @@ var Unit = new Phaser.Class({
     },
 
     magieAttaque: function(target) {
-            if(target.living) {
-                target.takeMagic(this.magie);
-                this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
-            }
+          if(target.living) {
+              target.takeMagic(this.magie);
+              this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
+          }
         },
 
     takeDamage: function(damage) {
@@ -168,8 +168,6 @@ var Unit = new Phaser.Class({
             this.hp -= damage;
             i = 0;
             getPhaserData(this.hp);
-            console.log("hello Loup: "+ this.hp);
-
         }
         if(this.hp <= 0) {
             this.hp = 0;

@@ -4,11 +4,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ContactType;
+use App\Entity\User;
+use App\Entity\Save;
+use App\Entity\Inventory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Inventory;
 class GamesmenuController extends AbstractController
 {
     /**
@@ -114,12 +116,35 @@ class GamesmenuController extends AbstractController
     /**
     * @Route("/profil", name="profil")
     */
-    public function profil()
-    {
-        return $this->render('user/profile.html.twig', [
-
-        ]);
-    }
+    
+    public function profil(EntityManagerInterface $em)
+   {
+       $userid = $this->getUser()->getId();
+       $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
+       
+       $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $userid]);
+       
+       return $this->render('user/profile.html.twig', [
+        "user" => $user,
+        "save" => $userSave,
+        
+       ]);
+   }
+   /**
+    * @Route("/compte", name="compte")
+    */
+    
+    public function compte(EntityManagerInterface $em)
+   {
+       $userid = $this->getUser()->getId();
+       $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
+       
+       
+       return $this->render('user/compte.html.twig', [
+        "user" => $user,
+        
+       ]);
+   }
     /**
      * @Route("/contact", name="contact")
      */
