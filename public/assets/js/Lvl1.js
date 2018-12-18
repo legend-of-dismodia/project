@@ -120,6 +120,24 @@ var Boot = new Phaser.Class({
       cursors = this.input.keyboard.createCursorKeys();
       showDebug = false;
 
+      //-----------------------caméra qui suit le perso-------------------------//
+
+      // empêche un bug graphique qui affiche une grille entre chaque tile
+      this.cameras.roundPixels = true;
+
+      // // changer la taille de la caméra
+      // this.cameras.resize(300, 300);
+
+      // // empêcher la caméra de dépasser de la carte
+      // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+      // faire que la caméra suive le joueur
+      this.cameras.main.startFollow(player);
+
+      // // change l'offset de la caméra
+      // this.cameras.main.x = 10;
+      // this.cameras.main.y = 10;
+
       //-------------------pour éviter que le personnage sorte du cadre---------------//
 
       player.setCollideWorldBounds(true);

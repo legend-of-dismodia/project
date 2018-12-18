@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Inventory;
 class GamesmenuController extends AbstractController
 {
     /**
@@ -55,7 +56,11 @@ class GamesmenuController extends AbstractController
 
         $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
 
+<<<<<<< HEAD
         // $userInventory = $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave->getId()]);
+=======
+        // $invent =  $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave]);
+>>>>>>> master
 
         $arrayUser = [
 
@@ -66,6 +71,7 @@ class GamesmenuController extends AbstractController
             'mana'=> $userSave->getMana(),
             'xp'=> $userSave->getXp(),
             'playtime'=> $userSave->getPlaytime(),
+<<<<<<< HEAD
           // $array
 
           // 'inventory' => $userSave->getInventories()->$item(),
@@ -76,6 +82,15 @@ class GamesmenuController extends AbstractController
 
           // var_dump($userInventory->());
           // die();
+=======
+            'inventory' => $userSave->getInventories(),
+        ];
+
+        // return new JsonResponse($arrayUser);
+        
+        var_dump($userSave->getInventories());
+        die();
+>>>>>>> master
     }
 
     /**
