@@ -28,7 +28,10 @@ var BattleScene = new Phaser.Class({
     startBattle: function() {
         // player character - warrior
         hp = tbl.life;
-        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
+        xp = tbl.xp;
+       level = tbl.level;
+
+        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, xp, level);
         this.add.existing(warrior);
 
 
@@ -116,7 +119,7 @@ var BattleScene = new Phaser.Class({
             this.units[i].destroy();
         }
         this.units.length = 0;
-        // sleep the UI
+
         this.scene.sleep('UIScene');
         // return to WorldScene and sleep current BattleScene
         this.scene.switch('World');
@@ -128,12 +131,13 @@ var Unit = new Phaser.Class({
     Extends: Phaser.GameObjects.Sprite,
 
     initialize:
-    function Unit(scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp, mana) {
+    function Unit(scene, x, y, texture, frame, type, hp, damage, xp, level) {
         Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
         this.type = type;
         this.maxHp = this.hp = hp;
         this.damage = damage; // default damage
-        this.magie = magie;
+      this.maxXp = this.xp = xp;
+      this.maxLevel = this.level = level;
         this.living = true;
         this.menuItem = null;
 
@@ -169,8 +173,15 @@ var Unit = new Phaser.Class({
         }else{
             this.hp -= damage;
             i = 0;
-            getPhaserData(this.hp);
-            console.log("hello BattleScene: "+ this.hp);
+            console.log("hp: "+this.hp+"dmg : "+ damage);
+            this.hp -= damage;
+            this.xp = xp + 50;
+            if (this.xp >= 50){
+            this.level = level + 1;
+            xp = 0;
+            this.hp = hp + 50;
+            }
+            getPhaserData(this.hp, this.xp, this.level);
         }
 
 
@@ -213,8 +224,8 @@ var PlayerCharacter = new Phaser.Class({
     Extends: Unit,
 
     initialize:
-    function PlayerCharacter(scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp, mana) {
-        Unit.call(this, scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp);
+    function PlayerCharacter(scene, x, y, texture, frame, type, hp, damage, xp, level) {
+        Unit.call(this, scene, x, y, texture, frame, type, hp, damage, xp,level);
         // flip the image so I don"t have to edit it manually
         this.flipX = true;
 

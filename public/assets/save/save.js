@@ -34,8 +34,10 @@ function successSave(data){
 
 }
 
-function getPhaserData(life) {
-    tbl.life = life;
+function getPhaserData(life, xp, lvl) {
+tbl.life = life;
+tbl.xp = xp;
+tbl.level = level;
 
     var jsonData  = JSON.stringify(tbl);
 

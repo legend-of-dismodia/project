@@ -110,6 +110,8 @@ class GamesmenuController extends AbstractController
             $saveUser->setLife(0);
         }else{
             $saveUser->setLife($tbl['life']);
+            $saveUser->setXp($tbl['xp']);
+            $saveUser->setLevel($tbl['level']);
         }
         $em->flush();
 
@@ -126,13 +128,11 @@ class GamesmenuController extends AbstractController
        $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
 
        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $userid]);
-      
-       
+
        return $this->render('user/profile.html.twig', [
         "user" => $user,
         "save" => $userSave,
 
-        
        ]);
    }
    /**
