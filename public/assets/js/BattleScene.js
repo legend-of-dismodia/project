@@ -26,7 +26,7 @@ var BattleScene = new Phaser.Class({
     },
 
     startBattle: function() {
-        // player character - warrior
+        // player character - warrior        
         hp = tbl.life;
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
         this.add.existing(warrior);
@@ -122,7 +122,7 @@ var BattleScene = new Phaser.Class({
         this.scene.switch('World');
     }
 });
-let i = 0;
+
 // base class for heroes and enemies
 var Unit = new Phaser.Class({
     Extends: Phaser.GameObjects.Sprite,
@@ -169,6 +169,8 @@ var Unit = new Phaser.Class({
         }else{
             this.hp -= damage;            
             i = 0;
+            getPhaserData(this.hp);
+            console.log("hello BattleScene: "+ this.hp);
         }
 
 

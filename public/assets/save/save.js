@@ -1,5 +1,6 @@
 
 getSave();
+var i = 0;
 
 var attack = 40;
 
@@ -28,7 +29,7 @@ function successSave(data){
     tbl.mana = saveUser.mana;
     tbl.xp = saveUser.xp;
     tbl.playtime = saveUser.playtime;
-tbl.inventories = saveUser.inventories;
+    // tbl.inventories = saveUser.inventories;
     console.log(saveUser);
 
 }
@@ -36,12 +37,12 @@ tbl.inventories = saveUser.inventories;
 function getPhaserData(life) {
     tbl.life = life;
 
-    var lala  = JSON.stringify(tbl);
+    var jsonData  = JSON.stringify(tbl);
 
     $.ajax({
         url: '/game/setSave',
         method: 'POST',
-        data: 'tbl='+lala,
+        data: 'tbl='+jsonData,
         success : function(r){
             console.log('ok'+  r);
         },
