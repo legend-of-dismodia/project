@@ -2,9 +2,13 @@
 
 namespace App\Repository;
 
+use App\Entity\Save;
 use App\Entity\Inventory;
+use App\Entity\Item;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\Query\Expr\Join;
+use Symfony\Component\Form\Tests\Fixtures\Type;
 
 /**
  * @method Inventory|null find($id, $lockMode = null, $lockVersion = null)
@@ -47,4 +51,28 @@ class InventoryRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getPlayerInventory($saveId)
+    {
+        // return $this->createQueryBuilder('q')
+        //     ->select('item.name', 'item.property', 'item.rarety', 'item.image', 'q.quantity')
+        //     ->from('q.Inventory', 'i')
+        //     ->innerJoin('q.save','s', Join::ON, 'i.save_id = s.id')
+        //     ->innerJoin('q.item','it', Join::ON, 'i.item_id = it.id')            
+        //     ->getQuery()
+        //     ->getResult()
+        // ;
+        
+        $rawSql = "SELECT item.name, item.property, item.rarety, item.image, inventory.quantity FROM inventory 
+        INNER JOIN save ON inventory.save_id = save.id
+        INNER JOIN item ON inventory.item_id = item.id
+        WHERE inventory.save_id = :saveId";       
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);  
+        $stmt->bindValue('saveId', $saveId);
+        $stmt->execute();
+    
+        return $stmt->fetchAll();
+
+    }
 }

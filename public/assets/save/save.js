@@ -14,7 +14,7 @@ function getSave(){
         dataType: 'json',
         success : successSave,
         error: function(e) {
-            console.log(e+" - Désolé, aucun résultat trouvé.");
+            console.log(e+" - Désolé, aucun résultat trouvé DataJson.");
         }
     });
 }
@@ -29,9 +29,7 @@ function successSave(data){
     tbl.mana = saveUser.mana;
     tbl.xp = saveUser.xp;
     tbl.playtime = saveUser.playtime;
-    // tbl.inventories = saveUser.inventories;
-    console.log(saveUser);
-
+    tbl.inventories = saveUser.inventory;
 }
 
 function getPhaserData(life) {
