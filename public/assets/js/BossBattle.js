@@ -22,7 +22,7 @@ var BossBattle = new Phaser.Class({
         // this.sys.events.on('wake', this.startBattle, this);
     },
 
-    startBattle: function() {        
+    startBattle: function() {
         hp = tbl.life;
         // player character - warrior
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50);

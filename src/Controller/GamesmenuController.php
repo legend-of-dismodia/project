@@ -31,16 +31,12 @@ class GamesmenuController extends AbstractController
             'controller_name' => 'GamesmenuController',
         ]);
     }
-    
     /**
      * @Route("/classement", name="classement")
      */
-    public function classement(EntityManagerInterface $em)
+    public function classement()
     {
-       
-       $user= $em->getRepository('App:User')->findAll();
-    
-        return $this->render('scores.html.twig', ["users" => $user,
+        return $this->render('scores.html.twig', [
             'controller_name' => 'GamesmenuController',
         ]);
     }
@@ -60,13 +56,12 @@ class GamesmenuController extends AbstractController
     {
         $user = $this->getUser()->getId();
 
-        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
+        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user ]);
 
-<<<<<<< HEAD
-        // $userInventory = $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave->getId()]);
-=======
-        // $invent =  $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave]);
->>>>>>> master
+
+        $userInventory = $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave->getId()]);
+
+        $invent =  $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave]);
 
         $arrayUser = [
 
@@ -81,7 +76,7 @@ class GamesmenuController extends AbstractController
         ];
 
         return new JsonResponse($arrayUser);
-        
+
         // var_dump($userSave->getInventories());
         // die();
     }
@@ -124,36 +119,33 @@ class GamesmenuController extends AbstractController
     /**
     * @Route("/profil", name="profil")
     */
-    
+
     public function profil(EntityManagerInterface $em)
    {
        $userid = $this->getUser()->getId();
        $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
-       
+
        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $userid]);
-       $inventory = $this->getUser()->getId();
-       $invent = $em->getRepository('App:Inventory')->findOneBy(['inventory' => $invent]);
-       
+
        return $this->render('user/profile.html.twig', [
         "user" => $user,
         "save" => $userSave,
-        "inventory"=>$inventory,
-        
+
        ]);
    }
    /**
     * @Route("/compte", name="compte")
     */
-    
+
     public function compte(EntityManagerInterface $em)
    {
        $userid = $this->getUser()->getId();
        $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
-       
-       
+
+
        return $this->render('user/compte.html.twig', [
         "user" => $user,
-        
+
        ]);
    }
     /**

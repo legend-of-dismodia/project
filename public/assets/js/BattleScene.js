@@ -26,7 +26,7 @@ var BattleScene = new Phaser.Class({
     },
 
     startBattle: function() {
-        // player character - warrior        
+        // player character - warrior
         hp = tbl.life;
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
         this.add.existing(warrior);
@@ -146,7 +146,7 @@ var Unit = new Phaser.Class({
     attack: function(target) {
         if(target.living) {
 
-            target.takeDamage(this.damage);            
+            target.takeDamage(this.damage);
             this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
         }
 
@@ -167,7 +167,7 @@ var Unit = new Phaser.Class({
             this.hp -= damage;
 
         }else{
-            this.hp -= damage;            
+            this.hp -= damage;
             i = 0;
             getPhaserData(this.hp);
             console.log("hello BattleScene: "+ this.hp);
