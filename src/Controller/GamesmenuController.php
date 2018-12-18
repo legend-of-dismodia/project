@@ -57,8 +57,11 @@ class GamesmenuController extends AbstractController
         $user = $this->getUser()->getId();
 
         $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
+        $userInventory = $em->getRepository('App:Inventory')->getPlayerInventory($userSave->getId());
 
-        // $invent =  $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave]);
+        foreach ($userInventory as $key => $value) {
+            $userInventory[$key]['property']  =  unserialize($value['property']);
+        }        
 
         $arrayUser = [
 
@@ -69,12 +72,11 @@ class GamesmenuController extends AbstractController
             'mana'=> $userSave->getMana(),
             'xp'=> $userSave->getXp(),
             'playtime'=> $userSave->getPlaytime(),
-            // 'inventory' => $userSave->getInventories(),
+            'inventory' => $userInventory,
         ];
 
         return new JsonResponse($arrayUser);
-        
-        // var_dump($userSave->getInventories());
+        // var_dump($arrayUser);
         // die();
     }
 
@@ -107,6 +109,8 @@ class GamesmenuController extends AbstractController
             $saveUser->setLife(0);
         }else{
             $saveUser->setLife($tbl['life']);
+            $saveUser->setXp($tbl['xp']);
+            $saveUser->setLevel($tbl['level']);
         }
         $em->flush();
 
@@ -116,33 +120,37 @@ class GamesmenuController extends AbstractController
     /**
     * @Route("/profil", name="profil")
     */
-    
+
     public function profil(EntityManagerInterface $em)
    {
        $userid = $this->getUser()->getId();
        $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
-       
        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $userid]);
-       
+       $userInventory = $em->getRepository('App:Inventory')->getPlayerInventory($userSave->getId());
+      
+       foreach ($userInventory as $key => $value) {
+        $userInventory[$key]['property']  =  unserialize($value['property']);
+    }
        return $this->render('user/profile.html.twig', [
         "user" => $user,
         "save" => $userSave,
-        
+        "inventorys" =>$userInventory,
+
        ]);
    }
    /**
     * @Route("/compte", name="compte")
     */
-    
+
     public function compte(EntityManagerInterface $em)
    {
        $userid = $this->getUser()->getId();
        $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
-       
-       
+
+
        return $this->render('user/compte.html.twig', [
         "user" => $user,
-        
+
        ]);
    }
     /**

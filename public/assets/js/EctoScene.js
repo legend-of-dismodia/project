@@ -22,11 +22,15 @@ var EctoScene = new Phaser.Class({
         // this.sys.events.on('wake', this.startBattle, this);
     },
 
-    startBattle: function() {        
+    startBattle: function() {
         // player character - warrior
-        hp = tbl.life;
 
-        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
+           hp = tbl.life;
+           xp = tbl.xp;
+           level = tbl.level;
+
+
+        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50, xp, level);
         this.add.existing(warrior);
 
 
@@ -99,8 +103,8 @@ var EctoScene = new Phaser.Class({
         if(action == "attack") {
             this.units[this.index].attack(this.enemies[target]);
         }
-        if(action == "magie"){
-        this.units[this.index].magieAttaque(this.enemies[target]);
+        if(action == ""){
+        this.units[this.index].Attaque(this.enemies[target]);
         }
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     },
@@ -129,12 +133,13 @@ var Unit = new Phaser.Class({
 
     initialize:
 
-    function Unit(scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp, mana) {
+    function Unit(scene, x, y, texture, frame, type, hp, damage, xp,  level) {
         Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
         this.type = type;
         this.maxHp = this.hp = hp;
         this.damage = damage; // default damage
-        this.magie = magie;
+        this.maxXp = this.xp = xp;
+        this.maxLevel = this.level =  level;
         this.living = true;
         this.menuItem = null;
         i = 0;
@@ -155,25 +160,34 @@ var Unit = new Phaser.Class({
 
     },
 
-    magieAttaque: function(target) {
-            if(target.living) {
-                target.takeMagic(this.magie);
-                this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
-            }
-        },
 
-    takeDamage: function(damage) {  
-        console.log("i: "+ i);      
+
+    takeDamage: function(damage) {
+        console.log("i: "+ i);
         if(i == 0){
             i = 1;
             this.hp -= damage;
             console.log("hp1: "+this.hp+" dmg1: "+ damage);
 
         }else{
+
             console.log("hp: "+this.hp+"dmg : "+ damage);
             this.hp -= damage;
-            getPhaserData(this.hp);
-            console.log("hello Ecto: "+ this.hp);
+            this.xp = xp + 50;
+       this.level = level + 1;
+  console.log(this.level);
+            if (this.xp = 100){
+
+            this.xp = 0;
+            this.hp = hp + 50;
+            this.level = level + 1;
+            }
+
+else{
+
+}
+            getPhaserData(this.hp, this.xp, this. level);
+
             i = 0;
 
         }
@@ -188,17 +202,6 @@ var Unit = new Phaser.Class({
 
     },
 
-
-    takeMagic: function(magie) {
-        this.hp -= magie;
-        if(this.hp <= 0) {
-            this.hp = 0;
-            this.menuItem.unitKilled();
-            this.living = false;
-            this.visible = false;
-            this.menuItem = null;
-        }
-    }
 });
 
 var Enemy = new Phaser.Class({
@@ -214,8 +217,8 @@ var PlayerCharacter = new Phaser.Class({
     Extends: Unit,
 
     initialize:
-    function PlayerCharacter(scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp, mana) {
-        Unit.call(this, scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp);
+    function PlayerCharacter(scene, x, y, texture, frame, type, hp, damage, xp, level) {
+        Unit.call(this, scene, x, y, texture, frame, type, hp, damage, xp, level);
         // flip the image so I don"t have to edit it manually
         this.flipX = true;
 
@@ -348,6 +351,7 @@ var ActionsMenu = new Phaser.Class({
     function ActionsMenu2(x, y, scene) {
         Menu3.call(this, x, y, scene);
         this.addMenuItem("Attack");
+        console.log('UIScene4')
 
     },
     confirm: function() {
@@ -450,7 +454,7 @@ var UIScene4 = new Phaser.Class({
         this.enemiesMenu.deselect();
         this.currentMenu = null;
         this.ectoScene.receivePlayerSelection("attack", index);
-        // this.ectoScene.receivePlayerSelection2("magie", index);
+        // this.ectoScene.receivePlayerSelection2("", index);
     },
     onPlayerSelect: function(id) {
         // when its player turn, we select the active hero item and the first action

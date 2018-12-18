@@ -120,15 +120,27 @@ var Boot3 = new Phaser.Class({
 
       cursors = this.input.keyboard.createCursorKeys();
       showDebug = false;
+      //-----------------------caméra qui suit le perso-------------------------//
 
+      // empêche un bug graphique qui affiche une grille entre chaque tile
+      this.cameras.roundPixels = true;
+
+      // // changer la taille de la caméra
+      // this.cameras.resize(300, 300);
+
+      // // empêcher la caméra de dépasser de la carte
+      // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+      // faire que la caméra suive le joueur
+      this.cameras.main.startFollow(player);
       //-------------------pour éviter que le personnage sorte du cadre---------------//
 
       player.setCollideWorldBounds(true);
       mur.setCollisionByExclusion([-1]);
-    decoration1.setCollisionByExclusion([-1]);
-  decoration2.setCollisionByExclusion([-1]);
-     this.physics.add.collider(player, mur);
-     player.setDepth(10);
+      decoration1.setCollisionByExclusion([-1]);
+      decoration2.setCollisionByExclusion([-1]);
+      this.physics.add.collider(player, mur);
+      player.setDepth(10);
 
       //--------verifier si phaser a bien pris en compte les colisions--------------//
 
@@ -166,9 +178,14 @@ var Boot3 = new Phaser.Class({
        // this.physics.add.overlap(player, escalier3, collisionStairs, null, this);
        escalier3 = this.physics.add.sprite(850, 158, "escalier3", 20);
        this.physics.add.overlap(player, escalier3, collisionStairs3, null, this);
-       
+
        loupgarou = this.physics.add.sprite(950, 158, "loupgarou", 11);
        this.physics.add.overlap(player, loupgarou, collisionloup, null, this);
+
+       this.input.keyboard.once("keydown_D", event =>{
+      this.scene.launch('Sac');
+
+              });
       },
 
 
@@ -224,7 +241,7 @@ var Boot3 = new Phaser.Class({
 
          }
          function collisionloup(player, loupgarou)
-                     {     
+                     {
              this.scene.switch('LoupScene');
              loupgarou.disableBody(true, true);
          }

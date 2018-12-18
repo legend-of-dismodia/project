@@ -63,12 +63,8 @@
                 "type":"",
                 "visible":true,
                 "width":0,
-                "x":550,
-<<<<<<< HEAD
-                "y":650
-=======
-                "y":800
->>>>>>> master
+                "x":560,
+                "y":900
                }],
         "offsetx":1,
         "offsety":1,
