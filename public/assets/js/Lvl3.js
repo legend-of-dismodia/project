@@ -120,15 +120,27 @@ var Boot3 = new Phaser.Class({
 
       cursors = this.input.keyboard.createCursorKeys();
       showDebug = false;
+      //-----------------------caméra qui suit le perso-------------------------//
 
+      // empêche un bug graphique qui affiche une grille entre chaque tile
+      this.cameras.roundPixels = true;
+
+      // // changer la taille de la caméra
+      // this.cameras.resize(300, 300);
+
+      // // empêcher la caméra de dépasser de la carte
+      // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+      // faire que la caméra suive le joueur
+      this.cameras.main.startFollow(player);
       //-------------------pour éviter que le personnage sorte du cadre---------------//
 
       player.setCollideWorldBounds(true);
       mur.setCollisionByExclusion([-1]);
-    decoration1.setCollisionByExclusion([-1]);
-  decoration2.setCollisionByExclusion([-1]);
-     this.physics.add.collider(player, mur);
-     player.setDepth(10);
+      decoration1.setCollisionByExclusion([-1]);
+      decoration2.setCollisionByExclusion([-1]);
+      this.physics.add.collider(player, mur);
+      player.setDepth(10);
 
       //--------verifier si phaser a bien pris en compte les colisions--------------//
 

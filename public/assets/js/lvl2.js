@@ -236,7 +236,6 @@ objets2.setCollisionByExclusion([-1]);
 
          function collisionStairs2(player, escalier2)
                      {
-             console.log( this.scene );
              this.scene.switch('Boot3');
 
 
