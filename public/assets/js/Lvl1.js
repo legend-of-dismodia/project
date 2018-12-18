@@ -193,7 +193,11 @@ var Boot = new Phaser.Class({
        this.input.keyboard.once("keydown_D", event =>{
        this.scene.switch('Sac');
        });
+       this.input.keyboard.once("keydown_F", event =>{
+        this.scene.switch('World');
+        });
       },
+      
 
 
       //---------------------------quand le perso bouge---------------------------//
