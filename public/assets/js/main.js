@@ -8,6 +8,7 @@ checkSize();
 $('.toggle').on('click', function () {
     // masque les légendes
     $('.navbarText').toggle();
+    $('.rectangle').toggle();
 
     // petite barre
     if ($('.sidebar-content aside').css('width') !== '56px') {

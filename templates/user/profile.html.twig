@@ -8,26 +8,19 @@
 <h2>Mana: {{save.mana}}</h2>
 <h2>XP: {{save.xp}}</h2>
 
+
 <h2>Inventaire :</h2> </br>
 <table>
+{% for inventory in inventorys %}
+   <tr>
+    <span>{% for property in inventorys %}{{dump(inventory.property)}} {% endfor %}</span>
 
-   <tr>
-       <th>Nom de l'objet</th>
+       <th>{{inventory.name}}</th>
        <th>propriété</th>
-       <th>rareté</th>
-        <th>mettre une image</th>
+       <th>{{inventory.rarety}}</th>
+        <th><img src="{{inventory.image}}"></th>
+        
    </tr>
-   <tr>
-       <td>potion</td>
-       <td>Ajoute 50 pv</td>
-       <td>1</td>
-       <td>image</td>
-   </tr>
-   <tr>
-       <td>épée</td>
-       <td>donne 40 en attaque</td>
-      <td>3</td>
-      <td>image</td>
-   </tr>
+{% endfor %}
 </table>
 {% endblock %}
