@@ -173,8 +173,10 @@ var Boot = new Phaser.Class({
        //-----------------------ouvrir l'inventaire-------------------------//
 
        this.input.keyboard.once("keydown_D", event =>{
-       this.scene.switch('Sac');
+       this.scene.run('Sac');
+
        });
+
       },
 
 
@@ -216,6 +218,7 @@ var Boot = new Phaser.Class({
       player.setVelocityY(0);
 
     }
+
 
  }
 

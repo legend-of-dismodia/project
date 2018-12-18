@@ -166,9 +166,14 @@ var Boot3 = new Phaser.Class({
        // this.physics.add.overlap(player, escalier3, collisionStairs, null, this);
        escalier3 = this.physics.add.sprite(850, 158, "escalier3", 20);
        this.physics.add.overlap(player, escalier3, collisionStairs3, null, this);
-       
+
        loupgarou = this.physics.add.sprite(950, 158, "loupgarou", 11);
        this.physics.add.overlap(player, loupgarou, collisionloup, null, this);
+
+       this.input.keyboard.once("keydown_D", event =>{
+      this.scene.launch('Sac');
+
+              });
       },
 
 
@@ -224,7 +229,7 @@ var Boot3 = new Phaser.Class({
 
          }
          function collisionloup(player, loupgarou)
-                     {     
+                     {
              this.scene.switch('LoupScene');
              loupgarou.disableBody(true, true);
          }

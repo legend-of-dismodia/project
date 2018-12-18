@@ -171,9 +171,13 @@ objets2.setCollisionByExclusion([-1]);
 
        madeleine = this.physics.add.sprite(450, 300, "madeleine", 3);
        this.physics.add.overlap(player, madeleine, collisionmadeleine, null, this);
-      
 
-      },
+
+       this.input.keyboard.once("keydown_D", event =>{
+       this.scene.run('Sac');
+       });
+
+     },
 
 
       //---------------------------quand le perso bouge---------------------------//
@@ -228,7 +232,7 @@ objets2.setCollisionByExclusion([-1]);
 
          }
          function collisionmadeleine(player, madeleine)
-                     {     
+                     {
              this.scene.switch('EctoScene');
              madeleine.disableBody(true, true);
          }

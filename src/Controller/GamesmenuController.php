@@ -54,6 +54,7 @@ class GamesmenuController extends AbstractController
         $user = $this->getUser()->getId();
 
         $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
+
         // $userInventory = $em->getRepository('App:Inventory')->findOneBy(['save' => $userSave->getId()]);
 
         $arrayUser = [
@@ -65,12 +66,16 @@ class GamesmenuController extends AbstractController
             'mana'=> $userSave->getMana(),
             'xp'=> $userSave->getXp(),
             'playtime'=> $userSave->getPlaytime(),
-            'inventory' => $userSave->getInventories()->getItem(),
+          // $array
+
+          // 'inventory' => $userSave->getInventories()->$item(),
         ];
 
-        return new JsonResponse($arrayUser);
-        // var_dump($userInventory->());
-        // die();
+
+  return new JsonResponse($arrayUser);
+
+          // var_dump($userInventory->());
+          // die();
     }
 
     /**

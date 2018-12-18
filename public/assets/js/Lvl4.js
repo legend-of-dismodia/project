@@ -182,6 +182,10 @@ this.physics.add.overlap(player, enemies1, collisionEnemies1, null, this);
 // // this.physics.add.collider(objet, enemies);
 
 
+       this.input.keyboard.once("keydown_D", event =>{
+       this.scene.launch('Sac');
+
+       });
 },
 
 

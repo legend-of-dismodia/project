@@ -25,7 +25,7 @@ var EctoScene = new Phaser.Class({
     startBattle: function() {
         // player character - warrior
            hp = tbl.life;
-           
+
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
         this.add.existing(warrior);
 
@@ -345,6 +345,7 @@ var ActionsMenu = new Phaser.Class({
     function ActionsMenu2(x, y, scene) {
         Menu3.call(this, x, y, scene);
         this.addMenuItem("Attack");
+        console.log('UIScene4')
 
     },
     confirm: function() {

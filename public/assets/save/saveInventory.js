@@ -11,6 +11,6 @@ var objet = [
       property: "ajoute 10 attaque",
       effet: 10,
       rareté: 3,
-      quantité: 0
+      quantité: 1
     }
 ];

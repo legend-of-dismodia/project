@@ -49,4 +49,4 @@ function getPhaserData(life) {
             console.log(e+" - Désolé, aucun résultat trouvé.");
         }
     });
-}
+  }
