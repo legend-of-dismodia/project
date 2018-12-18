@@ -16,16 +16,16 @@ var EctoScene = new Phaser.Class({
     create: function ()
     {
         // change the background to green
-         this.add.image(400, 300, 'fond');
+        this.add.image(400, 300, 'fond');
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
     },
 
-    startBattle: function() {
+    startBattle: function() {        
         // player character - warrior
-           hp = tbl.life;
-           
+        hp = tbl.life;
+
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
         this.add.existing(warrior);
 
@@ -101,7 +101,7 @@ var EctoScene = new Phaser.Class({
         }
         if(action == "magie"){
         this.units[this.index].magieAttaque(this.enemies[target]);
-         }
+        }
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     },
 
@@ -122,6 +122,7 @@ var EctoScene = new Phaser.Class({
     }
 });
 
+
 // base class for heroes and enemies
 var Unit = new Phaser.Class({
     Extends: Phaser.GameObjects.Sprite,
@@ -136,6 +137,7 @@ var Unit = new Phaser.Class({
         this.magie = magie;
         this.living = true;
         this.menuItem = null;
+        i = 0;
     },
     // we will use this to notify the menu item when the unit is dead
     setMenuItem: function(item) {
@@ -160,23 +162,29 @@ var Unit = new Phaser.Class({
             }
         },
 
-        takeDamage: function(damage) {
-            if(i == 0){
-                i = 1;
-                this.hp -= damage;
-            }else{
-                this.hp -= damage;
-                i = 0;
-                getPhaserData(this.hp);
-            }
+    takeDamage: function(damage) {  
+        console.log("i: "+ i);      
+        if(i == 0){
+            i = 1;
+            this.hp -= damage;
+            console.log("hp1: "+this.hp+" dmg1: "+ damage);
 
-            if(this.hp <= 0) {
-                this.hp = 0;
-                this.menuItem.unitKilled();
-                this.living = false;
-                this.visible = false;
-                this.menuItem = null;
-            }
+        }else{
+            console.log("hp: "+this.hp+"dmg : "+ damage);
+            this.hp -= damage;
+            getPhaserData(this.hp);
+            console.log("hello Ecto: "+ this.hp);
+            i = 0;
+
+        }
+
+        if(this.hp <= 0) {
+            this.hp = 0;
+            this.menuItem.unitKilled();
+            this.living = false;
+            this.visible = false;
+            this.menuItem = null;
+        }
 
     },
 

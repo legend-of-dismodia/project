@@ -67,13 +67,13 @@ class GamesmenuController extends AbstractController
             'mana'=> $userSave->getMana(),
             'xp'=> $userSave->getXp(),
             'playtime'=> $userSave->getPlaytime(),
-            'inventory' => $userSave->getInventories(),
+            // 'inventory' => $userSave->getInventories(),
         ];
 
-        // return new JsonResponse($arrayUser);
+        return new JsonResponse($arrayUser);
         
-        var_dump($userSave->getInventories());
-        die();
+        // var_dump($userSave->getInventories());
+        // die();
     }
 
     /**
