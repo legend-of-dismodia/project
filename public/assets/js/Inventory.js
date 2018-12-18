@@ -25,6 +25,9 @@
 
     startInventory:function(){
 
+      this.index = -1; // currently active unit
+
+
       this.scene.start('UIScene5');
     },
 
@@ -104,7 +107,7 @@
 
             this.menus = this.add.container();
             //
-            // this.heroesMenu2 = new HeroesMenu2(195, 153, this);
+            // this.heroesMenu = new HeroesMenu(195, 153, this);
             this.actionsMenu = new ActionsMenu(400, 250, this);
             // this.objetMenu = new ObjetMenu(8, 153, this);
 
@@ -120,7 +123,42 @@
 
 
       });
+      var Unit= new Phaser.Class({
+          Extends: Phaser.GameObjects.Sprite,
 
+          initialize:
+          function Unit(scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp, mana) {
+              Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
+              this.type = type;
+              this.maxHp = this.hp = hp;
+              this.damage = damage; // default damage
+              this.magie = magie;
+              this.living = true;
+              this.menuItem = null;
+
+          },
+          // we will use this to notify the menu item when the unit is dead
+          setMenuItem: function(item) {
+              this.menuItem = item;
+          },
+
+      });
+
+      var PlayerCharacter = new Phaser.Class({
+          Extends: Unit,
+
+          initialize:
+          function PlayerCharacter(scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp, mana) {
+              Unit.call(this, scene, x, y, texture, frame, type, hp, damage, magie, lvl, xp);
+              // flip the image so I don"t have to edit it manually
+              this.flipX = true;
+
+              this.setScale(2);
+              console.log('hpPLayer: '+hp);
+              console.log('damage: '+damage);
+
+          }
+      });
 
         var Unit3 = new Phaser.Class({
             Extends: Phaser.GameObjects.Sprite,
@@ -138,6 +176,29 @@
             },
           });
 
+          var MenuItem = new Phaser.Class({
+              Extends: Phaser.GameObjects.Text,
+
+              initialize:
+
+              function MenuItem(x, y, text, scene) {
+                  Phaser.GameObjects.Text.call(this, scene, x, y, text, { color: "#ffffff", align: "left", fontSize: 15});
+              },
+
+              select: function() {
+                  this.setColor("#f8ff38");
+              },
+
+              deselect: function() {
+                  this.setColor("#ffffff");
+              },
+              // when the associated enemy or player unit is killed
+              unitKilled: function() {
+                  this.active = false;
+                  this.visible = false;
+              }
+
+          });
 
         var Objet = new Phaser.Class({
             Extends: Unit3,
@@ -149,83 +210,148 @@
         });
 
 
-        var Menu2 = new Phaser.Class({
+        var Menu = new Phaser.Class({
             Extends: Phaser.GameObjects.Container,
 
             initialize:
 
-            function Menu2(x, y, scene, heroes) {
+            function Menu(x, y, scene, heroes) {
                 Phaser.GameObjects.Container.call(this, scene, x, y);
                 this.menuItems = [];
                 this.menuItemIndex = 0;
-                this.heroes = heroes;
                 this.x = x;
                 this.y = y;
+                this.selected = false;
             },
-            addMenuItem2: function(unit3) {
-                var menuItem = new MenuItem(0, this.menuItem.length * 0, unit3, this.scene);
+            addMenuItem: function(unit) {
+                var menuItem = new MenuItem(0, this.menuItems.length * 20, unit, this.scene);
                 this.menuItems.push(menuItem);
                 this.add(menuItem);
+                return menuItem;
             },
+            // menu navigation
             moveSelectionUp: function() {
-                this.menuItem[this.menuItemIndex].deselect();
-                this.menuItemIndex--;
-                if(this.menuItemIndex < 0)
-                    this.menuItemIndex = this.menuItems.length - 1;
+                this.menuItems[this.menuItemIndex].deselect();
+                do {
+                    this.menuItemIndex--;
+                    if(this.menuItemIndex < 0)
+                        this.menuItemIndex = this.menuItems.length - 1;
+                } while(!this.menuItems[this.menuItemIndex].active);
                 this.menuItems[this.menuItemIndex].select();
             },
             moveSelectionDown: function() {
                 this.menuItems[this.menuItemIndex].deselect();
-                this.menuItemIndex++;
-                if(this.menuItemIndex >= this.menuItems.length)
-                    this.menuItemIndex = 0;
+                do {
+                    this.menuItemIndex++;
+                    if(this.menuItemIndex >= this.menuItems.length)
+                        this.menuItemIndex = 0;
+                } while(!this.menuItems[this.menuItemIndex].active);
                 this.menuItems[this.menuItemIndex].select();
             },
-            // select the menu as a whole and an element with index from it
+            // select the menu as a whole and highlight the choosen element
             select: function(index) {
                 if(!index)
                     index = 0;
                 this.menuItems[this.menuItemIndex].deselect();
                 this.menuItemIndex = index;
+                while(!this.menuItems[this.menuItemIndex].active) {
+                    this.menuItemIndex++;
+                    if(this.menuItemIndex >= this.menuItems.length)
+                        this.menuItemIndex = 0;
+                    if(this.menuItemIndex == index)
+                        return;
+                }
                 this.menuItems[this.menuItemIndex].select();
+                this.selected = true;
             },
             // deselect this menu
             deselect: function() {
                 this.menuItems[this.menuItemIndex].deselect();
                 this.menuItemIndex = 0;
+                this.selected = false;
             },
             confirm: function() {
-                // wen the player confirms his slection, do the action
+                // when the player confirms his slection, do the action
             },
-
-
+            // clear menu and remove all menu items
+            clear: function() {
+                for(var i = 0; i < this.menuItems.length; i++) {
+                    this.menuItems[i].destroy();
+                }
+                this.menuItems.length = 0;
+                this.menuItemIndex = 0;
+            },
+            // recreate the menu items
+            remap: function(units) {
+                this.clear();
+                for(var i = 0; i < units.length; i++) {
+                    var unit3 = units[i];
+                    unit3.setMenuItem(this.addMenuItem(unit.type));
+                }
+                this.menuItemIndex = 0;
+            }
         });
 
-        var HeroesMenu2 = new Phaser.Class({
-            Extends: Menu2,
+
+        var HeroesMenu = new Phaser.Class({
+            Extends: Menu,
 
             initialize:
 
-            function HeroesMenu2(x, y, scene) {
-                Menu2.call(this, x, y, scene);
+            function HeroesMenu(x, y, scene) {
+                Menu.call(this, x, y, scene);
             }
         });
 
         var ActionsMenu = new Phaser.Class({
-            Extends: Menu2,
+            Extends: Menu,
 
             initialize:
 
             function ActionsMenu(x, y, scene) {
-                Menu2.call(this, x, y, scene);
+                Menu.call(this, x, y, scene);
                 this.addMenuItem("equiper");
+
             },
             confirm: function() {
-                // do something when the player selects an action
-            },
+                // we select an action and go to the next menu and choose from the enemies to apply the action
+                this.scene.events.emit("SelectedAction");
+            }
 
         });
 
+
+        var Message = new Phaser.Class({
+
+            Extends: Phaser.GameObjects.Container,
+
+            initialize:
+            function Message(scene, events) {
+                Phaser.GameObjects.Container.call(this, scene, 160, 30);
+                var graphics = this.scene.add.graphics();
+                this.add(graphics);
+                graphics.lineStyle(1, 0xffffff, 0.8);
+                graphics.fillStyle(0x031f4c, 0.3);
+                graphics.strokeRect(-90, -15, 180, 30);
+                graphics.fillRect(-90, -15, 180, 30);
+                this.text = new Phaser.GameObjects.Text(scene, 0, 0, "", { color: "#ffffff", align: "center", fontSize: 13, wordWrap: { width: 170, useAdvancedWrap: true }});
+                this.add(this.text);
+                this.text.setOrigin(0.5);
+                events.on("Message", this.showMessage, this);
+                this.visible = false;
+            },
+            showMessage: function(text) {
+                this.text.setText(text);
+                this.visible = true;
+                if(this.hideEvent)
+                    this.hideEvent.remove(false);
+                this.hideEvent = this.scene.time.addEvent({ delay: 2000, callback: this.hideMessage, callbackScope: this });
+            },
+            hideMessage: function() {
+                this.hideEvent = null;
+                this.visible = false;
+            }
+        });
 
         // var ObjetMenu = new Phaser.Class({
         //     Extends: Menu2,

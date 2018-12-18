@@ -1,4 +1,3 @@
-
 var objet = [
     {
         name: "potion",

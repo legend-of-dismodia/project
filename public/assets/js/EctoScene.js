@@ -16,15 +16,16 @@ var EctoScene = new Phaser.Class({
     create: function ()
     {
         // change the background to green
-        this.add.image(400, 300, 'fond');
+         this.add.image(400, 300, 'fond');
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
     },
 
     startBattle: function() {
-        hp = tbl.life;
         // player character - warrior
+           hp = tbl.life;
+           
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
         this.add.existing(warrior);
 
@@ -100,13 +101,12 @@ var EctoScene = new Phaser.Class({
         }
         if(action == "magie"){
         this.units[this.index].magieAttaque(this.enemies[target]);
-        }
+         }
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     },
 
 
-    endBattle: function() {        
-
+    endBattle: function() {
         // clear state, remove sprites
         this.heroes.length = 0;
         this.enemies.length = 0;
@@ -144,37 +144,43 @@ var Unit = new Phaser.Class({
     // attack the target unit
     attack: function(target) {
         if(target.living) {
-            target.takeDamage(this.damage);            
+
+            target.takeDamage(this.damage);
             this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
+
+
         }
 
     },
 
     magieAttaque: function(target) {
-            if(target.living) {
-                target.takeMagic(this.magie);
-                this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
-            }
+          if(target.living) {
+              target.takeMagic(this.magie);
+              this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
+          }
         },
 
-    takeDamage: function(damage) {
-        if(i == 0){
-            i = 1;
-            this.hp -= damage;
+        takeDamage: function(damage) {
+            if(i == 0){
+                i = 1;
+                this.hp -= damage;
 
-        }else{
-            this.hp -= damage;         
-            i = 0;
-            getPhaserData(this.hp);
-        }
-        
-        if(this.hp <= 0) {
-            this.hp = 0;
-            this.menuItem.unitKilled();
-            this.living = false;
-            this.visible = false;
-            this.menuItem = null;
-        }
+
+
+            }else{
+                this.hp -= damage;
+
+                i = 0;
+                getPhaserData(this.hp);
+            }
+
+            if(this.hp <= 0) {
+                this.hp = 0;
+                this.menuItem.unitKilled();
+                this.living = false;
+                this.visible = false;
+                this.menuItem = null;
+            }
 
 
     },
@@ -214,12 +220,12 @@ var PlayerCharacter = new Phaser.Class({
     }
 });
 
-var MenuItem3 = new Phaser.Class({
+var MenuItem = new Phaser.Class({
     Extends: Phaser.GameObjects.Text,
 
     initialize:
 
-    function MenuItem3(x, y, text, scene) {
+    function MenuItem(x, y, text, scene) {
         Phaser.GameObjects.Text.call(this, scene, x, y, text, { color: "#ffffff", align: "left", fontSize: 15});
     },
 
@@ -252,7 +258,7 @@ var Menu3 = new Phaser.Class({
         this.y = y;
         this.selected = false;
     },
-    addMenuItem3: function(unit) {
+    addMenuItem: function(unit) {
         var menuItem = new MenuItem(0, this.menuItems.length * 20, unit, this.scene);
         this.menuItems.push(menuItem);
         this.add(menuItem);
@@ -315,7 +321,7 @@ var Menu3 = new Phaser.Class({
         this.clear();
         for(var i = 0; i < units.length; i++) {
             var unit = units[i];
-            unit.setMenuItem(this.addMenuItem3(unit.type));
+            unit.setMenuItem(this.addMenuItem(unit.type));
         }
         this.menuItemIndex = 0;
     }
@@ -331,14 +337,14 @@ var HeroesMenu = new Phaser.Class({
     }
 });
 
-var ActionsMenu3 = new Phaser.Class({
+var ActionsMenu = new Phaser.Class({
     Extends: Menu3,
 
     initialize:
 
-    function ActionsMenu3(x, y, scene) {
+    function ActionsMenu2(x, y, scene) {
         Menu3.call(this, x, y, scene);
-        this.addMenuItem3("Attack");
+        this.addMenuItem("Attack");
 
     },
     confirm: function() {
@@ -391,7 +397,7 @@ var UIScene4 = new Phaser.Class({
         this.menus = this.add.container();
 
         this.heroesMenu = new HeroesMenu(810, 650, this);
-        this.actionsMenu = new ActionsMenu3(550, 650, this);
+        this.actionsMenu = new ActionsMenu(550, 650, this);
         this.enemiesMenu = new EnemiesMenu(50, 650, this);
 
         // the currently selected menu

@@ -12,6 +12,7 @@ var config = {
         }
     },
     scene: [
+
       Boot,
       World,
 
@@ -20,10 +21,11 @@ var config = {
       UIScene,
       LoupScene,
       EctoScene,
+      UIScene5,
       UIScene2,
       UIScene3,
       UIScene4,
- UIScene5,
+
 
 
       Boot2,
