@@ -95,9 +95,32 @@ nav .fa, nav .fas {
     border-color: transparent;
 }
 
-.video video {
-    max-width: 100%;
+/*******Gestion de la vidéo dans la page d'acceuil******/
+
+.encart-video {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
 }
+
+.encart-video video{
+    width: 100%;
+}
+.rectangle{
+	width:150px;
+    height:80px;
+    position: relative;
+    left: 30px;
+    top:30px;
+    background:#ff793f;  
+}
+a {
+    color:whitesmoke;
+}
+/****************************************************************/
+
+
 /** footer **/
 .modal-footer {
     border-top: 1px solid #ced4da;
@@ -140,6 +163,9 @@ td{
     .container {
         max-width: inherit;
         padding:  0 15px;
+    }
+    .rectangle {
+        display:none;
     }
 }
 

@@ -129,12 +129,16 @@ class GamesmenuController extends AbstractController
    {
        $userid = $this->getUser()->getId();
        $user= $em->getRepository('App:User')->findOneBy(['id' => $userid]);
-
        $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $userid]);
-
+       $userInventory = $em->getRepository('App:Inventory')->getPlayerInventory($userSave->getId());
+      
+       foreach ($userInventory as $key => $value) {
+        $userInventory[$key]['property']  =  unserialize($value['property']);
+    }
        return $this->render('user/profile.html.twig', [
         "user" => $user,
         "save" => $userSave,
+        "inventorys" =>$userInventory,
 
        ]);
    }

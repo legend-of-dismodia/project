@@ -57,14 +57,16 @@
               </li>
           </ul>
         </div>
+        
       </nav>
+      <button class="rectangle"><a href="{{path('login')}}">Jouez<a></button>
     </aside>
 
     <div class="toggle">
       <a><i class="fas fa-caret-left"></i></a>
     </div>
 
-    <div class="container">
+    <div class="col px-0">
       {% for message in app.flashes('notice') %}
         <div class="flash-notice alert alert-success alert-dismissible fade show" role="alert">
           {{ message }} 
