@@ -154,22 +154,18 @@ var Unit = new Phaser.Class({
     },
 
     magieAttaque: function(target) {
-          if(target.living) {
-              target.takeMagic(this.magie);
-              this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
-          }
+            if(target.living) {
+                target.takeMagic(this.magie);
+                this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
+            }
         },
 
         takeDamage: function(damage) {
             if(i == 0){
                 i = 1;
                 this.hp -= damage;
-
-
-
             }else{
                 this.hp -= damage;
-
                 i = 0;
                 getPhaserData(this.hp);
             }
@@ -181,7 +177,6 @@ var Unit = new Phaser.Class({
                 this.visible = false;
                 this.menuItem = null;
             }
-
 
     },
 
