@@ -110,9 +110,6 @@ nav .fa, nav .fas {
 .rectangle{
 	width:150px;
     height:80px;
-    position: relative;
-    left: 30px;
-    top:30px;
     background:#ff793f;  
 }
 .rectangle a {
