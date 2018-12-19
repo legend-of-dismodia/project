@@ -194,6 +194,7 @@ var Boot = new Phaser.Class({
       //-----------------------ouvrir l'inventaire-------------------------//
 
       this.input.keyboard.on("keydown_D", event =>{
+        this.scene.sendToBack();
 
         // ferme le sac avant de l'ouvrir, pour en avoir une seule instance
         this.scene.stop('UIScene5');

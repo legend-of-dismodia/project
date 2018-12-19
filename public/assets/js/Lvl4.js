@@ -243,6 +243,7 @@ this.scene.sleep('UIScene5');
         // shake the world
 
     // start battle
+    this.scene.stop('UIScene5');
     this.scene.switch('BossBattle');
   enemies1.disableBody(true, true);
   if (enemies1.disableBody === true) {
