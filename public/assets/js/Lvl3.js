@@ -184,7 +184,7 @@ var Boot3 = new Phaser.Class({
 
 
        this.input.keyboard.on("keydown_D", event =>{
-        this.scene.moveUp('Sac');
+this.scene.sendToBack();
 
        this.scene.run('Sac');
 
