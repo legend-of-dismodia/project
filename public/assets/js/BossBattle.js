@@ -35,13 +35,13 @@ var BossBattle = new Phaser.Class({
         var boss = new Enemy(this, 500, 400, "", 1, "boss", 100, 30);
         this.add.existing(boss);
 
-      //
-      //   this.anims.create({
-      //     key: 'boss1',
-      //    frames: this.anims.generateFrameNumbers('boss1', { start: 1, end: 46}),
-      //     frameRate: 10,
-      //     repeat: -1
-      // });
+    
+        this.anims.create({
+        key: 'boss1',
+        frames: this.anims.generateFrameNumbers('boss1', { start: 1, end: 46}),
+        frameRate: 10,
+        repeat: -1
+    });
 
 
 

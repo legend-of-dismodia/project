@@ -183,19 +183,24 @@ var Boot3 = new Phaser.Class({
        this.physics.add.overlap(player, loupgarou, collisionloup, null, this);
 
 
-       this.input.keyboard.on("keydown_D", event =>{
-this.scene.sendToBack();
+      //-----------------------ouvrir l'inventaire-------------------------//
 
-       this.scene.run('Sac');
+      this.input.keyboard.on("keydown_D", event =>{
+        this.scene.sendToBack();
 
-     });
+        // ferme le sac avant de l'ouvrir, pour en avoir une seule instance
+        this.scene.stop('UIScene5');
 
-     this.input.keyboard.on("keydown_F", event =>{
+        // ouvre le sac
+        this.scene.run('Sac');
 
-      this.scene.sleep('UIScene5');
+        // on peut ne peut fermer l'inventaire que quand il est ouvert
+        this.input.keyboard.on("keydown_F", event =>{
+          this.scene.stop('UIScene5');
+        });      
 
-   });
-},
+      });
+    },
 
 
 
@@ -252,6 +257,7 @@ this.scene.sendToBack();
          }
          function collisionloup(player, loupgarou)
                      {
+                      this.scene.stop('UIScene5');
              this.scene.switch('LoupScene');
              loupgarou.disableBody(true, true);
          }
