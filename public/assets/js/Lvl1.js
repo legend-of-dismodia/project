@@ -18,13 +18,14 @@ var Boot = new Phaser.Class({
       this.load.image("tiles12", "../assets/tilesets/Dungeon_A5.png");
       this.load.image("tiles13", "../assets/tilesets/Inside_B.png");
       this.load.image("tiles14", "../assets/tilesets/Chest.png");
-
+      this.load.audio("fantasy", "../assets/sound/fantasy.mp3")
       this.load.tilemapTiledJSON("map", "../assets/map/nivo1.json");
       this.load.spritesheet("escalier", "../assets/tilesets/Inside_B.png", { frameWidth: 48, frameHeight: 48});
       this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
       this.load.spritesheet('souris', '../assets/spritesheet/troll.png', { frameWidth: 80, frameHeight: 80});
     this.load.spritesheet("chest", "../assets/tilesets/chest.png", { frameWidth: 48, frameHeight: 48});
     },
+    
 
       create: function (){
 
@@ -53,7 +54,7 @@ var Boot = new Phaser.Class({
 
 
         create:function () {
-
+          this.sound.play('fantasy');
         //-------------------------on affiche la map--------------------------------//
         //----------------------bien respecter l'ordre des calques------------------//
 
@@ -125,7 +126,7 @@ var Boot = new Phaser.Class({
       this.cameras.roundPixels = true;
 
       // // changer la taille de la caméra
-      // this.cameras.resize(300, 300);
+      //this.cameras.resize(300, 300);
 
       // // empêcher la caméra de dépasser de la carte
       // this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
