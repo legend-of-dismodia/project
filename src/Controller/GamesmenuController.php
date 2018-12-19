@@ -67,6 +67,7 @@ class GamesmenuController extends AbstractController
         $user = $this->getUser()->getId();
 
         $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
+
         $userInventory = $em->getRepository('App:Inventory')->getPlayerInventory($userSave->getId());
 
         foreach ($userInventory as $key => $value) {
@@ -96,13 +97,19 @@ class GamesmenuController extends AbstractController
     public function gameSetSave(EntityManagerInterface $em, Request $request)
     {
         $tbl = $_POST['tbl'];
+        //"inventories":[{"name":"Potion","property":{"hp":50},"rarety":"1","image":"","quantity":"2"},{"name":"Sword","property":{"atk":10},"rarety":"1","image":"","quantity":"1"}]
         // $tbl = '{
         //     "life":90,
         //     "createdAt":{"date":"2018-12-14 14:27:07.000000","timezone_type":3,"timezone":"Europe/Berlin"},
         //     "level":0,
         //     "mana":200,
         //     "xp":0,
+<<<<<<< HEAD
         //     "playtime":{"date":"1970-01-01 00:00:00.000000","timezone_type":3,"timezone":"Europe/Berlin"}
+=======
+        //     "playtime":{"date":"1970-01-01 00:00:00.000000","timezone_type":3,"timezone":"Europe/Berlin"},
+        //     "inventories":[{"name":"Potion","property":{"hp":50},"rarety":"1","image":"","quantity":"1"}]
+>>>>>>> master
         // }';
 
         $tbl = json_decode($tbl, true);
@@ -110,6 +117,7 @@ class GamesmenuController extends AbstractController
         $user = $this->getUser()->getId();
         $saveUser = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
 
+<<<<<<< HEAD
         if (!$saveUser) {
             throw $this->createNotFoundException(
                 'No user found for id '.$id
@@ -121,8 +129,54 @@ class GamesmenuController extends AbstractController
             $saveUser->setLife($tbl['life']);
             $saveUser->setXp($tbl['xp']);
             $saveUser->setLevel($tbl['level']);
+=======
+        //Récupère l'inventaire correspondant à la save de l'utilisateur
+        $saveUserInventory = $em->getRepository('App:Inventory')->findOneBy(['save' => $saveUser->getId()]);
+        //Récupère les items de l'utilisateur
+        $userInventory = $em->getRepository('App:Inventory')->getPlayerInventory($saveUser->getId());        
+        //Récupère tous les items de la bdd
+        $items = $em->getRepository('App:Item')->findAll();        
+        //Crée une nouvelle instance inventaire
+        $firstSaveInventory = new Inventory();
+        
+        if (isset($saveUserInventory)) {
+
+            if (!$saveUser) {
+                throw $this->createNotFoundException(
+                    'No user found for id '.$id
+                );
+            }
+
+            if ($tbl['life'] <= 0) {
+                $saveUser->setLife(0);
+            }else{
+                $saveUser->setLife($tbl['life']);
+                $saveUser->setXp($tbl['xp']);
+                $saveUser->setLevel($tbl['level']);
+                //inventory here            
+                foreach ($tbl['inventories'] as $key => $value) {
+                    if ($value['quantity'] != $userInventory[$key]['quantity']) {                    
+                        $saveUserInventory->setQuantity($value['quantity']);
+                    }
+                }                
+            }
+                $em->flush();
+        }else{
+            
+            foreach ($tbl['inventories'] as $key => $value) {
+                
+                if ($value['name'] == 'Potion') {                    
+
+                    $firstSaveInventory->setItem($items[0]);
+                }
+            }            
+            $firstSaveInventory->setSave($saveUser);            
+            $firstSaveInventory->setQuantity(1);
+            
+            $em->persist( $firstSaveInventory );
+            $em->flush();
+>>>>>>> master
         }
-        $em->flush();
 
         return new Response('ok');
     }

@@ -44,34 +44,6 @@ var UIScene5 = new Phaser.Class({
         },
 
     create: function () {
-        hp = tbl.life;
-
-        
-
-        var warrior = new PlayerCharacter(this, 80 , 90, "player", 0, "Warrior", hp, attack, 50);
-        this.add.existing(warrior);
-
-        var potion;
-        var arme;        
-
-        tbl.inventories.forEach(item => {            
-            switch (item.name) {
-                case 'Potion':
-                    potion = new Objet(this, 40, 270, "objet", 179, item.name, item.property, item.quantity, item.rarety);
-                    this.add.existing(potion);                    
-                break;
-            
-                case 'Sword':
-                    arme = new Objet (this, 40, 400, "objet", 97, item.name, item.property, item.quantity, item.rarety);
-                    this.add.existing(arme);
-                break;
-            }
-        });
-        
-
-        warrior.setDepth(10);
-        potion.setDepth(10);
-        arme.setDepth(10);
 
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(10, 0x795548);
@@ -83,9 +55,38 @@ var UIScene5 = new Phaser.Class({
         this.graphics.strokeRect(5, 200, 300, 595);
         this.graphics.fillRect(5, 200, 300, 595);
 
+        hp = tbl.life;
 
-        // this.graphics.strokeRect(600, 200, 300, 500);
-        // this.graphics.fillRect(600, 200, 300, 500);
+        var warrior = new PlayerCharacter(this, 80 , 90, "player", 0, "Warrior", hp, attack, 50);
+        this.add.existing(warrior);
+
+        var potion;
+        var arme;
+        
+        if (tbl.inventories.length != 0) {
+
+            tbl.inventories.forEach(item => {            
+                switch (item.name) {
+                    case 'Potion':
+                        potion = new Objet(this, 40, 270, "objet", 179, item.name, item.property, item.quantity, item.rarety);
+                        this.add.existing(potion); 
+                        potion.setDepth(10);                   
+                    break;
+    
+                    case 'Sword':
+                        arme = new Objet (this, 40, 400, "objet", 97, item.name, item.property, item.quantity, item.rarety);
+                        this.add.existing(arme);
+                        arme.setDepth(10);
+                    break;
+    
+                }
+            });
+
+        }else{            
+            lo = this.add.text(90, 250, 'Pas d\'objet disponible', { font: '14px Arial', fill: 'white' });
+        }
+
+        warrior.setDepth(10);
 
         this.heroes = [warrior];
         this.objet = [potion, arme];
@@ -102,15 +103,15 @@ var UIScene5 = new Phaser.Class({
 
         invent = this.add.text(115, 210, 'Inventaire', { font: 'bold 12pt Arial', fill: 'white' });
         tbl.inventories.forEach(item => {
-            var properties = item.property;            
+            var properties = item.property;
             switch (item.name) {
                 case 'Potion':
                     potionText = this.add.text(80, 260, 'effet: 0', { fontSize: '14px', fill: 'white' });
-                    Object.keys(properties).forEach(function(key) {                        
+                    Object.keys(properties).forEach(function(key) {
                         potionText.setText(key.toUpperCase()+' : +' + properties[key]);
-                    });  
+                    });
 
-                    potionText = this.add.text(80, 280, 'quantité: 0', { fontSize: '14px', fill: 'white' });                    
+                    potionText = this.add.text(80, 280, 'quantité: 0', { fontSize: '14px', fill: 'white' });
                     potionText.setText('Quantité : ' + item.quantity);
 
                     switch (item.rarety) {
@@ -136,14 +137,14 @@ var UIScene5 = new Phaser.Class({
 
                     }
                 break;
-            
+
                 case 'Sword':
                     armeText = this.add.text(80, 390, 'effet: 0', { fontSize: '14px', fill: 'white' });
-                    Object.keys(properties).forEach(function(key) {                        
+                    Object.keys(properties).forEach(function(key) {
                         armeText.setText(key.toUpperCase()+' : +' + properties[key]);
-                    });  
+                    });
 
-                    armeText = this.add.text(80, 410, 'quantité: 0', { fontSize: '14px', fill: 'white' });                    
+                    armeText = this.add.text(80, 410, 'quantité: 0', { fontSize: '14px', fill: 'white' });
                     armeText.setText('Quantité : ' + item.quantity);
 
                     switch (item.rarety) {
@@ -167,7 +168,7 @@ var UIScene5 = new Phaser.Class({
                             armeText.setText('Légendaire');
                         break;
 
-                    }                    
+                    }
                 break;
             }
         });
@@ -186,34 +187,63 @@ var UIScene5 = new Phaser.Class({
         // this.menus.add(this.actionsMenu);
         // // this.menus.add(this.objetMenu);
 
-  
+
 
         this.input.keyboard.once("keydown_I", event => {
-            console.log("alo i");
-            tbl.inventories.forEach(item => {            
+
+            // tbl.inventories.forEach(item => {            
+            //     switch (item.name) {
+            //         case 'Potion':
+            //             if (item.quantity > 0) {
+            //                 item.quantity -= 1;
+
+            //                 hpText = this.add.text(160, 70, 'hp: 0', { fontSize: '24px', fill: 'white' });
+            //                 hpText.setText('HP: ' + hp);
+
+            //                 this.hp = hp + item.property.hp;
+            //                 getPhaserData(this.hp, tbl.xp, tbl.level);
+                            
+            //             }
+            //             else {
+            //                 alert("vous n'avez pas assez de potion");
+                            
+            //             }
+            //         break;
+
+            //         case 'Sword':
+                        
+            //         break;
+            //     }
+                
+            // });
+
+            tbl.inventories.forEach(item => {                            
                 switch (item.name) {
                     case 'Potion':
                         if (item.quantity > 0) {
                             item.quantity -= 1;
-            
+
                             hpText = this.add.text(160, 70, 'hp: 0', { fontSize: '24px', fill: 'white' });
                             hpText.setText('HP: ' + hp);
-            
+
                             this.hp = hp + item.property.hp;
-                            getPhaserData(this.hp, tbl.xp, tbl.level);
-                        }
-                        else {
-                            alert("vous n'avez pas assez de potion");
+                            getPhaserData(this.hp, tbl.xp, tbl.level); 
+                            break;                           
+                        }else{
+                            alert("Vous n'avez pas assez de potion");
+                            break;
                         }
                     break;
-                
+
                     case 'Sword':
                         
                     break;
+
                 }
+                
             });
 
-            
+
         });
 
 

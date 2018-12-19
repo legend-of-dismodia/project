@@ -147,11 +147,11 @@ var Boot = new Phaser.Class({
 
       mur.setDepth(10);
 
-       this.physics.add.collider(player, mur);
+      this.physics.add.collider(player, mur);
 
-       // this.physics.add.collider(player, solLave);
-       // this.physics.add.collider(player, mur);
-       //  this.physics.add.collider(player, statue);
+      // this.physics.add.collider(player, solLave);
+      // this.physics.add.collider(player, mur);
+      //  this.physics.add.collider(player, statue);
 
       //--------verifier si phaser a bien pris en compte les colisions--------------//
 
@@ -182,28 +182,34 @@ var Boot = new Phaser.Class({
       // });
       // });
 
-       escalier = this.physics.add.sprite(1032, 407, "escalier", 20);
-       this.physics.add.overlap(player, escalier, collisionStairs, null, this);
+      escalier = this.physics.add.sprite(1032, 407, "escalier", 20);
+      this.physics.add.overlap(player, escalier, collisionStairs, null, this);
 
-       souris1 = this.physics.add.sprite(900, 350, "souris", 2);
-       this.physics.add.overlap(player, souris1, collisionSouris1, null, this);
+      souris1 = this.physics.add.sprite(900, 350, "souris", 2);
+      this.physics.add.overlap(player, souris1, collisionSouris1, null, this);
 
-       chestPotion = this.physics.add.sprite(850, 20, "chest", 2);
-       this.physics.add.overlap(player, chestPotion, collisionChestPotion, null, this);
+      chestPotion = this.physics.add.sprite(850, 20, "chest", 2);
+      this.physics.add.overlap(player, chestPotion, collisionChestPotion, null, this);
 
-       //-----------------------ouvrir l'inventaire-------------------------//
+      //-----------------------ouvrir l'inventaire-------------------------//
 
-       this.input.keyboard.on("keydown_D", event =>{
+      this.input.keyboard.on("keydown_D", event =>{
+        this.scene.sendToBack();
 
-       this.scene.run('Sac');
+        // ferme le sac avant de l'ouvrir, pour en avoir une seule instance
+        this.scene.stop('UIScene5');
 
-     });
+        // ouvre le sac
+        this.scene.run('Sac');
 
-     this.input.keyboard.on("keydown_F", event =>{
+        // on peut ne peut fermer l'inventaire que quand il est ouvert
+        this.input.keyboard.on("keydown_F", event =>{
+          this.scene.stop('UIScene5');
+        });      
 
-      this.scene.sleep('UIScene5');
+    });
 
-   });
+    
 
       },
 
@@ -248,10 +254,10 @@ var Boot = new Phaser.Class({
 
     }
 
- }
+}
 
 
-         });
+        });
 
 
 function collisionStairs(player, escalier)
@@ -262,9 +268,9 @@ function collisionStairs(player, escalier)
 
 function collisionSouris1(player, souris1)
             {
-
+              this.scene.stop('UIScene5');
               this.scene.switch('BattleScene');
-                souris1.disableBody(true, true);
+              souris1.disableBody(true, true);
 }
 
 function collisionChestPotion(player, chestPotion)
@@ -272,16 +278,23 @@ function collisionChestPotion(player, chestPotion)
   chestPotion.disableBody(true, true);
   chestPotion = this.physics.add.sprite(850, 20, "chest", 13);
 
-  tbl.inventories.forEach(item => {     
-    if (item.name == 'Potion') {
-      quantity = parseInt(item.quantity);
-      quantity+=1;
-      quantity.toString();  
-      quantity = item.quantity = quantity.toString();    
-      getPhaserDataInventory();
-      
-    }
-    
-  });
+  if (tbl.inventories.length == 0) {
+    tbl.inventories = [{"name":"Potion","property":{"hp":50},"rarety":"1","image":"","quantity":"1"}];    
+    getPhaserDataInventory();
+  }else{
+
+    tbl.inventories.forEach(item => {
+      if (item.name == 'Potion') {
+        quantity = parseInt(item.quantity);
+        quantity+=1;
+        quantity.toString();  
+        quantity = item.quantity = quantity.toString();    
+        getPhaserDataInventory();      
+      }      
+    });
+
+  }
+
+  
   
 }

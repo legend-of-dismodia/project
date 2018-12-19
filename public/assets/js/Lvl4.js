@@ -187,15 +187,21 @@ statuecouple = this.physics.add.sprite(850, 50, "statuecouple");
 // this.physics.add.collider(mur, enemies);
 // // this.physics.add.collider(objet, enemies);
 
+//-----------------------ouvrir l'inventaire-------------------------//
+
 this.input.keyboard.on("keydown_D", event =>{
-this.scene.sendToBack();
-this.scene.run('Sac');
+  this.scene.sendToBack();
 
-});
+  // ferme le sac avant de l'ouvrir, pour en avoir une seule instance
+  this.scene.stop('UIScene5');
 
-this.input.keyboard.on("keydown_F", event =>{
+  // ouvre le sac
+  this.scene.run('Sac');
 
-this.scene.sleep('UIScene5');
+  // on peut ne peut fermer l'inventaire que quand il est ouvert
+  this.input.keyboard.on("keydown_F", event =>{
+    this.scene.stop('UIScene5');
+  });      
 
 });
 
@@ -257,6 +263,7 @@ this.scene.sleep('UIScene5');
       {
        
     // start battle
+    this.scene.stop('UIScene5');
     this.scene.switch('BossBattle');
   enemies1.disableBody(true, true);
   if (enemies1.disableBody === true) {

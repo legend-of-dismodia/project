@@ -20,6 +20,7 @@ var EctoScene = new Phaser.Class({
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
+
     },
 
     startBattle: function() {
@@ -176,6 +177,18 @@ var Unit = new Phaser.Class({
             this.xp = xp + 50;
        this.level = level + 1;
   console.log(this.level);
+
+            //
+            // this.anims.create({
+            //   key: 'hero',
+            //  frames: this.anims.generateFrameNumbers('hero', { start: 1, end: 26}),
+            //   frameRate: 10,
+            //   repeat: -1
+            //
+            //       });
+
+
+
             if (this.xp = 100){
 
             this.xp = 0;
