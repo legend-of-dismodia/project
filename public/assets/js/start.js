@@ -3,6 +3,9 @@ var config = {
     parent: 'content',
     width: 1280,
     height: 800,
+    audio: {
+        disableWebAudio: true
+    },
     pixelArt: true,
     physics: {
         default: 'arcade',
