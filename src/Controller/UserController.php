@@ -186,10 +186,10 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             // $user = $entityManager->getRepository(User::class)->findOneByResetPassword($token);
 
-            $user = $entityManager->getRepository(User::class)->findBy(array('resetPassword' => $token));
+            $user = $entityManager->getRepository(User::class)->findOneBy(array('resetPassword' => $token));
 
             if ($user !== null) {
-                $form = $this->createForm(User::class, $user);
+                $form = $this->createForm(ResetPasswordType::class, $user);
 
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid()) {
@@ -204,7 +204,7 @@ class UserController extends AbstractController
                     return $this->redirectToRoute('login');
                 }
 
-                return $this->render('authentication/reset-password-token.html.twig', array(
+                return $this->render('user/reset-password-token.html.twig', array(
                     'form' => $form->createView(),
                 ));
             }
