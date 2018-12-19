@@ -193,17 +193,22 @@ var Boot = new Phaser.Class({
 
        //-----------------------ouvrir l'inventaire-------------------------//
 
-       this.input.keyboard.on("keydown_D", event =>{
+      this.input.keyboard.on("keydown_D", event =>{
 
-       this.scene.run('Sac');
+        // ferme le sac avant de l'ouvrir, pour en avoir une seule instance
+        this.scene.stop('UIScene5');
+
+        // ouvre le sac
+        this.scene.run('Sac');
+
+        // on peut ne peut fermer l'inventaire que quand il est ouvert
+        this.input.keyboard.on("keydown_F", event =>{
+          this.scene.stop('UIScene5');
+        });      
 
      });
 
-     this.input.keyboard.on("keydown_F", event =>{
-
-      this.scene.sleep('UIScene5');
-
-   });
+     
 
       },
 
