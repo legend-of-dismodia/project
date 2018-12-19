@@ -184,8 +184,8 @@ var Boot = new Phaser.Class({
        souris1 = this.physics.add.sprite(900, 350, "souris", 2);
        this.physics.add.overlap(player, souris1, collisionSouris1, null, this);
 
-       chest = this.physics.add.sprite(850, 20, "chest", 2);
-       this.physics.add.overlap(player, chest, collisionChest, null, this);
+       chestPotion = this.physics.add.sprite(850, 20, "chest", 2);
+       this.physics.add.overlap(player, chestPotion, collisionChestPotion, null, this);
 
        //-----------------------ouvrir l'inventaire-------------------------//
 
@@ -263,10 +263,21 @@ function collisionSouris1(player, souris1)
                 souris1.disableBody(true, true);
 }
 
-function collisionChest(player, chest)
-            {
+function collisionChestPotion(player, chestPotion)
+{
+  chestPotion.disableBody(true, true);
+  chestPotion = this.physics.add.sprite(850, 20, "chest", 13);
 
-                chest.disableBody(true, true);
-                chest = this.physics.add.sprite(850, 20, "chest", 13);
-                objet[0]['quantité'] = 1;
+  tbl.inventories.forEach(item => {     
+    if (item.name == 'Potion') {
+      quantity = parseInt(item.quantity);
+      quantity+=1;
+      quantity.toString();  
+      quantity = item.quantity = quantity.toString();    
+      getPhaserDataInventory();
+      
+    }
+    
+  });
+  
 }

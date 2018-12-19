@@ -45,10 +45,27 @@ tbl.level = level;
         method: 'POST',
         data: 'tbl='+jsonData,
         success : function(r){
+            console.log('okData'+  r);
+        },
+        error: function(e) {
+            console.log(e+" - Désolé, aucun résultat trouvé.");
+        }
+    });
+}
+
+function getPhaserDataInventory() {
+
+    var jsonData  = JSON.stringify(tbl);
+    
+    $.ajax({
+        url: '/game/setSave',
+        method: 'POST',
+        data: 'tbl='+jsonData,
+        success : function(r){
             console.log('ok'+  r);
         },
         error: function(e) {
             console.log(e+" - Désolé, aucun résultat trouvé.");
         }
     });
-  }
+}
