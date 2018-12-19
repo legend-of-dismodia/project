@@ -18,6 +18,7 @@ var Boot = new Phaser.Class({
       this.load.image("tiles12", "../assets/tilesets/Dungeon_A5.png");
       this.load.image("tiles13", "../assets/tilesets/Inside_B.png");
       this.load.image("tiles14", "../assets/tilesets/Chest.png");
+      // -----------Ajout de la musique ingame --------------//
       this.load.audio("fantasy", "../assets/sound/fantasy.mp3")
       this.load.tilemapTiledJSON("map", "../assets/map/nivo1.json");
       this.load.spritesheet("escalier", "../assets/tilesets/Inside_B.png", { frameWidth: 48, frameHeight: 48});
@@ -54,6 +55,8 @@ var Boot = new Phaser.Class({
 
 
         create:function () {
+
+        //--------------Lancement de la musique au lancement du jeux----------------//
           this.sound.play('fantasy');
         //-------------------------on affiche la map--------------------------------//
         //----------------------bien respecter l'ordre des calques------------------//
