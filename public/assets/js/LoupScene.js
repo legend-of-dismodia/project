@@ -36,7 +36,7 @@ var LoupScene = new Phaser.Class({
 
         this.anims.create({
         key: 'hero',
-        frames: this.anims.generateFrameNumbers('hero', { start: 1, end: 26}),
+        frames: this.anims.generateFrameNumbers('hero', { start: 1, end: 15}),
         frameRate: 10,
         repeat: 0
 

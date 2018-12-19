@@ -249,8 +249,6 @@ var Boot = new Phaser.Class({
     }
 
  }
-
-
          });
 
 
