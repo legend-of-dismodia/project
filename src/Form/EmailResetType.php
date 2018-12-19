@@ -17,7 +17,8 @@ class EmailResetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
+            ->add('email', null,  array(
+                'help' => 'L\'addresse email reliée à votre compte.'))
         ;
     }
     

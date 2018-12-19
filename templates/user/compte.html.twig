@@ -2,13 +2,24 @@
 
 
 {% block body %}
-
-<h1>Votre Compte</h1>
-
-<h2>Nom d'utilisateur: {{user.username}}</h2>
-<p>Adresse mail: {{user.email}}</p>
-
-<img src="assets/img/princesse.png" alt="image de la princesse">
-
-    
+<div class="container">
+    <div class="encart mx-auto">
+        <div class="row justify-content-center">
+            <h1>Votre Compte</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <h2>Nom d'utilisateur <br><br>{{user.username}}</h2>
+            </div>
+            <div class="col-12 text-center"><br><br>
+                <h2>Adresse mail <br><br>{{user.email}}</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <img class="img2" src="assets/img/princesse.png" alt="image de la princesse">
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

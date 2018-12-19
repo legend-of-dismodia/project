@@ -1,6 +1,21 @@
 {% extends 'base.html.twig' %}
 {% block body %}
+<div class="container">
+<div class="row text-center">
+<div class="col-12">
+<h1>Classement des joueurs</h1>
+</div>
+</div>
+<div class="row text-center">
+<div class="col-12">
 {% for user in users %}
-<h2>{{user.username}}</h2><br>
+
+<h2>Pseudo : {{user.username}}</h2>
+<h3>Niveau : {{user.saves.0.level}}</h3>
+
+
 {% endfor %}
+</div>
+</div>
+</div>
 {% endblock %}

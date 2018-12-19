@@ -110,13 +110,24 @@ nav .fa, nav .fas {
 .rectangle{
 	width:150px;
     height:80px;
-    position: relative;
-    left: 30px;
-    top:30px;
     background:#ff793f;  
 }
-a {
+.rectangle a {
     color:whitesmoke;
+}
+/*****************************************************************/
+.img {
+    height: 200px;
+    width: 200px;
+}
+.img2 {
+    height: 300px;
+    width: 300px;
+}
+.encart {
+    padding: 20px;
+    width: 450px;
+    border: 2px solid whitesmoke;
 }
 /****************************************************************/
 

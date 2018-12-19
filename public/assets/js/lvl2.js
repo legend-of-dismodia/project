@@ -187,12 +187,18 @@ objets2.setCollisionByExclusion([-1]);
        this.physics.add.overlap(player, madeleine, collisionmadeleine, null, this);
 
 
-       this.input.keyboard.once("keydown_D", event =>{
+
+       this.input.keyboard.on("keydown_D", event =>{
        this.scene.run('Sac');
-       });
+     this.scene.sendToBack();
+     });
 
-     },
+     this.input.keyboard.on("keydown_F", event =>{
 
+      this.scene.sleep('UIScene5');
+
+   });
+},
 
       //---------------------------quand le perso bouge---------------------------//
 

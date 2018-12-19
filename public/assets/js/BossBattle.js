@@ -11,12 +11,12 @@ var BossBattle = new Phaser.Class({
         // load resources
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
     this.load.spritesheet("boss", "../assets/spritesheet/boss.png",  { frameWidth: 374, frameHeight: 354});
-    this.load.image("fond1", "../assets/spritesheet/battle.png");
+    this.load.image("fond1", "../assets/spritesheet/nv4.png");
     },
     create: function ()
     {
         // change the background to green
-        this.add.image(400, 300, 'fond1');
+        this.add.image(650, 300, 'fond1');
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);

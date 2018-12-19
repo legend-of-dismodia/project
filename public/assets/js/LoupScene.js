@@ -10,13 +10,13 @@ var LoupScene = new Phaser.Class({
     {
         // load resources
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
-    this.load.spritesheet("loup", "../assets/spritesheet/Package1.png", { frameWidth: 48, frameHeight: 48});
-    this.load.image("fond", "../assets/spritesheet/battle.png");
+    this.load.spritesheet("loup", "../assets/spritesheet/loup2.png", { frameWidth:280, frameHeight: 350});
+    this.load.image("fond3", "../assets/spritesheet/nv3.png");
     },
     create: function ()
     {
         // change the background to green
-         this.add.image(400, 300, 'fond');
+         this.add.image(650, 300, 'fond3');
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);

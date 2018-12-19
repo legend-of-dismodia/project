@@ -22,7 +22,7 @@ var Boot3 = new Phaser.Class({
 
 
       this.load.spritesheet("escalier3", "../assets/tilesets/Inside_B.png", { frameWidth: 48, frameHeight: 48});
-      this.load.spritesheet('loupgarou', '../assets/spritesheet/Package1.png', { frameWidth: 48, frameHeight: 48});
+      this.load.spritesheet('loupgarou', '../assets/spritesheet/loup.png', { frameWidth: 85, frameHeight: 100});
       this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
 
 
@@ -182,11 +182,21 @@ var Boot3 = new Phaser.Class({
        loupgarou = this.physics.add.sprite(950, 158, "loupgarou", 11);
        this.physics.add.overlap(player, loupgarou, collisionloup, null, this);
 
-       this.input.keyboard.once("keydown_D", event =>{
-      this.scene.launch('Sac');
 
-              });
-      },
+       this.input.keyboard.on("keydown_D", event =>{
+this.scene.sendToBack();
+
+       this.scene.run('Sac');
+
+     });
+
+     this.input.keyboard.on("keydown_F", event =>{
+
+      this.scene.sleep('UIScene5');
+
+   });
+},
+
 
 
       //---------------------------quand le perso bouge---------------------------//

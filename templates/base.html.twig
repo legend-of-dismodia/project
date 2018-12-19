@@ -57,14 +57,20 @@
               </li>
           </ul>
         </div>
-        
       </nav>
-      <button class="rectangle"><a href="{{path('login')}}">Jouez<a></button>
+
+      {% if app.user is null %}
+        <div class="mx-auto mt-3 text-center">
+          <a href="{{path('login')}}" class="btn btn-danger">Jouer<a>
+        </div>
+      {% endif %}
     </aside>
 
+    
     <div class="toggle">
       <a><i class="fas fa-caret-left"></i></a>
     </div>
+    
 
     <div class="col px-0">
       {% for message in app.flashes('notice') %}

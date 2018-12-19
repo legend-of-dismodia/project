@@ -11,15 +11,15 @@ var BattleScene = new Phaser.Class({
     {
         // load resources
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
-    this.load.spritesheet('souris', '../assets/spritesheet/troll.png', { frameWidth: 150, frameHeight: 180});
-    this.load.image("fond", "../assets/spritesheet/battle.png");
+    this.load.spritesheet('souris1', '../assets/spritesheet/troll2.png', { frameWidth: 462, frameHeight: 669});
+    this.load.image("fond", "../assets/spritesheet/nv1.png");
 
 
     },
     create: function ()
     {
         // change the background to green
-        this.add.image(400, 300, 'fond');
+        this.add.image(650, 300, 'fond');
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
@@ -35,7 +35,7 @@ var BattleScene = new Phaser.Class({
         this.add.existing(warrior);
 
 
-        var souris = new Enemy(this, 500, 400, "souris", null, "souris", 50, 10);
+        var souris = new Enemy(this, 500, 400, "souris1", null, "souris1", 50, 10);
         this.add.existing(souris);
 
         // array with heroes
