@@ -277,16 +277,23 @@ function collisionChestPotion(player, chestPotion)
   chestPotion.disableBody(true, true);
   chestPotion = this.physics.add.sprite(850, 20, "chest", 13);
 
-  tbl.inventories.forEach(item => {     
-    if (item.name == 'Potion') {
-      quantity = parseInt(item.quantity);
-      quantity+=1;
-      quantity.toString();  
-      quantity = item.quantity = quantity.toString();    
-      getPhaserDataInventory();
-      
-    }
-    
-  });
+  if (tbl.inventories.length == 0) {
+    tbl.inventories = [{"name":"Potion","property":{"hp":50},"rarety":"1","image":"","quantity":"1"}];    
+    getPhaserDataInventory();
+  }else{
+
+    tbl.inventories.forEach(item => {
+      if (item.name == 'Potion') {
+        quantity = parseInt(item.quantity);
+        quantity+=1;
+        quantity.toString();  
+        quantity = item.quantity = quantity.toString();    
+        getPhaserDataInventory();      
+      }      
+    });
+
+  }
+
+  
   
 }
