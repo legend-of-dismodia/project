@@ -57,13 +57,12 @@
               </li>
           </ul>
         </div>
-       
       </nav>
-      {% if app.user %}
-    {% else %} 
-      <div class="mx-auto mt-3 text-center">
-        <button class="rectangle btn btn-danger"><a href="{{path('login')}}">Jouer<a></button>
-      </div>
+
+      {% if app.user is null %}
+        <div class="mx-auto mt-3 text-center">
+          <button class="rectangle btn btn-danger"><a href="{{path('login')}}">Jouer<a></button>
+        </div>
       {% endif %}
     </aside>
 
