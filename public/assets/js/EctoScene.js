@@ -10,7 +10,7 @@ var EctoScene = new Phaser.Class({
     {
         // load resources
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
-    this.load.spritesheet("madeleine", "../assets/spritesheet/ecto1.png", { frameWidth: 150, frameHeight: 160});
+    this.load.spritesheet("fairy", "../assets/spritesheet/fairy.png", { frameWidth: 150, frameHeight: 160});
     this.load.image("fond2", "../assets/spritesheet/nv2.png");
     },
     create: function ()
@@ -35,15 +35,15 @@ var EctoScene = new Phaser.Class({
         this.add.existing(warrior);
 
 
-        var madeleine = new Enemy(this, 500, 400, "madeleine", 1, "madeleine", 50, 20);
-        this.add.existing(madeleine);
+        var fairy = new Enemy(this, 500, 400, "fairy", 1, "fairy", 50, 20);
+        this.add.existing(fairy);
 
 
 
         // array with heroes
         this.heroes = [ warrior];
         // array with enemies
-        this.enemies = [madeleine];
+        this.enemies = [fairy];
         // array with both parties, who will attack
         this.units = this.heroes.concat(this.enemies);
 

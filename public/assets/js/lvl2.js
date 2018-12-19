@@ -21,7 +21,7 @@ var Boot2 = new Phaser.Class({
       this.load.image("tiles19", "../assets/tilesets/SF_Outside_C.png");
 
       this.load.spritesheet("escalier2", "../assets/tilesets/Inside_B.png", { frameWidth: 48, frameHeight: 48});
-      this.load.spritesheet('madeleine', '../assets/spritesheet/ecto2.png', { frameWidth: 150, frameHeight: 160});
+      this.load.spritesheet('fairy', '../assets/spritesheet/fairysmall.png', { frameWidth: 150, frameHeight: 160});
       this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
 
 
@@ -184,8 +184,8 @@ objets2.setCollisionByExclusion([-1]);
        escalier2 = this.physics.add.sprite(850, 158, "escalier2", 20);
        this.physics.add.overlap(player, escalier2, collisionStairs2, null, this);
 
-       madeleine = this.physics.add.sprite(450, 300, "madeleine", 3);
-       this.physics.add.overlap(player, madeleine, collisionmadeleine, null, this);
+       fairy = this.physics.add.sprite(450, 300, "fairy", 3);
+       this.physics.add.overlap(player, fairy, collisionmadeleine, null, this);
 
 
 
@@ -261,9 +261,9 @@ objets2.setCollisionByExclusion([-1]);
 
 
          }
-         function collisionmadeleine(player, madeleine)
+         function collisionmadeleine(player, fairy)
                      {
                       this.scene.stop('UIScene5');
              this.scene.switch('EctoScene');
-             madeleine.disableBody(true, true);
+             fairy.disableBody(true, true);
          }
