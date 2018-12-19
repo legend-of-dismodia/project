@@ -9,10 +9,10 @@
 <div class="row text-center">
 <div class="col-12">
 {% for user in users %}
-
 <h2>Pseudo : {{user.username}}</h2>
-<h3>Niveau : {{save.level}}</h3>
-
+{% for save in saves %}
+<h3>Niveau : {{dump(save.level)}}</h3>
+{% endfor %}
 {% endfor %}
 </div>
 </div>

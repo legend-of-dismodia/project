@@ -22,7 +22,7 @@ var Boot3 = new Phaser.Class({
 
 
       this.load.spritesheet("escalier3", "../assets/tilesets/Inside_B.png", { frameWidth: 48, frameHeight: 48});
-      this.load.spritesheet('loupgarou', '../assets/spritesheet/loup.png', { frameWidth: 85, frameHeight: 100});
+      this.load.spritesheet('loupgarou', '../assets/spritesheet/loup1.png', { frameWidth: 85, frameHeight: 100});
       this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
 
 

@@ -46,7 +46,7 @@ class GamesmenuController extends AbstractController
         return $this->render('scores.html.twig', [
             "users" => $user,
             "level" => $level,
-            "save"=> $userSave,
+            "saves"=> $userSave,
             'controller_name' => 'GamesmenuController',
         ]);
     }
@@ -104,12 +104,8 @@ class GamesmenuController extends AbstractController
         //     "level":0,
         //     "mana":200,
         //     "xp":0,
-<<<<<<< HEAD
-        //     "playtime":{"date":"1970-01-01 00:00:00.000000","timezone_type":3,"timezone":"Europe/Berlin"}
-=======
         //     "playtime":{"date":"1970-01-01 00:00:00.000000","timezone_type":3,"timezone":"Europe/Berlin"},
         //     "inventories":[{"name":"Potion","property":{"hp":50},"rarety":"1","image":"","quantity":"1"}]
->>>>>>> master
         // }';
 
         $tbl = json_decode($tbl, true);
@@ -117,19 +113,6 @@ class GamesmenuController extends AbstractController
         $user = $this->getUser()->getId();
         $saveUser = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
 
-<<<<<<< HEAD
-        if (!$saveUser) {
-            throw $this->createNotFoundException(
-                'No user found for id '.$id
-            );
-        }
-        if ($tbl['life'] <= 0) {
-            $saveUser->setLife(0);
-        }else{
-            $saveUser->setLife($tbl['life']);
-            $saveUser->setXp($tbl['xp']);
-            $saveUser->setLevel($tbl['level']);
-=======
         //Récupère l'inventaire correspondant à la save de l'utilisateur
         $saveUserInventory = $em->getRepository('App:Inventory')->findOneBy(['save' => $saveUser->getId()]);
         //Récupère les items de l'utilisateur
@@ -175,7 +158,6 @@ class GamesmenuController extends AbstractController
             
             $em->persist( $firstSaveInventory );
             $em->flush();
->>>>>>> master
         }
 
         return new Response('ok');
