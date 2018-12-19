@@ -24,9 +24,10 @@ var BootScene = new Phaser.Class({
     this.load.image("tiles5", "../assets/tilesets/InsideC.png");
 
     this.load.spritesheet("boss", "../assets/spritesheet/boss.png",  { frameWidth: 374, frameHeight: 354});
+    
 
     this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
-    this.load.spritesheet("statuecouple", "../assets/spritesheet/statue.png", { frameWidth: 200, frameHeight: 250});
+
 
   },
 
@@ -182,8 +183,6 @@ enemies1.setCollideWorldBounds(true);
 
 this.physics.add.overlap(player, enemies1, collisionEnemies1, null, this);
 
-statuecouple = this.physics.add.sprite(850, 50, "statuecouple");
-       this.physics.add.overlap(player, statuecouple, collissionStatue, null, this);
 // this.physics.add.collider(mur, enemies);
 // // this.physics.add.collider(objet, enemies);
 
@@ -207,12 +206,7 @@ this.input.keyboard.on("keydown_D", event =>{
 
 },
 
-
-
-
 //---------------------------quand le perso bouge---------------------------//
-
-
           update: function (){
 
             if (cursors.left.isDown)
@@ -252,12 +246,7 @@ this.input.keyboard.on("keydown_D", event =>{
 
 
    });
-  
 
-  function collisionStatue(player, statuecouple)
-      {
-  statuecouple.disableBody(true, true); 
-  }
 
   function collisionEnemies1(player, enemies1)
       {

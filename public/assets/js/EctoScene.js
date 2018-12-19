@@ -10,7 +10,7 @@ var EctoScene = new Phaser.Class({
     {
         // load resources
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
-    this.load.spritesheet("fairy", "../assets/spritesheet/fairy.png", { frameWidth: 150, frameHeight: 160});
+    this.load.spritesheet("fairy2", "../assets/spritesheet/fairy.png", { frameWidth: 150, frameHeight: 160});
     this.load.image("fond2", "../assets/spritesheet/nv2.png");
     },
     create: function ()
@@ -35,7 +35,7 @@ var EctoScene = new Phaser.Class({
         this.add.existing(warrior);
 
 
-        var fairy = new Enemy(this, 500, 400, "fairy", 1, "fairy", 50, 20);
+        var fairy = new Enemy(this, 500, 400, "fairy2", 1, "fairy2", 50, 20);
         this.add.existing(fairy);
 
 
