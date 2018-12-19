@@ -118,11 +118,7 @@ var UIScene5 = new Phaser.Class({
         // this.menus.add(this.actionsMenu);
         // // this.menus.add(this.objetMenu);
 
-        this.input.keyboard.once("keydown_D", event => {
-            this.scene.sleep('UIScene5');
-
-        });
-
+  
 
         this.input.keyboard.once("keydown_I", event => {
             if (objet[0]['quantité'] > 0) {
