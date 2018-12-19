@@ -181,6 +181,17 @@ this.physics.add.overlap(player, enemies1, collisionEnemies1, null, this);
 // this.physics.add.collider(mur, enemies);
 // // this.physics.add.collider(objet, enemies);
 
+this.input.keyboard.on("keydown_D", event =>{
+
+this.scene.run('Sac');
+
+});
+
+this.input.keyboard.on("keydown_F", event =>{
+
+this.scene.sleep('UIScene5');
+
+});
 },
 
 
@@ -239,4 +250,3 @@ this.physics.add.overlap(player, enemies1, collisionEnemies1, null, this);
   }
 
   }
-  

@@ -110,12 +110,9 @@ nav .fa, nav .fas {
 .rectangle{
 	width:150px;
     height:80px;
-    position: relative;
-    left: 30px;
-    top:30px;
     background:#ff793f;  
 }
-a {
+.rectangle a {
     color:whitesmoke;
 }
 /*****************************************************************/
@@ -138,6 +135,7 @@ a {
 /** footer **/
 .modal-footer {
     border-top: 1px solid #ced4da;
+    display: inherit;
 }
 
 

@@ -182,11 +182,21 @@ var Boot3 = new Phaser.Class({
        loupgarou = this.physics.add.sprite(950, 158, "loupgarou", 11);
        this.physics.add.overlap(player, loupgarou, collisionloup, null, this);
 
-       this.input.keyboard.once("keydown_D", event =>{
-      this.scene.launch('Sac');
 
-              });
-      },
+       this.input.keyboard.on("keydown_D", event =>{
+        this.scene.moveUp('Sac');
+
+       this.scene.run('Sac');
+
+     });
+
+     this.input.keyboard.on("keydown_F", event =>{
+
+      this.scene.sleep('UIScene5');
+
+   });
+},
+
 
 
       //---------------------------quand le perso bouge---------------------------//

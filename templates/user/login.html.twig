@@ -63,9 +63,13 @@
                         </div>
                         <!--Footer-->
                         <div class="modal-footer">
-                            <div class="options text-center text-md-right mt-1">
-                                <p>Pas encore inscrit? <a href="{{path('register')}}">Inscription</a></p>
-                                {# <p>Mot de passe  <a href="#" class="blue-text">oublié?</a></p> #}
+                            <div class="options mt-1 row">
+                                <div class="col-6">
+                                    <p><a href="{{path('forgot')}}">Mot de passe oublié ?</a></p>
+                                </div>
+                                <div class="col-6 text-md-right ">
+                                    <p><a href="{{path('register')}}">Pas encore inscrit ?</a></p>
+                                </div>
                             </div>            
                         </div>
                     </div>        
