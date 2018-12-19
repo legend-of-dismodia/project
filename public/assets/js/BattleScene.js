@@ -13,7 +13,7 @@ var BattleScene = new Phaser.Class({
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
     this.load.spritesheet('souris1', '../assets/spritesheet/troll2.png', { frameWidth: 462, frameHeight: 669});
     this.load.image("fond", "../assets/spritesheet/nv1.png");
-
+    this.load.spritesheet('hero', '../assets/spritesheet/Fire3.png', { frameWidth: 37, frameHeight: 192});
 
     },
     create: function ()
@@ -23,6 +23,7 @@ var BattleScene = new Phaser.Class({
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
+        
     },
 
     startBattle: function() {
@@ -185,6 +186,9 @@ var Unit = new Phaser.Class({
 
             }
             getPhaserData(this.hp, this.xp, this.level);
+
+
+
         }
 
 

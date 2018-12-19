@@ -11,6 +11,7 @@ var BossBattle = new Phaser.Class({
         // load resources
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
     this.load.spritesheet("boss", "../assets/spritesheet/boss.png",  { frameWidth: 374, frameHeight: 354});
+      this.load.spritesheet("boss1", "../assets/spritesheet/boss.png",  { frameWidth: 374, frameHeight: 354});
     this.load.image("fond1", "../assets/spritesheet/nv4.png");
     },
     create: function ()
@@ -31,10 +32,20 @@ var BossBattle = new Phaser.Class({
         this.add.existing(warrior);
 
 
-        var boss = new Enemy(this, 500, 400, "boss", 1, "boss", 100, 30);
+        var boss = new Enemy(this, 500, 400, "", 1, "boss", 100, 30);
         this.add.existing(boss);
 
+      //
+      //   this.anims.create({
+      //     key: 'boss1',
+      //    frames: this.anims.generateFrameNumbers('boss1', { start: 1, end: 46}),
+      //     frameRate: 10,
+      //     repeat: -1
+      // });
 
+
+
+      this.add.sprite(500, 400, 'boss1').play('boss1');
         // array with heroes
         this.heroes = [ warrior];
         // array with enemies
@@ -213,6 +224,8 @@ var Enemy = new Phaser.Class({
     function Enemy(scene, x, y, texture, frame, type, hp, damage) {
         Unit.call(this, scene, x, y, texture, frame, type, hp, damage);
     }
+
+
 });
 
 var PlayerCharacter = new Phaser.Class({
