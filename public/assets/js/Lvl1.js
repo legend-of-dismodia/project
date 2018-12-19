@@ -196,7 +196,7 @@ var Boot = new Phaser.Class({
      });
 
      this.input.keyboard.on("keydown_F", event =>{
-    
+
       this.scene.sleep('UIScene5');
 
    });

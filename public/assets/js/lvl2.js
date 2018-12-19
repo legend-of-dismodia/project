@@ -189,9 +189,8 @@ objets2.setCollisionByExclusion([-1]);
 
 
        this.input.keyboard.on("keydown_D", event =>{
-  
        this.scene.run('Sac');
-
+     this.scene.sendToBack();
      });
 
      this.input.keyboard.on("keydown_F", event =>{
