@@ -324,7 +324,7 @@ var Menu = new Phaser.Class({
     },
 
 //-------------------------------deselectionner------------------------------//
-s
+
     deselect: function() {
         this.menuItems[this.menuItemIndex].deselect();
         this.menuItemIndex = 0;

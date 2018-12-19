@@ -142,6 +142,7 @@ murs.setCollisionByExclusion([-1]);
 objets.setCollisionByExclusion([-1]);
 objets2.setCollisionByExclusion([-1]);
      player.setDepth(10);
+     
 
      this.physics.add.collider(player, murs);
 
@@ -188,16 +189,26 @@ objets2.setCollisionByExclusion([-1]);
 
 
 
-       this.input.keyboard.on("keydown_D", event =>{
-       this.scene.run('Sac');
-     this.scene.sendToBack();
-     });
+      //-----------------------ouvrir l'inventaire-------------------------//
 
-     this.input.keyboard.on("keydown_F", event =>{
+      this.input.keyboard.on("keydown_D", event =>{
+        this.scene.sendToBack();
 
-      this.scene.sleep('UIScene5');
+        // ferme le sac avant de l'ouvrir, pour en avoir une seule instance
+        this.scene.stop('UIScene5');
 
-   });
+        // ouvre le sac
+        this.scene.run('Sac');
+
+        // on peut ne peut fermer l'inventaire que quand il est ouvert
+        this.input.keyboard.on("keydown_F", event =>{
+          this.scene.stop('UIScene5');
+        });      
+
+      });
+
+    
+
 },
 
       //---------------------------quand le perso bouge---------------------------//
@@ -252,6 +263,7 @@ objets2.setCollisionByExclusion([-1]);
          }
          function collisionmadeleine(player, madeleine)
                      {
+                      this.scene.stop('UIScene5');
              this.scene.switch('EctoScene');
              madeleine.disableBody(true, true);
          }
