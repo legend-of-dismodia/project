@@ -18,7 +18,7 @@ var Boot = new Phaser.Class({
       this.load.image("tiles12", "../assets/tilesets/Dungeon_A5.png");
       this.load.image("tiles13", "../assets/tilesets/Inside_B.png");
       this.load.image("tiles14", "../assets/tilesets/Chest.png");
-  
+
       this.load.tilemapTiledJSON("map", "../assets/map/nivo1.json");
       this.load.spritesheet("escalier", "../assets/tilesets/Inside_B.png", { frameWidth: 48, frameHeight: 48});
       this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
@@ -53,7 +53,7 @@ var Boot = new Phaser.Class({
 
 
         create:function () {
- 
+
         //-------------------------on affiche la map--------------------------------//
         //----------------------bien respecter l'ordre des calques------------------//
 
@@ -189,13 +189,20 @@ var Boot = new Phaser.Class({
 
        //-----------------------ouvrir l'inventaire-------------------------//
 
-       this.input.keyboard.once("keydown_D", event =>{
+       this.input.keyboard.on("keydown_D", event =>{
+
        this.scene.run('Sac');
 
-       });
+     });
+
+     this.input.keyboard.on("keydown_F", event =>{
+    
+      this.scene.sleep('UIScene5');
+
+   });
 
       },
-      
+
 
 
       //---------------------------quand le perso bouge---------------------------//
@@ -236,12 +243,12 @@ var Boot = new Phaser.Class({
       player.setVelocityY(0);
 
     }
-    
+
  }
 
 
          });
-         
+
 
 function collisionStairs(player, escalier)
             {
