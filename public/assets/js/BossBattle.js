@@ -35,15 +35,21 @@ var BossBattle = new Phaser.Class({
         var boss = new Enemy(this, 500, 400, "", 1, "boss", 100, 30);
         this.add.existing(boss);
 
-      //
-      //   this.anims.create({
-      //     key: 'boss1',
-      //    frames: this.anims.generateFrameNumbers('boss1', { start: 1, end: 46}),
-      //     frameRate: 10,
-      //     repeat: -1
-      // });
 
+        this.anims.create({
+          key: 'boss1',
+         frames: this.anims.generateFrameNumbers('boss1', { start: 1, end: 46}),
+          frameRate: 10,
+          repeat: -1
+      });
 
+      this.anims.create({
+      key: 'hero',
+      frames: this.anims.generateFrameNumbers('hero', { start: 1, end: 26}),
+      frameRate: 10,
+      repeat: 0
+
+        });
 
       this.add.sprite(500, 400, 'boss1').play('boss1');
         // array with heroes
@@ -109,10 +115,9 @@ var BossBattle = new Phaser.Class({
     receivePlayerSelection: function(action, target) {
         if(action == "attack") {
             this.units[this.index].attack(this.enemies[target]);
+                this.add.sprite(500, 400, 'hero').play('hero');
         }
-        if(action == "magie"){
-        this.units[this.index].magieAttaque(this.enemies[target]);
-         }
+
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     },
 

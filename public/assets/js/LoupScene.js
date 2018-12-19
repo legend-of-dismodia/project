@@ -34,6 +34,13 @@ var LoupScene = new Phaser.Class({
         var loup = new Enemy(this, 500, 400, "loup", 11, "loup", 50, 15);
         this.add.existing(loup);
 
+        this.anims.create({
+        key: 'hero',
+        frames: this.anims.generateFrameNumbers('hero', { start: 1, end: 26}),
+        frameRate: 10,
+        repeat: 0
+
+          });
 
 
         // array with heroes
@@ -99,10 +106,9 @@ var LoupScene = new Phaser.Class({
     receivePlayerSelection: function(action, target) {
         if(action == "attack") {
             this.units[this.index].attack(this.enemies[target]);
+                this.add.sprite(500, 400, 'hero').play('hero');
         }
-        if(action == "magie"){
-        this.units[this.index].magieAttaque(this.enemies[target]);
-         }
+
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     },
 
@@ -175,17 +181,6 @@ var Unit = new Phaser.Class({
             this.xp = xp + 50;
             this.level = level + 1
             }
-        //
-        //     if (this.xp > 50){
-        //     this.level = level + 1;
-        //     xp = 0;
-        //     this.hp = hp + 50;
-        //
-        // }
-        //
-        // else{
-        //
-        //   }
 
   getPhaserData(this.hp, this.xp, this.level);
 

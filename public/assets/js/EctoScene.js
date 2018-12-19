@@ -12,6 +12,7 @@ var EctoScene = new Phaser.Class({
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
     this.load.spritesheet("madeleine", "../assets/spritesheet/ecto1.png", { frameWidth: 150, frameHeight: 160});
     this.load.image("fond2", "../assets/spritesheet/nv2.png");
+    this.load.spritesheet('hero', '../assets/spritesheet/Fire3.png', { frameWidth: 37, frameHeight: 192});
     },
     create: function ()
     {
@@ -38,7 +39,13 @@ var EctoScene = new Phaser.Class({
         var madeleine = new Enemy(this, 500, 400, "madeleine", 1, "madeleine", 50, 20);
         this.add.existing(madeleine);
 
+        this.anims.create({
+        key: 'hero',
+        frames: this.anims.generateFrameNumbers('hero', { start: 1, end: 26}),
+        frameRate: 10,
+        repeat: 0
 
+          });
 
         // array with heroes
         this.heroes = [ warrior];
@@ -103,6 +110,7 @@ var EctoScene = new Phaser.Class({
     receivePlayerSelection: function(action, target) {
         if(action == "attack") {
             this.units[this.index].attack(this.enemies[target]);
+              this.add.sprite(500, 400, 'hero').play('hero');
         }
         if(action == ""){
         this.units[this.index].Attaque(this.enemies[target]);
@@ -156,12 +164,9 @@ var Unit = new Phaser.Class({
             target.takeDamage(this.damage);
             this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
 
-
         }
 
     },
-
-
 
     takeDamage: function(damage) {
         console.log("i: "+ i);
@@ -177,17 +182,6 @@ var Unit = new Phaser.Class({
             this.xp = xp + 50;
        this.level = level + 1;
   console.log(this.level);
-
-            //
-            // this.anims.create({
-            //   key: 'hero',
-            //  frames: this.anims.generateFrameNumbers('hero', { start: 1, end: 26}),
-            //   frameRate: 10,
-            //   repeat: -1
-            //
-            //       });
-
-
 
             if (this.xp = 100){
 

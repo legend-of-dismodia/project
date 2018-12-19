@@ -26,7 +26,7 @@ var Boot = new Phaser.Class({
       this.load.spritesheet('souris', '../assets/spritesheet/troll.png', { frameWidth: 80, frameHeight: 80});
     this.load.spritesheet("chest", "../assets/tilesets/chest.png", { frameWidth: 48, frameHeight: 48});
     },
-    
+
 
       create: function (){
 
@@ -272,16 +272,16 @@ function collisionChestPotion(player, chestPotion)
   chestPotion.disableBody(true, true);
   chestPotion = this.physics.add.sprite(850, 20, "chest", 13);
 
-  tbl.inventories.forEach(item => {     
+  tbl.inventories.forEach(item => {
     if (item.name == 'Potion') {
       quantity = parseInt(item.quantity);
       quantity+=1;
-      quantity.toString();  
-      quantity = item.quantity = quantity.toString();    
+      quantity.toString();
+      quantity = item.quantity = quantity.toString();
       getPhaserDataInventory();
-      
+
     }
-    
+
   });
-  
+
 }

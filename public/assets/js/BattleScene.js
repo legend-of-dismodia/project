@@ -13,7 +13,7 @@ var BattleScene = new Phaser.Class({
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
     this.load.spritesheet('souris1', '../assets/spritesheet/troll2.png', { frameWidth: 462, frameHeight: 669});
     this.load.image("fond", "../assets/spritesheet/nv1.png");
-    this.load.spritesheet('hero', '../assets/spritesheet/Fire3.png', { frameWidth: 37, frameHeight: 192});
+    this.load.spritesheet('hero', '../assets/spritesheet/Breath.png', { frameWidth: 192, frameHeight: 192});
 
     },
     create: function ()
@@ -23,7 +23,7 @@ var BattleScene = new Phaser.Class({
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
-        
+
     },
 
     startBattle: function() {
@@ -38,6 +38,15 @@ var BattleScene = new Phaser.Class({
 
         var souris = new Enemy(this, 500, 400, "souris1", null, "souris1", 50, 10);
         this.add.existing(souris);
+
+        this.anims.create({
+        key: 'hero',
+        frames: this.anims.generateFrameNumbers('hero', { start: 1, end: 26}),
+        frameRate: 10,
+        repeat: 0
+
+          });
+
 
         // array with heroes
         this.heroes = [ warrior];
@@ -67,6 +76,7 @@ var BattleScene = new Phaser.Class({
         } while(!this.units[this.index].living);
         // if its player hero
         if(this.units[this.index] instanceof PlayerCharacter) {
+
             // we need the player to select action and then enemy
             this.events.emit("PlayerSelect", this.index);
         } else { // else if its enemy unit
@@ -102,6 +112,7 @@ var BattleScene = new Phaser.Class({
     receivePlayerSelection: function(action, target) {
         if(action == "attack") {
             this.units[this.index].attack(this.enemies[target]);
+            this.add.sprite(500, 400, 'hero').play('hero');
         }
         if(action == "magie"){
         this.units[this.index].magieAttaque(this.enemies[target]);
