@@ -73,7 +73,7 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Save", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="App\Entity\Save", mappedBy="user")
      */
     private $saves;
 
@@ -152,33 +152,14 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Save[]
-     */
-    public function getSaves(): Collection
+
+    public function getSaves()
     {
         return $this->saves;
     }
 
-    public function addSafe(Save $safe): self
-    {
-        if (!$this->saves->contains($safe)) {
-            $this->saves[] = $safe;
-            $safe->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSafe(Save $safe): self
-    {
-        if ($this->saves->contains($safe)) {
-            $this->saves->removeElement($safe);
-            // set the owning side to null (unless already changed)
-            if ($safe->getUser() === $this) {
-                $safe->setUser(null);
-            }
-        }
+    public function setSaves($saves){
+        $this->saves = $saves;
 
         return $this;
     }

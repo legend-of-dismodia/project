@@ -49,7 +49,7 @@ class Save
     private $playtime;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="saves")
+     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="saves")
      */
     private $user;
 

@@ -38,10 +38,15 @@ class GamesmenuController extends AbstractController
     {
         $userid = $this->getUser()->getId();
         $user= $em->getRepository('App:User')->findAll();
-        // $userSave = $em->getRepository('App:Save')->findAll(['user' => $userid]);
+        $level= $em->getRepository('App:Save')->findOneBy(
+            [],
+            ['level'=>'DESC']
+        );
+        $userSave = $em->getRepository('App:Save')->findAll(['user' => $userid]);
         return $this->render('scores.html.twig', [
             "users" => $user,
-            // "saves"=> $userSave,
+            "level" => $level,
+            "save"=> $userSave,
             'controller_name' => 'GamesmenuController',
         ]);
     }
@@ -97,19 +102,13 @@ class GamesmenuController extends AbstractController
         //     "level":0,
         //     "mana":200,
         //     "xp":0,
-        //     "playtime":{"date":"1970-01-01 00:00:00.000000","timezone_type":3,"timezone":"Europe/Berlin"},
-        //     "inventories":[{"name":"Potion","property":{"hp":50},"rarety":"1","image":"","quantity":"2"},{"name":"Sword","property":{"atk":10},"rarety":"1","image":"","quantity":"1"}]
+        //     "playtime":{"date":"1970-01-01 00:00:00.000000","timezone_type":3,"timezone":"Europe/Berlin"}
         // }';
 
         $tbl = json_decode($tbl, true);
 
         $user = $this->getUser()->getId();
         $saveUser = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
-
-        $saveUserInventory = $em->getRepository('App:Inventory')->findOneBy(['save' => $saveUser->getId()]);
-
-        $userInventory = $em->getRepository('App:Inventory')->getPlayerInventory($saveUser->getId());
-        
 
         if (!$saveUser) {
             throw $this->createNotFoundException(
@@ -122,17 +121,10 @@ class GamesmenuController extends AbstractController
             $saveUser->setLife($tbl['life']);
             $saveUser->setXp($tbl['xp']);
             $saveUser->setLevel($tbl['level']);
-            //inventory here            
-            foreach ($tbl['inventories'] as $key => $value) {
-                if ($value['quantity'] != $userInventory[$key]['quantity']) {                    
-                    $saveUserInventory->setQuantity($value['quantity']);
-                }
-            }
-            
         }
         $em->flush();
 
-        return new Response('Mise à jour de la save');
+        return new Response('ok');
     }
 
     /**
@@ -182,14 +174,19 @@ class GamesmenuController extends AbstractController
             // $sent = $form->getData();
             if (isset($form)) {
                 $name = $form['name']->getData();
-                $email = $form['email']->getData();
-                $message = $form['message']->getData();
             } else {
                 $name = 'undefined';
+            }
+            if (isset($form)) {
+                $email = $form['email']->getData();
+            } else {
                 $email = 'undefined';
+            }
+            if (isset($form)) {
+                $message = $form['message']->getData();
+            } else {
                 $message = 'undefined';
             }
-
             $message = (new \Swift_Message('Nouveau message sur Legend of Dismodia !'))
                 ->setFrom('send@example.com')
                 ->setTo('legendofdismodia@gmail.com')

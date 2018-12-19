@@ -26,6 +26,7 @@ var BootScene = new Phaser.Class({
     this.load.spritesheet("boss", "../assets/spritesheet/boss.png",  { frameWidth: 374, frameHeight: 354});
 
     this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
+    this.load.spritesheet("statuecouple", "../assets/spritesheet/statue.png", { frameWidth: 200, frameHeight: 250});
 
   },
 
@@ -70,6 +71,7 @@ var WorldScene = new Phaser.Class({
   const tiles3 = map.addTilesetImage("DungeonB", "tiles3");
   const tiles4= map.addTilesetImage("InsideA5", "tiles4");
   const tiles5 = map.addTilesetImage("InsideC", "tiles5");
+  
 
 //---------------------------ce sont les calques------------------------------//
 
@@ -80,6 +82,7 @@ var WorldScene = new Phaser.Class({
   const lave = map.createDynamicLayer("lave", tiles);
   const rocher = map.createDynamicLayer("rocher", tiles5);
   const statue = map.createDynamicLayer("statue", tiles5);
+
 
 //----------------------créer l'animation du personnage-----------------------//
 
@@ -178,6 +181,9 @@ player.setCollideWorldBounds(true);
 enemies1.setCollideWorldBounds(true);
 
 this.physics.add.overlap(player, enemies1, collisionEnemies1, null, this);
+
+statuecouple = this.physics.add.sprite(850, 50, "statuecouple");
+       this.physics.add.overlap(player, statuecouple, collissionStatue, null, this);
 // this.physics.add.collider(mur, enemies);
 // // this.physics.add.collider(objet, enemies);
 
@@ -192,7 +198,10 @@ this.input.keyboard.on("keydown_F", event =>{
 this.scene.sleep('UIScene5');
 
 });
+
 },
+
+
 
 
 //---------------------------quand le perso bouge---------------------------//
@@ -237,11 +246,16 @@ this.scene.sleep('UIScene5');
 
 
    });
+  
+
+  function collisionStatue(player, statuecouple)
+      {
+  statuecouple.disableBody(true, true); 
+  }
 
   function collisionEnemies1(player, enemies1)
       {
-        // shake the world
-
+       
     // start battle
     this.scene.switch('BossBattle');
   enemies1.disableBody(true, true);
@@ -249,4 +263,4 @@ this.scene.sleep('UIScene5');
     console.log ("Le jeu est fini")
   }
 
-  }
+} 
