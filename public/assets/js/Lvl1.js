@@ -269,7 +269,13 @@ function collisionStairs(player, escalier)
 function collisionSouris1(player, souris1)
             {
               this.scene.stop('UIScene5');
+              console.log(player);
+              console.log(cursors);
+              // player.setVelocityY(0);
               this.scene.switch('BattleScene');
+              
+              // player.setVelocityX(0);
+              // player.setVelocityY(0);              
               souris1.disableBody(true, true);
 }
 
