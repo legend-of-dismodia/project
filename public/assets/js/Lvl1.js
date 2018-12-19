@@ -205,11 +205,11 @@ var Boot = new Phaser.Class({
         // on peut ne peut fermer l'inventaire que quand il est ouvert
         this.input.keyboard.on("keydown_F", event =>{
           this.scene.stop('UIScene5');
-        });      
+        });
 
     });
 
-    
+
 
       },
 

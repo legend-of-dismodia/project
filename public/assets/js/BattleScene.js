@@ -456,7 +456,7 @@ var UIScene = new Phaser.Class({
     },
     createMenu: function() {
 
-        this.remapHeroes();s
+        this.remapHeroes();
         this.remapEnemies();
         this.battleScene.nextTurn();
     },
