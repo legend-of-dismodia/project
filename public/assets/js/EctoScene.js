@@ -10,7 +10,7 @@ var EctoScene = new Phaser.Class({
     {
         // load resources
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
-    this.load.spritesheet("fairy2", "../assets/spritesheet/fairy.png", { frameWidth: 150, frameHeight: 160});
+    this.load.spritesheet("fairy2", "../assets/spritesheet/fairy.png", { frameWidth: 450, frameHeight: 450});
     this.load.image("fond2", "../assets/spritesheet/nv2.png");
     this.load.spritesheet('hero', '../assets/spritesheet/Fire3.png', { frameWidth: 37, frameHeight: 192});
     },
