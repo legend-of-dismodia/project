@@ -89,3 +89,20 @@ function checkSize() {
         $('.navTitle').html('LOD');
     }
 }
+
+$(document).ready(function(){
+    $("#soundOff").css("display", "none");
+
+    $("#soundUp").on("click", function(){
+        $("#soundUp").css("display", "none");
+        $("#soundOff").css("display", "block");
+        $("#trailer").prop('muted', true);
+    })
+
+    $("#soundOff").on("click", function(){
+        $("#soundOff").css("display", "none");
+        $("#soundUp").css("display", "block");
+        $("#trailer").prop('muted', false);
+
+    })
+});

@@ -37,17 +37,16 @@ class GamesmenuController extends AbstractController
     public function classement(EntityManagerInterface $em)
     {
         $userid = $this->getUser()->getId();
-        $user= $em->getRepository('App:User')->findAll();
-        $level= $em->getRepository('App:Save')->findOneBy(
+        
+        $level= $em->getRepository('App:Save')->findBy(
             [],
             ['level'=>'DESC']
         );
         $userSave = $em->getRepository('App:Save')->findAll(['user' => $userid]);
         return $this->render('scores.html.twig', [
-            "users" => $user,
-            "level" => $level,
+            
+            "levels" => $level,
             "saves"=> $userSave,
-            'controller_name' => 'GamesmenuController',
         ]);
     }
     /**

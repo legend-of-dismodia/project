@@ -138,7 +138,6 @@ showDebug = false;
 
 player.setCollideWorldBounds(true);
 
-// objet.setDepth(10);
 
  this.physics.add.collider(player, mur2);
  this.physics.add.collider(player, solLave);
@@ -176,19 +175,14 @@ player.setCollideWorldBounds(true);
 
 //------------------evenement combat-------------------------------------------//
 
- enemies1 = this.physics.add.sprite(700, 420, "boss");
-
-
+enemies1 = this.physics.add.sprite(700, 420, "boss");
 enemies1.setCollideWorldBounds(true);
 
 this.physics.add.overlap(player, enemies1, collisionEnemies1, null, this);
 
-// this.physics.add.collider(mur, enemies);
-// // this.physics.add.collider(objet, enemies);
-
 //-----------------------ouvrir l'inventaire-------------------------//
 
-this.input.keyboard.on("keydown_D", event =>{
+this.input.keyboard.on("keydown_I", event =>{
   this.scene.sendToBack();
 
   // ferme le sac avant de l'ouvrir, pour en avoir une seule instance
@@ -198,9 +192,9 @@ this.input.keyboard.on("keydown_D", event =>{
   this.scene.run('Sac');
 
   // on peut ne peut fermer l'inventaire que quand il est ouvert
-  this.input.keyboard.on("keydown_F", event =>{
+  this.input.keyboard.on("keydown_ESC", event =>{
     this.scene.stop('UIScene5');
-  });      
+  });
 
 });
 
@@ -243,9 +237,9 @@ this.input.keyboard.on("keydown_D", event =>{
           }
 
        }
+ });
 
 
-   });
 
 
   function collisionEnemies1(player, enemies1)
@@ -256,7 +250,7 @@ this.input.keyboard.on("keydown_D", event =>{
     this.scene.switch('BossBattle');
   enemies1.disableBody(true, true);
   if (enemies1.disableBody === true) {
-    console.log ("Le jeu est fini")
+  console.log ("Le jeu est fini")
   }
 
 } 
