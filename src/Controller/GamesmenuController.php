@@ -23,6 +23,15 @@ class GamesmenuController extends AbstractController
         ]);
     }
     /**
+     * @Route("/end", name="end")
+     */
+    public function end()
+    {
+        return $this->render('gamesmenu/fin.html.twig', [
+            'controller_name' => 'GamesmenuController',
+        ]);
+    }
+    /**
      * @Route("/guide", name="guide")
      */
     public function guide()
