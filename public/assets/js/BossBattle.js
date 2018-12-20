@@ -35,7 +35,7 @@ var BossBattle = new Phaser.Class({
         var boss = new Enemy(this, 500, 400, "", 1, "boss", 100, 30);
         this.add.existing(boss);
 
-    
+
         this.anims.create({
         key: 'boss1',
         frames: this.anims.generateFrameNumbers('boss1', { start: 1, end: 46}),
@@ -196,10 +196,12 @@ var Unit = new Phaser.Class({
             console.log("hp: "+this.hp+"dmg : "+ damage);
             this.hp -= damage;
             this.xp = xp + 50;
-            if (this.xp >= 50){
+
+            if (this.xp > 100){
             this.level = level + 1;
             xp = 0;
             this.hp = hp + 50;
+        
             }
             getPhaserData(this.hp, this.xp, this.level);
 
