@@ -82,10 +82,7 @@ class User implements UserInterface
      */
     private $facebookId;
 
-    public function __construct()
-    {
-        $this->saves = new ArrayCollection();
-    }
+
 
     public function getId(): ?int
     {
