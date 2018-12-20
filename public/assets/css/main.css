@@ -98,7 +98,7 @@ nav .fa, nav .fas {
 /*******Gestion de la vidéo dans la page d'acceuil******/
 
 .encart-video {
-    height: 96vh;
+    height: 100vh;
     width: 100vw;
     overflow: hidden;
     position: relative;
