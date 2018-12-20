@@ -136,9 +136,10 @@ var BattleScene = new Phaser.Class({
         for(var i = 0; i < this.units.length; i++) {
 
             this.units[i].destroy();
-            heroText = this.add.text(80, 430, 'rare: 0', { font: 'bold 12pt Arial', fill: '#9b59b6' });
-            heroText.setText('vous avez gagné un niveau');
+
         }
+
+  
         this.units.length = 0;
 //-------------------------------retour au niveau----------------------------//
 

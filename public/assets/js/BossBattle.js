@@ -8,7 +8,7 @@ var BossBattle = new Phaser.Class({
     },
     preload: function ()
     {
-        // load resources
+
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
     this.load.spritesheet("boss", "../assets/spritesheet/boss.png",  { frameWidth: 374, frameHeight: 354});
       this.load.spritesheet("boss1", "../assets/spritesheet/boss.png",  { frameWidth: 374, frameHeight: 354});
@@ -16,18 +16,17 @@ var BossBattle = new Phaser.Class({
     },
     create: function ()
     {
-        // change the background to green
+
         this.add.image(650, 300, 'fond1');
         this.startBattle();
-        // on wake event we call startBattle too
-        // this.sys.events.on('wake', this.startBattle, this);
+
     },
 
     startBattle: function() {
         xp = tbl.xp;
         hp = tbl.life;
-        level=tbl.level;
-        // player character - warrior
+        level = tbl.level;
+
         var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50);
         this.add.existing(warrior);
 
@@ -59,66 +58,66 @@ var BossBattle = new Phaser.Class({
         });
 
       this.add.sprite(500, 400, 'boss1').play('boss1');
-        // array with heroes
+
         this.heroes = [ warrior];
-        // array with enemies
+
         this.enemies = [boss];
-        // array with both parties, who will attack
+
         this.units = this.heroes.concat(this.enemies);
 
-        this.index = -1; // currently active unit
+        this.index = -1;
 
         this.scene.run("UIScene2");
     },
     nextTurn: function() {
-        // if we have victory or game over
+
         if(this.checkEndBattle()) {
             this.endBattle();
 
             return;
         }
         do {
-            // currently active unit
+
             this.index++;
-            // if there are no more units, we start again from the first one
+
             if(this.index >= this.units.length) {
                 this.index = 0;
             }
         } while(!this.units[this.index].living);
-        // if its player hero
+
         if(this.units[this.index] instanceof PlayerCharacter) {
-            // we need the player to select action and then enemy
+
             this.events.emit("PlayerSelect", this.index);
-        } else { // else if its enemy unit
-            // pick random living hero to be attacked
+        } else {
+
             var r;
             do {
                 r = Math.floor(Math.random() * this.heroes.length);
             } while(!this.heroes[r].living)
-            // call the enemy's attack function
+
             this.units[this.index].attack(this.heroes[r]);
-            // add timer for the next turn, so will have smooth gameplay
+
             this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
         }
     },
-    // check for game over or victory
+
     checkEndBattle: function() {
         var victory = true;
-        // if all enemies are dead we have victory
+
         for(var i = 0; i < this.enemies.length; i++) {
             if(this.enemies[i].living)
 
                 victory = false;
         }
         var gameOver = true;
-        // if all heroes are dead we have game over
+
         for(var i = 0; i < this.heroes.length; i++) {
             if(this.heroes[i].living)
                 gameOver = false;
         }
         return victory || gameOver;
     },
-    // when the player have selected the enemy to be attacked
+
     receivePlayerSelection: function(action, target) {
         if(action == "attack") {
             this.units[this.index].attack(this.enemies[target]);
@@ -130,7 +129,7 @@ var BossBattle = new Phaser.Class({
 
 
     endBattle: function() {
-        // clear state, remove sprites
+
         this.heroes.length = 0;
         this.enemies.length = 0;
         for(var i = 0; i < this.units.length; i++) {
@@ -138,15 +137,14 @@ var BossBattle = new Phaser.Class({
             this.units[i].destroy();
         }
         this.units.length = 0;
-        // sleep the UI
+
         this.scene.sleep('UIScene2');
-        // return to WorldScene and sleep current BossBattle
+
         this.scene.switch('WorldScene');
     }
 });
 
 
-// base class for heroes and enemies
 var Unit = new Phaser.Class({
     Extends: Phaser.GameObjects.Sprite,
 
@@ -156,18 +154,16 @@ var Unit = new Phaser.Class({
         Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
         this.type = type;
         this.maxHp = this.hp = hp;
-        this.damage = damage; // default damage
+        this.damage = damage;
 
       this.maxLevel = this.level = level;
     this.maxXp = this.xp = xp;
         this.living = true;
         this.menuItem = null;
     },
-    // we will use this to notify the menu item when the unit is dead
     setMenuItem: function(item) {
         this.menuItem = item;
     },
-    // attack the target unit
     attack: function(target) {
         if(target.living) {
 
@@ -190,19 +186,18 @@ var Unit = new Phaser.Class({
         if(i == 0){
             i = 1;
             this.hp -= damage;
-        }else{
-            this.hp -= damage;
-            i = 0;
-            console.log("hp: "+this.hp+"dmg : "+ damage);
-            this.hp -= damage;
-            this.xp = xp + 50;
+          }else{
 
-            if (this.xp > 100){
-            this.level = level + 1;
-            xp = 0;
-            this.hp = hp + 50;
-        
-            }
+              console.log("hp: "+this.hp+"dmg : "+ damage);
+              this.hp -= damage;
+              this.xp = xp + 50;
+
+              if (this.xp > 50){
+              this.xp = 0;
+              this.hp = hp + 50;
+              this.level = level + 1;
+
+              }
             getPhaserData(this.hp, this.xp, this.level);
 
         }
@@ -248,7 +243,6 @@ var PlayerCharacter = new Phaser.Class({
     initialize:
     function PlayerCharacter(scene, x, y, texture, frame, type, hp, damage,  xp, level) {
         Unit.call(this, scene, x, y, texture, frame, type, hp, damage, xp,  level);
-        // flip the image so I don"t have to edit it manually
         this.flipX = true;
 
         this.setScale(2);
@@ -271,7 +265,6 @@ var MenuItem = new Phaser.Class({
     deselect: function() {
         this.setColor("#ffffff");
     },
-    // when the associated enemy or player unit is killed
     unitKilled: function() {
         this.active = false;
         this.visible = false;
@@ -279,7 +272,6 @@ var MenuItem = new Phaser.Class({
 
 });
 
-// base menu class, container for menu items
 var Menu = new Phaser.Class({
     Extends: Phaser.GameObjects.Container,
 
@@ -299,7 +291,6 @@ var Menu = new Phaser.Class({
         this.add(menuItem);
         return menuItem;
     },
-    // menu navigation
     moveSelectionUp: function() {
         this.menuItems[this.menuItemIndex].deselect();
         do {
@@ -318,7 +309,6 @@ var Menu = new Phaser.Class({
         } while(!this.menuItems[this.menuItemIndex].active);
         this.menuItems[this.menuItemIndex].select();
     },
-    // select the menu as a whole and highlight the choosen element
     select: function(index) {
         if(!index)
             index = 0;
@@ -334,16 +324,13 @@ var Menu = new Phaser.Class({
         this.menuItems[this.menuItemIndex].select();
         this.selected = true;
     },
-    // deselect this menu
     deselect: function() {
         this.menuItems[this.menuItemIndex].deselect();
         this.menuItemIndex = 0;
         this.selected = false;
     },
     confirm: function() {
-        // when the player confirms his slection, do the action
     },
-    // clear menu and remove all menu items
     clear: function() {
         for(var i = 0; i < this.menuItems.length; i++) {
             this.menuItems[i].destroy();
@@ -351,7 +338,6 @@ var Menu = new Phaser.Class({
         this.menuItems.length = 0;
         this.menuItemIndex = 0;
     },
-    // recreate the menu items
     remap: function(units) {
         this.clear();
         for(var i = 0; i < units.length; i++) {
@@ -379,11 +365,9 @@ var ActionsMenu = new Phaser.Class({
 
     function ActionsMenu(x, y, scene) {
         Menu.call(this, x, y, scene);
-        // this.addMenuItem("Attack");
 
     },
     confirm: function() {
-        // we select an action and go to the next menu and choose from the enemies to apply the action
         this.scene.events.emit("SelectedAction");
     }
 
@@ -398,12 +382,10 @@ var EnemiesMenu = new Phaser.Class({
         Menu.call(this, x, y, scene);
     },
     confirm: function() {
-        // the player has selected the enemy and we send its id with the event
         this.scene.events.emit("Enemy", this.menuItemIndex);
     }
 });
 
-// User Interface scene
 var UIScene2 = new Phaser.Class({
 
     Extends: Phaser.Scene,
@@ -417,7 +399,6 @@ var UIScene2 = new Phaser.Class({
 
     create: function ()
     {
-        // draw some background for the menu
         this.graphics = this.add.graphics();
         this.graphics.lineStyle(1, 0xffffff);
         this.graphics.fillStyle(0x031f4c, 1);
@@ -428,71 +409,53 @@ var UIScene2 = new Phaser.Class({
         this.graphics.strokeRect(800, 600, 500, 200);
         this.graphics.fillRect(800, 600, 500, 200);
 
-        // basic container to hold all menus
         this.menus = this.add.container();
 
         this.heroesMenu = new HeroesMenu(810, 650, this);
         this.actionsMenu = new ActionsMenu(550, 650, this);
         this.enemiesMenu = new EnemiesMenu(50, 650, this);
 
-        // the currently selected menu
         this.currentMenu = this.actionsMenu;
 
-        // add menus to the container
         this.menus.add(this.heroesMenu);
         this.menus.add(this.actionsMenu);
         this.menus.add(this.enemiesMenu);
 
         this.BossBattle = this.scene.get("BossBattle");
 
-        // listen for keyboard events
         this.input.keyboard.on("keydown", this.onKeyInput, this);
 
-        // when its player cunit turn to move
         this.BossBattle.events.on("PlayerSelect", this.onPlayerSelect, this);
 
-        // when the action on the menu is selected
-        // for now we have only one action so we dont send and action id
         this.events.on("SelectedAction", this.onSelectedAction, this);
 
-        // an enemy is selected
         this.events.on("Enemy", this.onEnemy, this);
 
-        // when the scene receives wake event
         this.sys.events.on('wake', this.createMenu, this);
 
-        // the message describing the current action
+
         this.message = new Message(this, this.BossBattle.events);
         this.add.existing(this.message);
 
         this.createMenu();
     },
     createMenu: function() {
-        // map hero menu items to heroes
         this.remapHeroes();
-        // map enemies menu items to enemies
         this.remapEnemies();
-        // first move
         this.BossBattle.nextTurn();
     },
     onEnemy: function(index) {
-        // when the enemy is selected, we deselect all menus and send event with the enemy id
         this.heroesMenu.deselect();
         this.actionsMenu.deselect();
         this.enemiesMenu.deselect();
         this.currentMenu = null;
         this.BossBattle.receivePlayerSelection("attack", index);
-        // this.BossBattle.receivePlayerSelection2("magie", index);
     },
     onPlayerSelect: function(id) {
-        // when its player turn, we select the active hero item and the first action
-        // then we make actions menu active
         this.heroesMenu.select(id);
         this.actionsMenu.select(0);
         this.currentMenu = this.actionsMenu;
     },
-    // we have action selected and we make the enemies menu active
-    // the player needs to choose an enemy to attack
     onSelectedAction: function() {
         this.currentMenu = this.enemiesMenu;
         this.enemiesMenu.select(0);
@@ -520,7 +483,7 @@ var UIScene2 = new Phaser.Class({
     },
 });
 
-// the message class extends containter
+
 var Message = new Phaser.Class({
 
     Extends: Phaser.GameObjects.Container,

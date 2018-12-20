@@ -24,7 +24,7 @@ var BootScene = new Phaser.Class({
     this.load.image("tiles5", "../assets/tilesets/InsideC.png");
 
     this.load.spritesheet("boss", "../assets/spritesheet/boss.png",  { frameWidth: 374, frameHeight: 354});
-    
+    this.load.spritesheet("couple", "../assets/spritesheet/couple.png",  { frameWidth: 218, frameHeight: 228});
 
     this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
 
@@ -72,7 +72,7 @@ var WorldScene = new Phaser.Class({
   const tiles3 = map.addTilesetImage("DungeonB", "tiles3");
   const tiles4= map.addTilesetImage("InsideA5", "tiles4");
   const tiles5 = map.addTilesetImage("InsideC", "tiles5");
-  
+
 
 //---------------------------ce sont les calques------------------------------//
 
@@ -176,9 +176,12 @@ player.setCollideWorldBounds(true);
 //------------------evenement combat-------------------------------------------//
 
 enemies1 = this.physics.add.sprite(700, 420, "boss");
+couple = this.physics.add.sprite(680, 100, "couple");
+
 enemies1.setCollideWorldBounds(true);
 
 this.physics.add.overlap(player, enemies1, collisionEnemies1, null, this);
+this.physics.add.overlap(player, couple, couple, null, this);
 
 //-----------------------ouvrir l'inventaire-------------------------//
 
@@ -240,17 +243,26 @@ this.input.keyboard.on("keydown_D", event =>{
  });
 
 
-
-
   function collisionEnemies1(player, enemies1)
       {
-       
+
     // start battle
-    this.scene.stop('UIScene5');
-    this.scene.switch('BossBattle');
+  this.scene.stop('UIScene5');
+  this.scene.switch('BossBattle');
   enemies1.disableBody(true, true);
   if (enemies1.disableBody === true) {
   console.log ("Le jeu est fini")
   }
 
-} 
+}
+
+
+function couple(player, couple)
+    {
+
+  // start battle
+this.scene.stop('UIScene5');
+this.scene.switch('Cinematique');
+
+
+}
