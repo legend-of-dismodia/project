@@ -278,7 +278,7 @@ function collisionChestPotion(player, chestPotion)
 
   if (tbl.inventories.length == 0) {
     tbl.inventories = [{"name":"Potion","property":{"hp":50},"rarety":"1","image":"","quantity":"1"}];    
-    getPhaserDataInventory();
+    setPhaserDataInventory();
   }else{
 
     tbl.inventories.forEach(item => {
@@ -287,7 +287,7 @@ function collisionChestPotion(player, chestPotion)
         quantity+=1;
         quantity.toString();  
         quantity = item.quantity = quantity.toString();    
-        getPhaserDataInventory();      
+        setPhaserDataInventory();      
       }      
     });
   }
