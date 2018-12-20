@@ -1,5 +1,8 @@
 "use strict"
-
+// function end(){
+//   document.location.href = "/end";
+//   console.log('coucou');
+// }
 var winSize = window.innerWidth;
 // au chargement de la page
 checkSize();
@@ -75,7 +78,7 @@ function checkSize() {
             })
             $('.navActive').css('width', 'initial')
             $('.toggle').html('<a><i class="fas fa-caret-left"></i></a>');
-            
+
             // pas de cookie de taille de navbar
         } else {
             $('.sidebar-content aside').css('width', '240px');

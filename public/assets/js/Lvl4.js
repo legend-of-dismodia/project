@@ -181,7 +181,7 @@ couple = this.physics.add.sprite(680, 100, "couple");
 enemies1.setCollideWorldBounds(true);
 
 this.physics.add.overlap(player, enemies1, collisionEnemies1, null, this);
-this.physics.add.overlap(player, couple, couple, null, this);
+this.physics.add.overlap(player, couple, couple1, null, this);
 
 //-----------------------ouvrir l'inventaire-------------------------//
 
@@ -257,12 +257,8 @@ this.input.keyboard.on("keydown_I", event =>{
 }
 
 
-function couple(player, couple)
+function couple1(player, couple)
     {
-
-  // start battle
-this.scene.stop('UIScene5');
-this.scene.switch('Cinematique');
-
-
+document.location.href = "/end";
+couple.disableBody(true, true);
 }
