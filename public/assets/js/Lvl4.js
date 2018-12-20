@@ -24,8 +24,10 @@ var BootScene = new Phaser.Class({
     this.load.image("tiles5", "../assets/tilesets/InsideC.png");
 
     this.load.spritesheet("boss", "../assets/spritesheet/boss.png",  { frameWidth: 374, frameHeight: 354});
+    
 
     this.load.spritesheet('princess', '../assets/spritesheet/princessfinal clone.png', { frameWidth: 80, frameHeight: 80});
+
 
   },
 
@@ -70,6 +72,7 @@ var WorldScene = new Phaser.Class({
   const tiles3 = map.addTilesetImage("DungeonB", "tiles3");
   const tiles4= map.addTilesetImage("InsideA5", "tiles4");
   const tiles5 = map.addTilesetImage("InsideC", "tiles5");
+  
 
 //---------------------------ce sont les calques------------------------------//
 
@@ -80,6 +83,7 @@ var WorldScene = new Phaser.Class({
   const lave = map.createDynamicLayer("lave", tiles);
   const rocher = map.createDynamicLayer("rocher", tiles5);
   const statue = map.createDynamicLayer("statue", tiles5);
+
 
 //----------------------créer l'animation du personnage-----------------------//
 
@@ -193,12 +197,10 @@ this.input.keyboard.on("keydown_D", event =>{
   });
 
 });
+
 },
 
-
 //---------------------------quand le perso bouge---------------------------//
-
-
           update: function (){
 
             if (cursors.left.isDown)
@@ -239,10 +241,10 @@ this.input.keyboard.on("keydown_D", event =>{
 
 
 
+
   function collisionEnemies1(player, enemies1)
       {
-        // shake the world
-
+       
     // start battle
     this.scene.stop('UIScene5');
     this.scene.switch('BossBattle');
@@ -251,4 +253,4 @@ this.input.keyboard.on("keydown_D", event =>{
   console.log ("Le jeu est fini")
   }
 
-  }
+} 

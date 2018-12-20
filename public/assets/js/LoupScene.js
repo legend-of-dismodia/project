@@ -10,7 +10,7 @@ var LoupScene = new Phaser.Class({
     {
         // load resources
     this.load.spritesheet("player", "../assets/spritesheet/princessfinal clone.png", { frameWidth: 80, frameHeight: 80 });
-    this.load.spritesheet("loup", "../assets/spritesheet/loup2.png", { frameWidth:280, frameHeight: 350});
+    this.load.spritesheet("loup", "../assets/spritesheet/loup.png", { frameWidth:280, frameHeight: 350});
     this.load.image("fond3", "../assets/spritesheet/nv3.png");
     },
     create: function ()
