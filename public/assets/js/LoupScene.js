@@ -16,24 +16,31 @@ var LoupScene = new Phaser.Class({
     create: function ()
     {
         // change the background to green
-         this.add.image(650, 300, 'fond3');
+        this.add.image(650, 300, 'fond3');
         this.startBattle();
         // on wake event we call startBattle too
         // this.sys.events.on('wake', this.startBattle, this);
     },
 
     startBattle: function() {
-         xp = tbl.xp;
+        xp = tbl.xp;
         hp = tbl.life;
-       level=tbl.level;
+        level = tbl.level;
+
         // player character - warrior
-        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50,);
+        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Kalhanne", hp, attack, 50, xp, level);
         this.add.existing(warrior);
 
-
-        var loup = new Enemy(this, 500, 400, "loup", 11, "loup", 50, 15);
+        var loup = new Enemy(this, 500, 400, "loup", 11, "Cerbère des enfers", 50, 15);
         this.add.existing(loup);
 
+        this.anims.create({
+        key: 'hero',
+        frames: this.anims.generateFrameNumbers('hero', { start: 1, end: 15}),
+        frameRate: 10,
+        repeat: 0
+
+        });
 
 
         // array with heroes
@@ -99,10 +106,9 @@ var LoupScene = new Phaser.Class({
     receivePlayerSelection: function(action, target) {
         if(action == "attack") {
             this.units[this.index].attack(this.enemies[target]);
+                this.add.sprite(500, 400, 'hero').play('hero');
         }
-        if(action == "magie"){
-        this.units[this.index].magieAttaque(this.enemies[target]);
-         }
+
         this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     },
 
@@ -139,6 +145,7 @@ var Unit = new Phaser.Class({
         this.maxLevel = this.level = level;
         this.living = true;
         this.menuItem = null;
+        i = 0;
     },
     // we will use this to notify the menu item when the unit is dead
     setMenuItem: function(item) {
@@ -156,39 +163,29 @@ var Unit = new Phaser.Class({
 
     },
 
-    magieAttaque: function(target) {
-          if(target.living) {
-              target.takeMagic(this.magie);
-              this.scene.events.emit("Message", this.type + "  magieAttaque " + target.type + " for " + this.magie + " magie");
-          }
-        },
-
+    
     takeDamage: function(damage) {
         if(i == 0){
             i = 1;
             this.hp -= damage;
+            console.log("hp1: "+this.hp+" dmg1: "+ damage);
+
         }else{
-            this.hp -= damage;
-            i = 0;
+
             console.log("hp: "+this.hp+"dmg : "+ damage);
             this.hp -= damage;
             this.xp = xp + 50;
-            this.level = level + 1
+
+            if (this.xp > 100){
+            this.xp = 0;
+            this.hp = hp + 50;
+            this.level = level + 1;
             }
-        //
-        //     if (this.xp > 50){
-        //     this.level = level + 1;
-        //     xp = 0;
-        //     this.hp = hp + 50;
-        //
-        // }
-        //
-        // else{
-        //
-        //   }
-
-  getPhaserData(this.hp, this.xp, this.level);
-
+            // hpText = this.add.text(160, 70, 'hp: 0', { fontSize: '24px', fill: 'white' });
+            // heroText.setText('vous avez gagné un niveau');
+            getPhaserData(this.hp, this.xp, this.level);
+            i = 0;
+        }
         if(this.hp <= 0) {
             this.hp = 0;
             this.menuItem.unitKilled();
@@ -196,21 +193,7 @@ var Unit = new Phaser.Class({
             this.visible = false;
             this.menuItem = null;
         }
-
-
     },
-
-
-    takeMagic: function(magie) {
-        this.hp -= magie;
-        if(this.hp <= 0) {
-            this.hp = 0;
-            this.menuItem.unitKilled();
-            this.living = false;
-            this.visible = false;
-            this.menuItem = null;
-        }
-    }
 });
 
 var Enemy = new Phaser.Class({

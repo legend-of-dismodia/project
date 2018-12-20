@@ -26,7 +26,7 @@ var Boot = new Phaser.Class({
       this.load.spritesheet('souris', '../assets/spritesheet/troll.png', { frameWidth: 80, frameHeight: 80});
     this.load.spritesheet("chest", "../assets/tilesets/chest.png", { frameWidth: 48, frameHeight: 48});
     },
-    
+
 
       create: function (){
 
@@ -193,7 +193,7 @@ var Boot = new Phaser.Class({
 
       //-----------------------ouvrir l'inventaire-------------------------//
 
-      this.input.keyboard.on("keydown_D", event =>{
+      this.input.keyboard.on("keydown_I", event =>{
         this.scene.sendToBack();
 
         // ferme le sac avant de l'ouvrir, pour en avoir une seule instance
@@ -203,13 +203,13 @@ var Boot = new Phaser.Class({
         this.scene.run('Sac');
 
         // on peut ne peut fermer l'inventaire que quand il est ouvert
-        this.input.keyboard.on("keydown_F", event =>{
+        this.input.keyboard.on("keydown_ESC", event =>{
           this.scene.stop('UIScene5');
-        });      
+        });
 
     });
 
-    
+
 
       },
 
@@ -254,10 +254,8 @@ var Boot = new Phaser.Class({
 
     }
 
-}
-
-
-        });
+ }
+         });
 
 
 function collisionStairs(player, escalier)
@@ -269,13 +267,7 @@ function collisionStairs(player, escalier)
 function collisionSouris1(player, souris1)
             {
               this.scene.stop('UIScene5');
-              console.log(player);
-              console.log(cursors);
-              // player.setVelocityY(0);
               this.scene.switch('BattleScene');
-              
-              // player.setVelocityX(0);
-              // player.setVelocityY(0);              
               souris1.disableBody(true, true);
 }
 
@@ -284,23 +276,16 @@ function collisionChestPotion(player, chestPotion)
   chestPotion.disableBody(true, true);
   chestPotion = this.physics.add.sprite(850, 20, "chest", 13);
 
-  if (tbl.inventories.length == 0) {
-    tbl.inventories = [{"name":"Potion","property":{"hp":50},"rarety":"1","image":"","quantity":"1"}];    
-    getPhaserDataInventory();
-  }else{
+  tbl.inventories.forEach(item => {
+    if (item.name == 'Potion') {
+      quantity = parseInt(item.quantity);
+      quantity+=1;
+      quantity.toString();
+      quantity = item.quantity = quantity.toString();
+      getPhaserDataInventory();
 
-    tbl.inventories.forEach(item => {
-      if (item.name == 'Potion') {
-        quantity = parseInt(item.quantity);
-        quantity+=1;
-        quantity.toString();  
-        quantity = item.quantity = quantity.toString();    
-        getPhaserDataInventory();      
-      }      
-    });
+    }
 
-  }
+  });
 
-  
-  
 }
