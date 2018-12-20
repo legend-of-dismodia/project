@@ -12,6 +12,7 @@ $('.toggle').on('click', function () {
     // masque les légendes
     $('.navbarText').toggle();
     $('.rectangle').toggle();
+    $('.hideSmall').toggle();
 
     // petite barre
     if ($('.sidebar-content aside').css('width') !== '56px') {
@@ -66,6 +67,7 @@ function checkSize() {
                 'font-size': '1.2rem',
                 'margin': '0 -8px',
             });
+            $('.hideSmall').hide();
             $('.navActive').css('width', '56px')
             $('.toggle').html('<a><i class="fas fa-caret-right"></i></a>');
 
