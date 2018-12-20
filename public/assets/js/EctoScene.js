@@ -180,14 +180,13 @@ var Unit = new Phaser.Class({
             console.log("hp: "+this.hp+"dmg : "+ damage);
             this.hp -= damage;
             this.xp = xp + 50;
-       this.level = level + 1;
-  console.log(this.level);
 
-            if (this.xp = 100){
-
+            if (this.xp > 100){
             this.xp = 0;
             this.hp = hp + 50;
             this.level = level + 1;
+            // hpText = this.add.text(160, 70, 'hp: 0', { fontSize: '24px', fill: 'white' });
+            // heroText.setText('vous avez gagné un niveau');
             }
 
 else{
