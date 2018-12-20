@@ -98,7 +98,7 @@ nav .fa, nav .fas {
 /*******Gestion de la vidéo dans la page d'acceuil******/
 
 .encart-video {
-    height: 100vh;
+    height: 96vh;
     width: 100vw;
     overflow: hidden;
     position: relative;
@@ -131,6 +131,19 @@ nav .fa, nav .fas {
 }
 /****************************************************************/
 
+/*************Sound Menu***************************/
+
+#soundUp, #soundOff{
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+    z-index: 2;
+    color: #76b4bd;
+    cursor: pointer;
+}
+
+
+/*************************************************/
 
 /** footer **/
 .modal-footer {
