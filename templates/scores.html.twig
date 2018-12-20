@@ -1,26 +1,44 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <div class="container">
-<div class="row text-center">
-<div class="col-12">
-<h1>Classement des joueurs</h1>
-</div>
-</div>
-<div class="row text-center">
-<div class="col-12">
+<div class="col-12 justify-content-center">
+    <div class="row text-center">
+        <div class="col-12">
+            <h1>Classement des joueurs</h1>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-12">
+        <div>
+        <img class="img2" src="assets/img/princesse.png" alt="princesse" >
+        </div>
+        <div>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Pseudo</th>
+                        <th>Niveau</th>
+                    </tr>
+                    
+                    {% for save in saves %}
+                    <tr>
+                    <td>{{save.user.username}}</td>
+                    <td>{{save.level}}</td>
+                    
+                    {% endfor %}
+                    <tr>
+                </table>
+            </div>
+            <table>
+        </div>
+        <div class="col-12">
+        <img class="img2" src="assets/img/boss.png" alt="boss" >
+        </div>
 
+            </table>
 
-
-
-
-
-{% for save in saves %}
-<h2>Pseudo : {{save.user.username}}</h2>
-<h3>Niveau : {{save.level}}</h3>
-{% endfor %}
-
-
-</div>
-</div>
+        </div>
+    </div>
+    </div>
 </div>
 {% endblock %}
