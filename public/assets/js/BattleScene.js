@@ -435,7 +435,8 @@ var UIScene = new Phaser.Class({
 
         this.currentMenu = this.actionsMenu;
 
-//-------------------------ajouter les menu-----------------------------//
+//------------------------------ajouter les menu-----------------------------//
+
         this.menus.add(this.heroesMenu);
         this.menus.add(this.actionsMenu);
         this.menus.add(this.enemiesMenu);
@@ -472,14 +473,13 @@ var UIScene = new Phaser.Class({
 
     },
     onPlayerSelect: function(id) {
-        // when its player turn, we select the active hero item and the first action
-        // then we make actions menu active
+ve
         this.heroesMenu.select(id);
         this.actionsMenu.select(0);
         this.currentMenu = this.actionsMenu;
     },
-    // we have action selected and we make the enemies menu active
-    // the player needs to choose an enemy to attack
+
+
     onSelectedAction: function() {
         this.currentMenu = this.enemiesMenu;
         this.enemiesMenu.select(0);
@@ -507,7 +507,8 @@ var UIScene = new Phaser.Class({
     },
 });
 
-// the message class extends containter
+//--------------------------------créer un message-------------------------//
+
 var Message = new Phaser.Class({
 
     Extends: Phaser.GameObjects.Container,
