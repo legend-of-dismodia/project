@@ -25,17 +25,17 @@ var BattleScene = new Phaser.Class({
     },
 
     startBattle: function() {
-  //---------------------------stat pour base de donnée----------------------//
+//---------------------------stat pour base de donnée----------------------//
         hp = tbl.life;
         xp = tbl.xp;
-       level = tbl.level;
+        level = tbl.level;
 //------------------------------on définit les personnages--------------------//
 
-        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, xp, level);
+        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Kalhanne", hp, attack, xp, level);
         this.add.existing(warrior);
 
 
-        var souris = new Enemy(this, 500, 400, "souris1", null, "souris1", 50, 10);
+        var souris = new Enemy(this, 500, 400, "souris1", null, "Tigre Astral", 50, 10);
         this.add.existing(souris);
 
 //--------------------on définit les animations pour les sprite--------------//
@@ -46,7 +46,7 @@ var BattleScene = new Phaser.Class({
         frameRate: 10,
         repeat: 0
 
-          });
+        });
 
 //------------------listes des heros et ennemies disponibl-------------------//
 
@@ -164,7 +164,7 @@ var Unit = new Phaser.Class({
         sthis.maxLevel = this.level = level;
         this.living = true;
         this.menuItem = null;
-
+        i = 0;
     },
 
     setMenuItem: function(item) {
@@ -174,9 +174,8 @@ var Unit = new Phaser.Class({
 
     attack: function(target) {
         if(target.living) {
-
             target.takeDamage(this.damage);
-            this.scene.events.emit("Message", this.type + " attacks " + target.type + " for " + this.damage + " damage");
+            this.scene.events.emit( this.type + " inflige "+ this.damage + "de dégats à " + target.type);
         }
 
     },
@@ -191,11 +190,9 @@ var Unit = new Phaser.Class({
 
         }else{
             this.hp -= damage;
-            i = 0;
-            console.log("hp: "+this.hp+"dmg : "+ damage);
+            i = 0;            
             this.hp -= damage;
             this.xp = xp + 50;
-
 
             if (this.xp > 100){
             this.level = level + 1;
@@ -205,7 +202,7 @@ var Unit = new Phaser.Class({
 
             }
             getPhaserData(this.hp, this.xp, this.level);
-
+            i = 0;
         }
 //------------------------------disparition du menu--------------------------//
         if(this.hp <= 0 ) {
@@ -252,7 +249,7 @@ var MenuItem = new Phaser.Class({
     initialize:
 
     function MenuItem(x, y, text, scene) {
-        Phaser.GameObjects.Text.call(this, scene, x, y, text, { color: "#ffffff", align: "left", fontSize: 15});
+        Phaser.GameObjects.Text.call(this, scene, x, y, text, { color: "#ffffff", align: "left", font: '20px Arial'});
     },
 
     select: function() {
@@ -422,19 +419,24 @@ var UIScene = new Phaser.Class({
     {
 
         this.graphics = this.add.graphics();
-        this.graphics.lineStyle(1, 0xffffff);
-        this.graphics.fillStyle(0x031f4c, 1);
-        this.graphics.strokeRect(2, 600, 500, 200);
-        this.graphics.fillRect(2, 600, 500, 200);
-        this.graphics.strokeRect(500, 600, 500, 200);
-        this.graphics.fillRect(500, 600, 500, 200);
-        this.graphics.strokeRect(800, 600, 500, 200);
-        this.graphics.fillRect(800, 600, 500, 200);
+        this.graphics.lineStyle(10, 0x795548);        
+        this.graphics.fillStyle(0x1e4363, 1);
+
+        // x,y - w,h
+        //panneau 1 
+        this.graphics.strokeRect(5, 600, 500, 195);
+        this.graphics.fillRect(5, 600, 500, 195);
+        //panneau 2
+        this.graphics.strokeRect(500, 600, 500, 195);
+        this.graphics.fillRect(500, 600, 500, 195);
+        //panneau 3 
+        this.graphics.strokeRect(800, 600, 475, 195);
+        this.graphics.fillRect(800, 600, 475, 195);
 
 //-----------------------ce que contient les cadre------------------------//
         this.menus = this.add.container();
 
-        this.heroesMenu = new HeroesMenu(810, 650, this);
+        this.heroesMenu = new HeroesMenu(850, 650, this);
         this.actionsMenu = new ActionsMenu(550, 650, this);
         this.enemiesMenu = new EnemiesMenu(50, 650, this);
 
@@ -521,14 +523,17 @@ var Message = new Phaser.Class({
 
     initialize:
     function Message(scene, events) {
-        Phaser.GameObjects.Container.call(this, scene, 160, 30);
+        Phaser.GameObjects.Container.call(this, scene, 95, 20);
         var graphics = this.scene.add.graphics();
         this.add(graphics);
-        graphics.lineStyle(1, 0xffffff, 0.8);
-        graphics.fillStyle(0x031f4c, 0.3);
-        graphics.strokeRect(-90, -15, 180, 30);
-        graphics.fillRect(-90, -15, 180, 30);
-        this.text = new Phaser.GameObjects.Text(scene, 0, 0, "", { color: "#ffffff", align: "center", fontSize: 13, wordWrap: { width: 170, useAdvancedWrap: true }});
+
+        graphics.lineStyle(10, 0x795548, 1);
+        graphics.fillStyle(0x1e4363, 1);
+
+        graphics.strokeRect(-90, -15, 1270, 50);
+        graphics.fillRect(-90, -15, 1270, 50);
+
+        this.text = new Phaser.GameObjects.Text(scene, 160, 10, "", { color: "#ffffff", align: "left", font: "20px Arial"});
         this.add(this.text);
         this.text.setOrigin(0.5);
         events.on("Message", this.showMessage, this);

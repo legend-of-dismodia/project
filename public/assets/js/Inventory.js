@@ -93,11 +93,18 @@ var UIScene5 = new Phaser.Class({
 
         //-----------------------------stat personnage------------------------------//
 
-        hpText = this.add.text(160, 70, 'hp: 0', { fontSize: '24px', fill: 'white' });
+        hpText = this.add.text(160, 70, 'HP : ' + hp, { font: '20px Arial', fill: '#27ae60' });
         hpText.setText('HP: ' + hp);
+        
+        attackText = this.add.text(160, 100, 'attack: 0', { font: '20px Arial', fill: '#c0392b' });
+        attackText.setText('ATK : ' + attack);
 
-        attackText = this.add.text(160, 100, 'attack: 0', { fontSize: '24px', fill: 'white' });
-        attackText.setText('ATK: ' + attack);
+        // level, xp
+
+        levelText = this.add.text(160, 10, 'Niveau '+tbl.level, { font: 'bold 24px Arial', fill: 'white' });        
+
+        xpText = this.add.text(160, 130, 'XP : '+tbl.xp, { font: '20px Arial', fill: 'white' });        
+
 
         //-----------------------------------Inventaire--------------------------------//
 
@@ -106,12 +113,12 @@ var UIScene5 = new Phaser.Class({
             var properties = item.property;
             switch (item.name) {
                 case 'Potion':
-                    potionText = this.add.text(80, 260, 'effet: 0', { fontSize: '14px', fill: 'white' });
+                    potionText = this.add.text(80, 260, 'effet: 0', { font: '14px Arial', fill: 'white' });
                     Object.keys(properties).forEach(function(key) {
                         potionText.setText(key.toUpperCase()+' : +' + properties[key]);
                     });
 
-                    potionText = this.add.text(80, 280, 'quantité: 0', { fontSize: '14px', fill: 'white' });
+                    potionText = this.add.text(80, 280, 'quantité: 0', { font: '14px Arial', fill: 'white' });
                     potionText.setText('Quantité : ' + item.quantity);
 
                     switch (item.rarety) {
@@ -189,41 +196,14 @@ var UIScene5 = new Phaser.Class({
 
 
 
-        this.input.keyboard.once("keydown_I", event => {
-
-            // tbl.inventories.forEach(item => {            
-            //     switch (item.name) {
-            //         case 'Potion':
-            //             if (item.quantity > 0) {
-            //                 item.quantity -= 1;
-
-            //                 hpText = this.add.text(160, 70, 'hp: 0', { fontSize: '24px', fill: 'white' });
-            //                 hpText.setText('HP: ' + hp);
-
-            //                 this.hp = hp + item.property.hp;
-            //                 getPhaserData(this.hp, tbl.xp, tbl.level);
-                            
-            //             }
-            //             else {
-            //                 alert("vous n'avez pas assez de potion");
-                            
-            //             }
-            //         break;
-
-            //         case 'Sword':
-                        
-            //         break;
-            //     }
-                
-            // });
-
+        this.input.keyboard.once("keydown_ONE", event => {
             tbl.inventories.forEach(item => {                            
                 switch (item.name) {
                     case 'Potion':
                         if (item.quantity > 0) {
                             item.quantity -= 1;
 
-                            hpText = this.add.text(160, 70, 'hp: 0', { fontSize: '24px', fill: 'white' });
+                            hpText = this.add.text(160, 70, 'hp: 0', { font: '20px Arial', fill: '#27ae60' });
                             hpText.setText('HP: ' + hp);
 
                             this.hp = hp + item.property.hp;
@@ -238,15 +218,9 @@ var UIScene5 = new Phaser.Class({
                     case 'Sword':
                         
                     break;
-
-                }
-                
+                }                
             });
-
-
         });
-
-
     },
 
 

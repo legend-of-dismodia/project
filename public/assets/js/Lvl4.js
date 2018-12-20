@@ -185,7 +185,7 @@ this.physics.add.overlap(player, couple, couple, null, this);
 
 //-----------------------ouvrir l'inventaire-------------------------//
 
-this.input.keyboard.on("keydown_D", event =>{
+this.input.keyboard.on("keydown_I", event =>{
   this.scene.sendToBack();
 
   // ferme le sac avant de l'ouvrir, pour en avoir une seule instance
@@ -195,7 +195,7 @@ this.input.keyboard.on("keydown_D", event =>{
   this.scene.run('Sac');
 
   // on peut ne peut fermer l'inventaire que quand il est ouvert
-  this.input.keyboard.on("keydown_F", event =>{
+  this.input.keyboard.on("keydown_ESC", event =>{
     this.scene.stop('UIScene5');
   });
 
