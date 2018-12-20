@@ -25,17 +25,17 @@ var BattleScene = new Phaser.Class({
     },
 
     startBattle: function() {
-  //---------------------------stat pour base de donnée----------------------//
+//---------------------------stat pour base de donnée----------------------//
         hp = tbl.life;
         xp = tbl.xp;
-       level = tbl.level;
+        level = tbl.level;
 //------------------------------on définit les personnages--------------------//
 
-        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, xp, level);
+        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Kalhanne", hp, attack, xp, level);
         this.add.existing(warrior);
 
 
-        var souris = new Enemy(this, 500, 400, "souris1", null, "souris1", 50, 10);
+        var souris = new Enemy(this, 500, 400, "souris1", null, "Tigre Astral", 50, 10);
         this.add.existing(souris);
 
 //--------------------on définit les animations pour les sprite--------------//
@@ -163,7 +163,7 @@ var Unit = new Phaser.Class({
         sthis.maxLevel = this.level = level;
         this.living = true;
         this.menuItem = null;
-
+        i = 0;
     },
 
     setMenuItem: function(item) {
@@ -204,7 +204,7 @@ var Unit = new Phaser.Class({
 
             }
             getPhaserData(this.hp, this.xp, this.level);
-
+            i = 0;
         }
 //------------------------------disparition du menu--------------------------//
         if(this.hp <= 0 ) {

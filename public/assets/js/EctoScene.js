@@ -25,18 +25,15 @@ var EctoScene = new Phaser.Class({
     },
 
     startBattle: function() {
+        hp = tbl.life;
+        xp = tbl.xp;
+        level = tbl.level;
 
-
-           hp = tbl.life;
-           xp = tbl.xp;
-           level = tbl.level;
-
-
-        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Warrior", hp, attack, 50, xp, level);
+        var warrior = new PlayerCharacter(this, 900, 400, "player", 11, "Kalhanne", hp, attack, 50, xp, level);
         this.add.existing(warrior);
 
 
-        var fairy = new Enemy(this, 500, 400, "fairy2", 1, "fairy2", 50, 20);
+        var fairy = new Enemy(this, 500, 400, "fairy2", 1, "Fée", 50, 20);
         this.add.existing(fairy);
 
         this.anims.create({
@@ -45,7 +42,7 @@ var EctoScene = new Phaser.Class({
         frameRate: 10,
         repeat: 0
 
-          });
+        });
 
         // array with heroes
         this.heroes = [ warrior];
@@ -110,7 +107,7 @@ var EctoScene = new Phaser.Class({
     receivePlayerSelection: function(action, target) {
         if(action == "attack") {
             this.units[this.index].attack(this.enemies[target]);
-              this.add.sprite(500, 400, 'hero').play('hero');
+            this.add.sprite(500, 400, 'hero').play('hero');
         }
         if(action == ""){
         this.units[this.index].Attaque(this.enemies[target]);
@@ -169,7 +166,6 @@ var Unit = new Phaser.Class({
     },
 
     takeDamage: function(damage) {
-        console.log("i: "+ i);
         if(i == 0){
             i = 1;
             this.hp -= damage;
@@ -181,21 +177,17 @@ var Unit = new Phaser.Class({
             this.hp -= damage;
             this.xp = xp + 50;
 
-            if (this.xp > 100){
+            if (this.xp >= 100){
             this.xp = 0;
             this.hp = hp + 50;
             this.level = level + 1;
+            }else{
+                this.level = level;
+            }
             // hpText = this.add.text(160, 70, 'hp: 0', { fontSize: '24px', fill: 'white' });
             // heroText.setText('vous avez gagné un niveau');
-            }
-
-else{
-
-}
-            getPhaserData(this.hp, this.xp, this. level);
-
+            getPhaserData(this.hp, this.xp, this.level);
             i = 0;
-
         }
 
         if(this.hp <= 0) {

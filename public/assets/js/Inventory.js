@@ -93,9 +93,9 @@ var UIScene5 = new Phaser.Class({
 
         //-----------------------------stat personnage------------------------------//
 
-        hpText = this.add.text(160, 70, 'hp: 0', { font: '20px Arial', fill: '#27ae60' });
-        hpText.setText('HP : ' + hp);
-
+        hpText = this.add.text(160, 70, 'HP : ' + hp, { font: '20px Arial', fill: '#27ae60' });
+        hpText.setText('HP: ' + hp);
+        
         attackText = this.add.text(160, 100, 'attack: 0', { font: '20px Arial', fill: '#c0392b' });
         attackText.setText('ATK : ' + attack);
 
@@ -196,14 +196,14 @@ var UIScene5 = new Phaser.Class({
 
 
 
-        this.input.keyboard.once("keydown_I", event => {
+        this.input.keyboard.once("keydown_ONE", event => {
             tbl.inventories.forEach(item => {                            
                 switch (item.name) {
                     case 'Potion':
                         if (item.quantity > 0) {
                             item.quantity -= 1;
 
-                            hpText = this.add.text(160, 70, 'hp: 0', { fontSize: '24px', fill: 'white' });
+                            hpText = this.add.text(160, 70, 'hp: 0', { font: '20px Arial', fill: '#27ae60' });
                             hpText.setText('HP: ' + hp);
 
                             this.hp = hp + item.property.hp;
