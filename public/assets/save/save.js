@@ -1,11 +1,9 @@
 
 getSave();
 var i = 0;
-
 var attack = 40;
 
 var tbl = {};
-console.log(tbl);
 
 function getSave(){
     $.ajax({
@@ -33,13 +31,10 @@ function successSave(data){
 }
 
 function getPhaserData(life, xp, level) {
-tbl.life = life;
-tbl.xp = xp;
-tbl.level = level;
-
-
+    tbl.life = life;
+    tbl.xp = xp;
+    tbl.level = level;
     var jsonData  = JSON.stringify(tbl);
-
     $.ajax({
         url: '/game/setSave',
         method: 'POST',
@@ -53,7 +48,7 @@ tbl.level = level;
     });
 }
 
-function getPhaserDataInventory() {
+function setPhaserDataInventory() {
 
     var jsonData  = JSON.stringify(tbl);
     

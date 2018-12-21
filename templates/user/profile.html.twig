@@ -11,23 +11,23 @@
         <div class="row text-center">
 
             <div class="col-12">
-                <h2>Niveau :{{save.level}}</h2>
+                <h2>Niveau {{save.level}}</h2>
             </div>
             <div class="col-12">
-                <h2>Point de vie :{{save.life}}</h2>
+                <h2>Point de vie : {{save.life}}</h2>
             </div>
             <div class="col-12">
-                <h2>Mana :{{save.mana}}</h2>
+                <h2>Mana : {{save.mana}}</h2>
             </div>
             <div class="col-12">
-                <h2>Xp :{{save.xp}}</h2>
+                <h2>Xp : {{save.xp}}</h2>
             </div>
         </div>
         <hr>
         <div class="row justify-content-center">
             {% for inventory in inventorys %}
             <div class="col-md-6">
-                <img class="img" src="{{inventory.image}}" alt="épée">
+                <img class="img" src="{{inventory.image}}" alt="{{inventory.name}}">
 
                 <h5 class="py-3 text-center">{{inventory.name}} : {{inventory.rarety}} </h5>
             </div>

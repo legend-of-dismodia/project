@@ -42,5 +42,11 @@ security:
         ROLE_SUPER_ADMIN: ROLE_ADMIN
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }  
-        - { path: ^/game, roles: ROLE_USER }     
+        - { path: ^/game, roles: ROLE_USER } 
+        - { path: ^/end, roles: ROLE_USER }   
+        - { path: ^/compte, roles: ROLE_USER } 
+        - { path: ^/profil, roles: ROLE_USER }     
+
+
+
 
