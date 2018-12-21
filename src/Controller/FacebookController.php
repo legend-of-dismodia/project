@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use App\Entity\Save;
 
 
 class FacebookController extends AbstractController
@@ -47,6 +48,7 @@ class FacebookController extends AbstractController
         try {
             
             $user = new User();
+            $save = new Save();
             // get the access token and then user
             $accessToken = $client->getAccessToken();
             $facebookUser = $client->fetchUserFromToken($accessToken);          
@@ -81,6 +83,20 @@ class FacebookController extends AbstractController
                     'notice',
                     'Vous êtes bien connecté avec votre compte '. $user->getUsername()
                 );
+
+                //Ajout de la première sauvegarde
+                $save->setLife(100);
+                $save->setCreatedAt(new \DateTime());
+                $save->setLevel(1);
+                $save->setMana(100);
+                $save->setXp(0);
+                $save->setUser($user);
+                $playtime = new \DateTime();
+                $playtime->setTime(00, 00, 00);
+                $save->setPlaytime($playtime);
+
+                $em->persist($save);
+                $em->flush();
                 
                 // Manually authenticate user in controller
                 $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());

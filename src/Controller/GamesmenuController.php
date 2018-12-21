@@ -102,8 +102,7 @@ class GamesmenuController extends AbstractController
      */
     public function gameSetSave(EntityManagerInterface $em, Request $request)
     {
-        $tbl = $_POST['tbl'];
-        //"inventories":[{"name":"Potion","property":{"hp":50},"rarety":"1","image":"","quantity":"2"},{"name":"Sword","property":{"atk":10},"rarety":"1","image":"","quantity":"1"}]
+        $tbl = $_POST['tbl'];        
         // $tbl = '{
         //     "life":90,
         //     "createdAt":{"date":"2018-12-14 14:27:07.000000","timezone_type":3,"timezone":"Europe/Berlin"},
