@@ -83,7 +83,7 @@ var UIScene5 = new Phaser.Class({
             });
 
         }else{            
-            lo = this.add.text(90, 250, 'Pas d\'objet disponible', { font: '14px Arial', fill: 'white' });
+            this.add.text(90, 250, 'Pas d\'objet disponible', { font: '14px Arial', fill: 'white' });
         }
 
         warrior.setDepth(10);

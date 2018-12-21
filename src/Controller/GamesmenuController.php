@@ -72,10 +72,11 @@ class GamesmenuController extends AbstractController
      */
     public function gameGetSave(EntityManagerInterface $em, Request $request)
     {
-        $user = $this->getUser()->getId();
-
+        //Récupère l'id de l'utilisateur connecté
+        $user = $this->getUser()->getId();        
+        //Récupère la save de l'utilisateur connecté
         $userSave = $em->getRepository('App:Save')->findOneBy(['user' => $user]);
-
+        //Récupère les items de l'utilisateur connecté
         $userInventory = $em->getRepository('App:Inventory')->getPlayerInventory($userSave->getId());
 
         foreach ($userInventory as $key => $value) {
@@ -83,7 +84,6 @@ class GamesmenuController extends AbstractController
         }        
 
         $arrayUser = [
-
             'id' => $userSave->getId(),
             'createdAt'=> $userSave->getCreatedAt(),
             'level'=> $userSave->getLevel(),
@@ -94,9 +94,7 @@ class GamesmenuController extends AbstractController
             'inventory' => $userInventory,
         ];
 
-        return new JsonResponse($arrayUser);
-        // var_dump($arrayUser);
-        // die();
+        return new JsonResponse($arrayUser);        
     }
 
     /**
@@ -157,7 +155,7 @@ class GamesmenuController extends AbstractController
             foreach ($tbl['inventories'] as $key => $value) {
                 
                 if ($value['name'] == 'Potion') {                    
-
+                    //Ajoute une potion à l'inventaire
                     $firstSaveInventory->setItem($items[0]);
                 }
             }            

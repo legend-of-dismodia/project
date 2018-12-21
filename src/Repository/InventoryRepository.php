@@ -54,15 +54,6 @@ class InventoryRepository extends ServiceEntityRepository
 
     public function getPlayerInventory($saveId)
     {
-        // return $this->createQueryBuilder('q')
-        //     ->select('item.name', 'item.property', 'item.rarety', 'item.image', 'q.quantity')
-        //     ->from('q.Inventory', 'i')
-        //     ->innerJoin('q.save','s', Join::ON, 'i.save_id = s.id')
-        //     ->innerJoin('q.item','it', Join::ON, 'i.item_id = it.id')            
-        //     ->getQuery()
-        //     ->getResult()
-        // ;
-        
         $rawSql = "SELECT item.name, item.property, item.rarety, item.image, inventory.quantity FROM inventory 
         INNER JOIN save ON inventory.save_id = save.id
         INNER JOIN item ON inventory.item_id = item.id

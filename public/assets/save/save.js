@@ -1,11 +1,9 @@
 
 getSave();
 var i = 0;
-
 var attack = 40;
 
 var tbl = {};
-console.log(tbl);
 
 function getSave(){
     $.ajax({
